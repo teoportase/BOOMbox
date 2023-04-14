@@ -6,7 +6,23 @@
 
 This is a mini-project for DIT113 Systems Development course with an emphasis on music. Do you listen to music on a daily basis? Are you tired of your big speakers? Is it a pain to not see the track information on your old soundbox? If your answer is **YES** to all the previous questions, then today is your lucky day! Introducing to you project **BOOMbox**! A small, portable, and effortless device to listen to your favourite playlists anywhere, anytime! This project is an innovative idea from group 12 to make your daily lives better. **You're Welcome!**
 
-## Team Information
+## Description
+
+(To be added: *What the project does?*)
+
+## Setup guide
+
+(To be added: *How users can get started with the project?*)
+
+## Purpose
+
+The goal of this project is to add a spark of joy to our daily lives while doing what we love to do most! **listening to music**
+
+## Contact Us
+
+If you have any questions relating this project feel free to contact us [here]().
+
+## Contributors
 
 Group 12 consists of 6 beautiful young minds:
 - **Arvin Rahimi** (<gusrahimar@student.gu.se>)
