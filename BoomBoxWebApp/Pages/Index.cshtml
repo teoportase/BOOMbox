@@ -1,0 +1,25 @@
+﻿@page
+@model IndexModel;
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<head>
+    @* <link rel="stylesheet" href="/css/site.css"/> *@
+    @* You can add the css files here *@
+</head>
+
+<div class="center">
+    <h1 class="display-4">Hi there</h1>
+    <p>Current time in the server: <span id="time">@DateTime.Now</span></p>
+    <p><a asp-page="/WioBoard">Go to WioBoard</a></p>
+    <p><a asp-page="/SoundBoard">Go to SoundBoard</a></p>
+</div>
+
+<script>
+    setInterval(function() {
+        var timeSpan = document.getElementById('time');
+        var now = new Date();
+        timeSpan.innerText = now.toLocaleString();
+    }, 1000);
+</script>
