@@ -4,16 +4,35 @@
     ViewData["Title"] = "Home page";
 }
 
+
 <head>
     @* <link rel="stylesheet" href="/css/site.css"/> *@
     @* You can add the css files here *@
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        function getTest() {
+            $.ajax({
+                type: "GET",
+                url: '/?handler=Reply',
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function (result) {
+                    $('#temperature').text(result);
+                }
+            });
+        }
+        setInterval(getTest, 1000);
+    </script>
 </head>
 
 <div class="center">
     <h1 class="display-4">Hi there</h1>
-    <p>Current time in the server: <span id="time">@DateTime.Now</span></p>
+    <p onclick="getTest()">Current time in the server: <span id="time">@DateTime.Now</span></p>
     <p><a asp-page="/WioBoard">Go to WioBoard</a></p>
     <p><a asp-page="/SoundBoard">Go to SoundBoard</a></p>
+    <span id="temperature"></span>
 </div>
 
 <script>
