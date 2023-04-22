@@ -8,9 +8,11 @@ namespace BoomBoxWebApp.Pages;
 
 public class IndexModel : PageModel
 {
+    private readonly static string brokerIP = "localhost";
+    private readonly static string topic = "#";
+    private static string reply = "Awaiting response...";
     private readonly ILogger<IndexModel> _logger;
-    public static string reply = ":)";
-
+    
     public IndexModel(ILogger<IndexModel> logger)
     {
         _logger = logger;
@@ -23,25 +25,17 @@ public class IndexModel : PageModel
 
     public static async Task Handle_Received_Application_Message()
     {
-        /*
-         * This sample subscribes to a topic and processes the received message.
-         */
 
         var mqttFactory = new MqttFactory();
 
         using (var mqttClient = mqttFactory.CreateMqttClient())
         {
-            var mqttClientOptions = new MqttClientOptionsBuilder().WithWebSocketServer("localhost:9001/mqtt").Build();
+            var mqttClientOptions = new MqttClientOptionsBuilder().WithWebSocketServer(brokerIP + ":9001/mqtt").Build();
 
-            // Setup message handling before connecting so that queued messages
-            // are also handled properly. When there is no event handler attached all
-            // received messages get lost.
             mqttClient.ApplicationMessageReceivedAsync += e =>
             {
-                Console.WriteLine("Received application message.");
-
                 reply = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
-                Console.WriteLine(reply);
+                Console.WriteLine("Received application message: " + reply);
                 return Task.CompletedTask;
 
             };
@@ -52,20 +46,18 @@ public class IndexModel : PageModel
                 .WithTopicFilter(
                     f =>
                     {
-                        f.WithTopic("#");
+                        f.WithTopic(topic);
                     })
                 .Build();
 
             await mqttClient.SubscribeAsync(mqttSubscribeOptions, CancellationToken.None);
 
             Console.WriteLine("MQTT client subscribed to topic.");
-
-            Console.WriteLine("Press enter to exit.");
             Console.ReadLine();
         }
     }
 
-    public JsonResult OnGetReply()
+    public JsonResult OnGetReply() //TODO: rename it later so it's less general
     {
         return new JsonResult(reply);
     }
