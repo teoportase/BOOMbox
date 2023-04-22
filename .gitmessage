@@ -1,3 +1,5 @@
+# To configure this template, you need to write the following command in the root folder:
+# git config commit.template .gitmessage
 # Follow English grammar and orthography unless otherwise stated
 # Subject line (Use imperative case)
 # (50 characters or less)
