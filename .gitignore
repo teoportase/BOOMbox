@@ -32,3 +32,6 @@
 # Package Managers
 vendor/
 node_modules/
+
+# Server credentials
+ServerData.h
