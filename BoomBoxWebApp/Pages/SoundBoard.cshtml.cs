@@ -38,7 +38,7 @@ public class SoundBoardModel : PageModel
         using (var mqttClient = mqttFactory.CreateMqttClient())
         {
             //Building ClientOptions
-            var mqttClientOptions = new MqttClientOptionsBuilder().WithWebSocketServer(brokerIP + ":9001/mqtt").Build();
+            var mqttClientOptions = new MqttClientOptionsBuilder().WithTcpServer(brokerIP).Build();
 
             //Conecting to the broker using ClientOptions
             await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
