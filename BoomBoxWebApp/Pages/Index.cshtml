@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel;
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<head>
+    <!--
+        To link a css file, do as it follows:
+        <link rel="stylesheet" href="/css/file_name.css"/>
+        -->
+    
+    <!-- Imports jquery library -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    <!-- Imports Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Imports ajaxTest file under the wwwroot/js folder -->
+    <script type="text/javascript" src="/js/ajaxTest.js"></script>
+    
+
+</head>
+
+<div class="center">
+    <h1 class="display-4">Hi there</h1>
+    <p>Current time in the server: <span id="time">@DateTime.Now</span></p>
+    <p><a asp-page="/WioBoard">Go to WioBoard</a></p>
+    <p><a asp-page="/SoundBoard">Go to SoundBoard</a></p>
+    <span id="temperature"></span>
+    <canvas id="tempChart"></canvas>
+
+</div>
