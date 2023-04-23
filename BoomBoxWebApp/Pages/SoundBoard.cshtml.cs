@@ -22,32 +22,40 @@ public class SoundBoardModel : PageModel
     public void OnPost()
     {
         //Getting values from the form
-        var brokerIP = Request.Form["Host"];
-        var port = Request.Form["Port"];
-        var topic = Request.Form["Topic"];
-        var payload = Request.Form["Message"];
+        string brokerIP = Request.Form["Host"];
+        string port = Request.Form["Port"];
+        string topic = Request.Form["Topic"];
+        string payload = Request.Form["Message"];
 
         //Calling the publishing function
         _ = Publish_Message(brokerIP, port, topic, payload);
     }
+
 
     public static async Task Publish_Message(string brokerIP, string port, string topic, string payload)
     {
         var mqttFactory = new MqttFactory();
         using (var mqttClient = mqttFactory.CreateMqttClient())
         {
+            //Building ClientOptions
             var mqttClientOptions = new MqttClientOptionsBuilder().WithWebSocketServer(brokerIP + ":9001/mqtt").Build();
 
+            //Conecting to the broker using ClientOptions
             await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
+            //Building the message using arguments
             var appMessage = new MqttApplicationMessageBuilder()
                 .WithTopic(topic)
                 .WithPayload(payload)
                 .Build();
 
+            //Publishing the message
             await mqttClient.PublishAsync(appMessage, CancellationToken.None);
+
+            //Disconnecting from the broker
             await mqttClient.DisconnectAsync();
-            Console.WriteLine("MQTT message published");
+
+            Console.WriteLine("MQTT message published at " + brokerIP + ":" + port);
         }
     }
 }
