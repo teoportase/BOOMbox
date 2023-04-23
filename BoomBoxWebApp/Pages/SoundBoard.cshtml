@@ -13,3 +13,43 @@
     <h1 class="display-4">SoundBoard</h1>
     <p><a asp-page="/Index">Go to Main Page</a></p>
 </div>
+<div class="center">
+    <h2 class="display-4">Send Data</h2>
+    <form method="post">
+        <fieldset>
+            <legend>Send Data</legend>
+            <div>
+                <label for="Topic">Topic:</label>
+                <input type="text" name="Topic" value="your/topic"/>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="Message">Message:</label>
+                <input type="text" name="Message" value="your message"/>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="Port">Port:</label>
+                <input type="text" name="Port" value="1883"/>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="Host">Host:</label>
+                <input type="text" name="Host" value="0.0.0.0"/>
+            </div>
+
+            <br>
+
+            <div>
+                <input type="submit" value="Send">
+            </div>
+
+        </fieldset>
+    </form>
+</div>
