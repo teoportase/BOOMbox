@@ -1,0 +1,166 @@
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    color: #fff;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.35px;
+}
+
+.sidebar {
+    background-color: rgba(4, 4, 4);
+    padding: 24px 24px 0 24px;
+    position: fixed;
+    height: 100%;
+    width: 230px;
+}
+
+.sidebar .brand {
+    padding-bottom: 18px;
+}
+
+.sidebar .brand img {
+    width: 131px;
+}
+
+.sidebar .menu .menu--item {
+    font-size: 1.5rem;
+    position: relative;
+}
+
+.sidebar .menu.menu-extra .menu--item:not(:first-child) {
+    margin-top: 5px;
+}
+
+.sidebar .menu .menu--item a,
+.sidebar .sidebar--download-app a {
+    text-decoration: none;
+    color: #B3B3B3;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    transition: all 350ms;
+}
+
+/* creating hover effect (3 down)*/
+.sidebar .menu.menu-extra .menu--item a img {
+    opacity: 0.7;
+    transition: all 350ms;
+}
+
+.sidebar .menu.menu-extra .menu--item:hover a img {
+    opacity: 1;
+}
+
+.sidebar .menu .menu--item.active a,
+.sidebar .menu .menu--item:hover a,
+.sidebar .sidebar--download-app:hover a {
+    color: #fff;
+}
+
+/* Active state of the menu  item, adds a background color to the element */
+.sidebar .menu .menu--item.active:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 8px;
+    left: -16px; /* -(Sidebar's padding left) + 8px */
+    right: -16px; /* -(Sidebar's padding left) + 8px */
+    background: rgb(40, 40, 40);
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.menu--item--text,
+.sidebar--download-app a span {
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-left: 15px;
+}
+
+.sidebar--header {
+    margin-top: 1.5rem;
+    margin-bottom: 1.3rem;
+    font-size: 0.68rem;
+    letter-spacing: 1.5px;
+    color: #B3B3B3;
+}
+
+.sidebar .separator {
+    height: 1px;
+    width: 100%;
+    border-top: 1px solid #303030;
+    margin-top: 16px;
+}
+
+.sidebar .menu.menu-playlist .menu--item--text {
+    font-weight: 400;
+    margin-left: 0;
+    /*
+        Add ellipsis when the text is bigger than the width of the sidebar
+        Read more: https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
+    */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar .sidebar--header, .sidebar .menu.menu-playlist a {
+    cursor: default;
+}
+
+
+.sidebar--download-app {
+    position: absolute;
+    bottom: 0;
+}
+
+/* TOGGLE BUTTON needs to be added somewhere in the header below
+1. create html 
+2. then alter css 
+*/
+
+.header--button {
+    background: rgb(7, 7, 7);
+    color: #fff;
+    border: 0;
+    border-radius: 50%;
+    height: 34px;
+    width: 34px;
+    cursor: pointer;
+    outline: 0;
+}
+
+.header--button.previous {
+    margin-right: 0.5rem;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 230px; /* sidebar width */
+    right: 0;
+    height: 60px;
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    justify-content: flex-start;    /* change when you add theme slider*/
+    align-items: center;
+    background-color: rgb(18, 18, 18);
+}
+
+main {
+    padding: 80px 32px 32px 262px;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background-color: dodgerblue;
+}
