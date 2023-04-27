@@ -1,5 +1,8 @@
+﻿// MQTT topic
 var topic = '#temperature';
 
+// Getting a reply from Reply handler 
+// To be changed when implementing the game
 function getReply() {
     $.ajax({
         type: "GET",
