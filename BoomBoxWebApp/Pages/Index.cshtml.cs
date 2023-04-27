@@ -33,8 +33,8 @@ public class IndexModel : PageModel
 
         using (var mqttClient = mqttFactory.CreateMqttClient())
         {
-            //Connecting to the broker with a web socket
-            var mqttClientOptions = new MqttClientOptionsBuilder().WithWebSocketServer(brokerIP + ":9001/mqtt").Build();
+            //Connecting to the broker with TCP 
+            var mqttClientOptions = new MqttClientOptionsBuilder().WithTcpServer(brokerIP).Build();
 
             mqttClient.ApplicationMessageReceivedAsync += e =>
             {
@@ -45,6 +45,7 @@ public class IndexModel : PageModel
 
             };
 
+            //Connecting to the broker using ClientOptions (TCP)
             await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
             var mqttSubscribeOptions = mqttFactory.CreateSubscribeOptionsBuilder()
@@ -55,6 +56,7 @@ public class IndexModel : PageModel
                     })
                 .Build();
 
+            //Subscribing to a topic using SubsribeOptions
             await mqttClient.SubscribeAsync(mqttSubscribeOptions, CancellationToken.None);
 
             Console.WriteLine("MQTT client subscribed to topic.");
@@ -62,7 +64,7 @@ public class IndexModel : PageModel
         }
     }
 
-    public JsonResult OnGetReply() //TODO: rename it later so it's less general
+    public JsonResult OnGetReply() //TODO: rename it later in the project so it's less general
     {
         return new JsonResult(reply);
     }

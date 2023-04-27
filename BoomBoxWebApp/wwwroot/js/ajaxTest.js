@@ -49,7 +49,7 @@ function refreshServerTime() {
 }
 
 //Interval for recieving MQTT data
-setInterval(getReply, 3000);
+setInterval(getReply, 1000);
 
 //Interval for refreshing server time
 setInterval(refreshServerTime, 1000);
