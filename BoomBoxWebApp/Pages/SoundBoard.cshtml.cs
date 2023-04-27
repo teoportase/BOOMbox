@@ -9,6 +9,10 @@ public class SoundBoardModel : PageModel
 {
     private readonly ILogger<SoundBoardModel> _logger;
 
+    private string brokerIP = "localhost";
+    private string port = "1883";
+    private string topic = "sound";
+
     public SoundBoardModel(ILogger<SoundBoardModel> logger)
     {
         _logger = logger;
@@ -21,11 +25,8 @@ public class SoundBoardModel : PageModel
     //OnPost() will run when submiting a form with method="post"
     public void OnPost()
     {
-        //Getting values from the form
-        string brokerIP = Request.Form["Host"];
-        string port = Request.Form["Port"];
-        string topic = Request.Form["Topic"];
-        string payload = Request.Form["Message"];
+        //Getting values from the post method (it's a placeholder for now)
+        string payload = "test message";
 
         //Calling the publishing function
         _ = Publish_Message(brokerIP, port, topic, payload);
