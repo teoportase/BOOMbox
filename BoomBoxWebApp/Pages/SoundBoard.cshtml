@@ -83,7 +83,14 @@
         </label>
     </div>
     <main>
-        <div style="min-height: 200vh"></div>
+        <div style="min-height: 200vh">
+            <ul>
+                @foreach (Song song in Model.Album.songs)
+                {
+                    <li>@song.title - @song.artist</li>
+                }
+            </ul>
+        </div>
     </main>
 </body>
 
