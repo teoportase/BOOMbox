@@ -22,9 +22,25 @@ PubSubClient client(wifiClient);
 // Define lcd screen
 TFT_eSPI tft;
 
-// To see if the device connects to the WiFi, open the Serial Monitor.
+// To see if the device connects to the WiFi, open the Serial Monitor here.
 
-void setup() {
+// Gets called when a message is received from the subscribed topic
+void callback(char* topic, byte* message, unsigned int length) {
+  Serial.print("Message received: ");
+  String received_message = "";
+  for (int i = 0; i < length; i++) {
+    received_message += (char)message[i];
+  }
+  Serial.println(received_message);
+
+  // Converting the topic to string if we want to print it
+  String stringTopic(topic);
+  Serial.println(stringTopic);
+
+  printOnScreen(received_message, 10, 50, 3);
+}
+
+void setup() {  
 
   //LCD Setup
   tft.begin();
@@ -35,6 +51,7 @@ void setup() {
 
   // Starts the first connection
   Serial.begin(115200);
+  while(!Serial); // Wait for Serial to be ready
 
   Serial.println("Connecting to WiFi..");
   WiFi.begin(SSID, PASSWORD);
@@ -43,10 +60,10 @@ void setup() {
       delay(500);
       Serial.println("Connecting to WiFi..");
       WiFi.begin(SSID, PASSWORD);
+      printOnScreen("Connecting to WiFi", 10, 50, 3);
+
   }
   Serial.println("Connected to the WiFi network");
-
-  printOnScreen("Connected to the WiFi network", 10, 100, 3);
 
   client.setServer(MQTT_SERVER, MQTT_PORT);
   client.setCallback(callback);
@@ -54,18 +71,13 @@ void setup() {
   // Connect to MQTT broker
   while (!client.connected()) {
     Serial.print("Connecting to MQTT broker...");
-    
-    tft.fillScreen(TFT_RED);
-    tft.drawString("Connecting to broker...", 10, 100);
+    printOnScreen("Connecting to broker", 10, 50, 3);
     if (client.connect("Wio Terminal")) {
       Serial.println("connected");
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());   // to see more about the reasons the connection failed, check: https://pubsubclient.knolleary.net/api#state
       Serial.println(" retrying in 5 seconds");
-      
-      printOnScreen("Failed to connect to broker :(", 10, 50, 3);
-      printOnScreen("Retrying in 5 seconds...", 10, 100, 3);
       delay(5000);
     }
   }
@@ -73,11 +85,9 @@ void setup() {
   // The device subscribes to the topic
   client.subscribe(MQTT_TOPIC);
 
-  // Publish test message
   client.publish("test", "help me lord");
 
-  // Display successful connection
-  printOnScreen("Connected to broker!", 10, 100, 3);
+  printOnScreen("Connected!", 10, 50, 3);
 }
 
 void loop() {
@@ -96,24 +106,11 @@ void loop() {
       delay(5000);
     }
   }
-
   client.loop();
 }
 
-// Gets called when a message is received from the subscribed topic
-void callback(char* topic, byte* message, unsigned int length) {
-  Serial.print("Message received: ");
-  String received_message = "";
-  for (int i = 0; i < length; i++) {
-    received_message += (char)message[i];
-  }
-  Serial.println(received_message);
-
-  printOnScreen(received_message, 10, 100, 4);
-}
-
 void printOnScreen(String message, int x, int y, int size) {
+  tft.setTextSize(size);
   tft.fillScreen(TFT_RED);
   tft.drawString(message, x, y);
-  tft.setTextSize(4);
 }
