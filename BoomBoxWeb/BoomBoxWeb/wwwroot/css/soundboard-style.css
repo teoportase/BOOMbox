@@ -203,9 +203,12 @@ input:checked + .slider:before {
 }
 
 main {
-    padding: 80px 32px 32px 262px;
     min-height: 100vh;
     max-height: 100vh;
     overflow-y: auto;
     background-color: dodgerblue;
+}
+
+body main main {
+    padding: 80px 32px 32px 262px;
 }

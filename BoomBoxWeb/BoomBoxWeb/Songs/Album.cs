@@ -1,13 +1,12 @@
-﻿using System.Collections;
-
-namespace BoomBoxWebApp
+﻿namespace BoomBoxWeb.Songs
 {
     public class Album
     {
         private string name { get; set; }
-        public List<Song> songs { get; set; } 
+        public List<Song> songs { get; set; }
 
-        public Album(string name) { 
+        public Album(string name)
+        {
             this.name = name;
             this.songs = new List<Song>();
         }

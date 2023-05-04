@@ -1,17 +1,15 @@
-@page
-@model SoundBoardModel;
-@{
-    ViewData["Title"] = "SoundBoard";
-}
-
+﻿@page "/SoundBoard"
+@using Songs
+@using Utils
 <head>
     <!-- Imports page-specific .css file -->
-    <link rel="stylesheet" href="css/soundboard-style.css"/>
+    <link rel="stylesheet" href="css/soundboard-style.css" />
     <!-- Imports icons -->
-    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css"/>
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+
 </head>
 
-<body>
+
     <nav class="sidebar">
         <div class="brand">
             <img src="res/Boombox.svg" class="boombox-logo" alt="boombox icon">
@@ -85,12 +83,37 @@
     <main>
         <div style="min-height: 200vh">
             <ul>
-                @foreach (Song song in Model.Album.songs)
+                @foreach (Song song in Album1.songs)
                 {
-                    <li>@song.title - @song.artist</li>
+                    <li>
+                        <h4 @onclick="() => PublishMqtt(song.title)">@song.title</h4>
+                        <p>Artist: @song.artist</p>
+                    </li>
                 }
             </ul>
         </div>
     </main>
-</body>
 
+
+@code {
+    public Album Album1 { get; set; }
+    public Song Song1 { get; set; }
+    public Song Song2 { get; set; }
+    public Song Song3 { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Album1 = new Album("Test album");
+        Song1 = new Song("Rain On Me", "Lady Gaga", "gaga.png");
+        Album1.addSong(Song1);
+        Song2 = new Song("Hyperballad", "Bjork", "riddle.png");
+        Album1.addSong(Song2);
+        Song3 = new Song("Firework", "Katy Perry", "katy.png");
+        Album1.addSong(Song3);
+    }
+
+    protected void PublishMqtt(string message)
+    {
+        _ = MqttConnection.Publish_Message(message);
+    }
+}

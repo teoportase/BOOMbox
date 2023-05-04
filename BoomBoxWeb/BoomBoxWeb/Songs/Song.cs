@@ -1,10 +1,10 @@
-﻿namespace BoomBoxWebApp
+﻿namespace BoomBoxWeb.Songs
 {
     public class Song
     {
-        public string title { get; set;}
+        public string title { get; set; }
         public string artist { get; set; }
-        private string image { get; set; }
+        public string image { get; set; }
 
         public Song(string title, string artist, string image)
         {
