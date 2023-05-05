@@ -24,22 +24,6 @@ TFT_eSPI tft;
 
 // To see if the device connects to the WiFi, open the Serial Monitor here.
 
-// Gets called when a message is received from the subscribed topic
-void callback(char* topic, byte* message, unsigned int length) {
-  Serial.print("Message received: ");
-  String received_message = "";
-  for (int i = 0; i < length; i++) {
-    received_message += (char)message[i];
-  }
-  Serial.println(received_message);
-
-  // Converting the topic to string if we want to print it
-  String stringTopic(topic);
-  Serial.println(stringTopic);
-
-  printOnScreen(received_message, 10, 50, 3);
-}
-
 void setup() {  
 
   //LCD Setup
@@ -47,11 +31,10 @@ void setup() {
   tft.setRotation(3);
   tft.fillScreen(TFT_RED);
   tft.setTextColor(TFT_BLACK);
-  tft.setTextSize(4);
+  tft.setTextSize(4); // If i delete this doesn't work for some reason
 
   // Starts the first connection
   Serial.begin(115200);
-  while(!Serial); // Wait for Serial to be ready
 
   Serial.println("Connecting to WiFi..");
   WiFi.begin(SSID, PASSWORD);
@@ -86,8 +69,6 @@ void setup() {
   client.subscribe(MQTT_TOPIC);
 
   client.publish("test", "help me lord");
-
-  printOnScreen("Connected!", 10, 50, 3);
 }
 
 void loop() {
@@ -107,6 +88,22 @@ void loop() {
     }
   }
   client.loop();
+}
+
+// Gets called when a message is received from the subscribed topic
+void callback(char* topic, byte* message, unsigned int length) {
+  Serial.print("Message received: ");
+  String received_message = "";
+  for (int i = 0; i < length; i++) {
+    received_message += (char)message[i];
+  }
+  Serial.println(received_message);
+
+  // Converting the topic to string if we want to print it
+  String stringTopic(topic);
+  Serial.println(stringTopic);
+
+  printOnScreen(received_message, 10, 100, 4);
 }
 
 void printOnScreen(String message, int x, int y, int size) {
