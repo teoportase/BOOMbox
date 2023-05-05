@@ -2,7 +2,7 @@
 {
     public class Album
     {
-        private string name { get; set; }
+        public string name { get; set; }
         public List<Song> songs { get; set; }
 
         public Album(string name)

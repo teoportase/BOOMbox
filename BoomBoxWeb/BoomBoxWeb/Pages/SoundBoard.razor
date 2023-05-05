@@ -1,6 +1,9 @@
 ﻿@page "/SoundBoard"
 @using Songs
 @using Utils
+@using System.Text.Json
+@inject HttpClient HttpClient
+
 <head>
     <!-- Imports page-specific .css file -->
     <link rel="stylesheet" href="css/soundboard-style.css" />
@@ -10,106 +13,101 @@
 </head>
 
 
-    <nav class="sidebar">
-        <div class="brand">
-            <img src="res/Boombox.svg" class="boombox-logo" alt="boombox icon">
-        </div>
-        <div class="menu">
-            <div class="menu--item">
-                <a href="#">
-                    <i class="lni lni-home"></i> <span class="menu--item--text">Home</span>
-                </a>
-            </div>
-            <div class="menu--item">
-                <a href="#">
-                    <i class="lni lni-search"></i> <span class="menu--item--text">Search</span>
-                </a>
-            </div>
-            <div class="menu--item">
-                <a href="#">
-                    <i class="lni lni-library"></i> <span class="menu--item--text">Library</span>
-                </a>
-            </div>
-        </div>
-        <p class="sidebar--header">PLAYLIST</p>
-        <div class="menu menu-extra">
-            <div class="menu--item">
-                <a href="#">
-                    <img src="http://via.placeholder.com/32x32" alt="">
-                    <span class="menu--item--text">Create a playlist</span>
-                </a>
-            </div>
-            <div class="menu--item">
-                <a href="#">
-                    <img src="http://via.placeholder.com/32x32" alt="">
-                    <span class="menu--item--text">Songs that you like</span>
-                </a>
-            </div>
-        </div>
-        <div class="separator"></div>
-        <div class="menu menu-playlist">
-            <div class="menu--item">
-                <a href="#">
-                    <span class="menu--item--text">Dev</span>
-                </a>
-            </div>
-            <div class="menu--item">
-                <a href="#">
-                    <span class="menu--item--text">That playlist that I really liked from the show</span>
-                </a>
-            </div>
-        </div>
-        <div class="sidebar--download-app">
+<nav class="sidebar">
+    <div class="brand">
+        <img src="res/Boombox.svg" class="boombox-logo" alt="boombox icon">
+    </div>
+    <div class="menu">
+        <div class="menu--item">
             <a href="#">
-                <i class="lni lni-arrow-down-circle"></i> <span>Install the app</span>
+                <i class="lni lni-home"></i> <span class="menu--item--text">Home</span>
             </a>
         </div>
-    </nav>
-    <div class="header">
-        <div class="header--bg"></div>
-        <div class="header--buttons">
-            <button class="header--button previous">
-                <i class="lni lni-chevron-left"></i>
-            </button>
-            <button class="header--button next">
-                <i class="lni lni-chevron-right"></i>
-            </button>
+        <div class="menu--item">
+            <a href="#">
+                <i class="lni lni-search"></i> <span class="menu--item--text">Search</span>
+            </a>
         </div>
-        <label class="brightnessButton">
-            <input type="checkbox">
-            <span class="slider"></span>
-        </label>
+        <div class="menu--item">
+            <a href="#">
+                <i class="lni lni-library"></i> <span class="menu--item--text">Library</span>
+            </a>
+        </div>
     </div>
-    <main>
-        <div style="min-height: 200vh">
-            <ul>
-                @foreach (Song song in Album1.songs)
-                {
+    <p class="sidebar--header">PLAYLIST</p>
+    <div class="menu menu-extra">
+        <div class="menu--item">
+            <a href="#">
+                <img src="http://via.placeholder.com/32x32" alt="">
+                <span class="menu--item--text">Create a playlist</span>
+            </a>
+        </div>
+        <div class="menu--item">
+            <a href="#">
+                <img src="http://via.placeholder.com/32x32" alt="">
+                <span class="menu--item--text">Songs that you like</span>
+            </a>
+        </div>
+    </div>
+    <div class="separator"></div>
+    <div class="menu menu-playlist">
+        <div class="menu--item">
+            <a href="#">
+                <span class="menu--item--text">Dev</span>
+            </a>
+        </div>
+        <div class="menu--item">
+            <a href="#">
+                <span class="menu--item--text">That playlist that I really liked from the show</span>
+            </a>
+        </div>
+    </div>
+    <div class="sidebar--download-app">
+        <a href="#">
+            <i class="lni lni-arrow-down-circle"></i> <span>Install the app</span>
+        </a>
+    </div>
+</nav>
+<div class="header">
+    <div class="header--bg"></div>
+    <div class="header--buttons">
+        <button class="header--button previous">
+            <i class="lni lni-chevron-left"></i>
+        </button>
+        <button class="header--button next">
+            <i class="lni lni-chevron-right"></i>
+        </button>
+    </div>
+    <label class="brightnessButton">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label>
+</div>
+<main>
+    <div style="min-height: 200vh">
+        <ul>
+            @foreach (Album album in songLibrary.Albums){
+                <h1>@album.name</h1>
+                @foreach (Song song in album.songs){
                     <li>
                         <h4 @onclick="() => PublishMqtt(song.title)">@song.title</h4>
                         <p>Artist: @song.artist</p>
                     </li>
                 }
-            </ul>
-        </div>
-    </main>
+            }
+            
+        </ul>
+    </div>
+</main>
 
 
 @code {
-    public Album Album1 { get; set; }
-    public Song Song1 { get; set; }
-    public Song Song2 { get; set; }
-    public Song Song3 { get; set; }
+    protected Library songLibrary = new Library();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Album1 = new Album("Test album");
-        Song1 = new Song("Rain On Me", "Lady Gaga", "gaga.png");
-        Album1.addSong(Song1);
-        Song2 = new Song("Hyperballad", "Bjork", "riddle.png");
-        Album1.addSong(Song2);
-        Song3 = new Song("Firework", "Katy Perry", "katy.png");
-        Album1.addSong(Song3);
+        HttpClient client = new HttpClient();
+        songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json");
     }
 
     protected void PublishMqtt(string message)
