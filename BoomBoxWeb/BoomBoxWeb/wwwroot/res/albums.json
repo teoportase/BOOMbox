@@ -37,6 +37,26 @@
           "title": "Make Believe",
           "artist": "Kero Kero Bonito",
           "image": "kkb.png"
+        },
+        {
+          "title": "Up From the South",
+          "artist": "The Budos Band",
+          "image": "tbb.png"
+        },
+        {
+          "title": "Mosaic",
+          "artist": "Sven Wunder",
+          "image": "msw.png"
+        },
+        {
+          "title": "Supalonely (feat. Gus Dapperton)",
+          "artist": "BENEE, Gus Dapperton",
+          "image": "bgd.png"
+        },
+        {
+          "title": "Afraid To Feel",
+          "artist": "LF System",
+          "image": "lfs.png"
         }
       ]
     }

@@ -91,21 +91,20 @@
                 </div>
             </div>
             <div class="section--body">
-            </div>
-            @foreach(Song song in album.Songs){
-                <div class="section--body--item song--item"  @onclick="() => PublishMqtt(song.Title)">
-                    <div class="section--body--item--img">
-                        <img src="http://via.placeholder.com/150x150" alt="">
+                @foreach (Song song in album.Songs)
+                {
+                    <div class="section--body--item song--item" @onclick="() => PublishMqtt(song.Title)">
+                        <div class="section--body--item--img">
+                            <img src="http://via.placeholder.com/150x150" alt="">
+                        </div>
+                        <p class="section--body--item--title">@song.Title</p>
+                        <p class="section--body--item--subtitle">@song.Artist</p>
                     </div>
-                    <p class="section--body--item--title">@song.Title</p>
-                    <p class="section--body--item--subtitle">@song.Artist</p>
-                </div>
-            }
-
+                }
+            </div>
         </section>
     }
 </main>
-
 
 @code {
     //MQTT message topic
