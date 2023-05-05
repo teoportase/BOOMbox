@@ -87,15 +87,14 @@
     <div style="min-height: 200vh">
         <ul>
             @foreach (Album album in songLibrary.Albums){
-                <h1>@album.name</h1>
-                @foreach (Song song in album.songs){
+                <h1>@album.Name</h1>
+                @foreach (Song song in album.Songs){
                     <li>
-                        <h4 @onclick="() => PublishMqtt(song.title)">@song.title</h4>
-                        <p>Artist: @song.artist</p>
+                        <h4 @onclick="() => PublishMqtt(song.Title)">@song.Title</h4>
+                        <p>Artist: @song.Artist</p>
                     </li>
                 }
             }
-            
         </ul>
     </div>
 </main>

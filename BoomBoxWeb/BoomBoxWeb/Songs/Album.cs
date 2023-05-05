@@ -2,18 +2,18 @@
 {
     public class Album
     {
-        public string name { get; set; }
-        public List<Song> songs { get; set; }
+        public string Name { get; set; }
+        public List<Song> Songs { get; set; }
 
         public Album(string name)
         {
-            this.name = name;
-            this.songs = new List<Song>();
+            this.Name = name;
+            this.Songs = new List<Song>();
         }
 
-        public void addSong(Song song)
+        public void AddSong(Song song)
         {
-            songs.Add(song);
+            Songs.Add(song);
         }
     }
 }

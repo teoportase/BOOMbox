@@ -2,15 +2,15 @@
 {
     public class Song
     {
-        public string title { get; set; }
-        public string artist { get; set; }
-        public string image { get; set; }
+        public string Title { get; set; }
+        public string Artist { get; set; }
+        public string Image { get; set; }
 
         public Song(string title, string artist, string image)
         {
-            this.title = title;
-            this.artist = artist;
-            this.image = image;
+            this.Title = title;
+            this.Artist = artist;
+            this.Image = image;
         }
     }
 }
