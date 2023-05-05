@@ -1,0 +1,44 @@
+{
+  "Albums": [
+    {
+      "name": "Pop songs",
+      "songs": [
+        {
+          "title": "Rain On Me",
+          "artist": "Lady Gaga",
+          "image": "gaga.png"
+        },
+        {
+          "title": "Vroom Vroom",
+          "artist": "Charli XCX",
+          "image": "xcx.png"
+        },
+        {
+          "title": "Hyperballad",
+          "artist": "Bjork",
+          "image": "riddle.png"
+        }
+      ]
+    },
+    {
+      "name": "Indie songs",
+      "songs": [
+        {
+          "title": "Beach Life-in-Death",
+          "artist": "Car Seat Headrest",
+          "image": "will.png"
+        },
+        {
+          "title": "Another Bed",
+          "artist": "Piggie",
+          "image": "pyrus.png"
+        },
+        {
+          "title": "Make Believe",
+          "artist": "Kero Kero Bonito",
+          "image": "kkb.png"
+        }
+      ]
+    }
+  ]
+}

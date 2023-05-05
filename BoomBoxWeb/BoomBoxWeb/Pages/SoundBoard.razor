@@ -1,0 +1,132 @@
+﻿@page "/SoundBoard"
+@using Songs
+@using Utils
+@inject HttpClient HttpClient
+
+<head>
+    <!-- Imports page-specific .css file -->
+    <link rel="stylesheet" href="css/soundboard-style.css" />
+    <!-- Imports icons -->
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+
+</head>
+
+
+<nav class="sidebar">
+    <div class="brand">
+        <img src="res/Boombox.svg" class="boombox-logo" alt="boombox icon">
+    </div>
+    <div class="menu">
+        <div class="menu--item">
+            <a href="#">
+                <i class="lni lni-home"></i> <span class="menu--item--text">Home</span>
+            </a>
+        </div>
+        <div class="menu--item">
+            <a href="#">
+                <i class="lni lni-search"></i> <span class="menu--item--text">Search</span>
+            </a>
+        </div>
+        <div class="menu--item">
+            <a href="#">
+                <i class="lni lni-library"></i> <span class="menu--item--text">Library</span>
+            </a>
+        </div>
+    </div>
+    <p class="sidebar--header">PLAYLIST</p>
+    <div class="menu menu-extra">
+        <div class="menu--item">
+            <a href="#">
+                <img src="http://via.placeholder.com/32x32" alt="">
+                <span class="menu--item--text">Create a playlist</span>
+            </a>
+        </div>
+        <div class="menu--item">
+            <a href="#">
+                <img src="http://via.placeholder.com/32x32" alt="">
+                <span class="menu--item--text">Songs that you like</span>
+            </a>
+        </div>
+    </div>
+    <div class="separator"></div>
+    <div class="menu menu-playlist">
+        <div class="menu--item">
+            <a href="#">
+                <span class="menu--item--text">Dev</span>
+            </a>
+        </div>
+        <div class="menu--item">
+            <a href="#">
+                <span class="menu--item--text">That playlist that I really liked from the show</span>
+            </a>
+        </div>
+    </div>
+    <div class="sidebar--download-app">
+        <a href="#">
+            <i class="lni lni-arrow-down-circle"></i> <span>Install the app</span>
+        </a>
+    </div>
+</nav>
+<div class="header">
+    <div class="header--bg"></div>
+    <div class="header--buttons">
+        <button class="header--button previous">
+            <i class="lni lni-chevron-left"></i>
+        </button>
+        <button class="header--button next">
+            <i class="lni lni-chevron-right"></i>
+        </button>
+    </div>
+    <label class="brightnessButton">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label>
+</div>
+<main>
+    @foreach(Album album in songLibrary.Albums){
+        <section class="section">
+            <div class="section--header">
+                <div class="section--header--left">
+                    <h2 class="title">@album.Name</h2>
+                </div>
+            </div>
+            <div class="section--body">
+            </div>
+            @foreach(Song song in album.Songs){
+                <div class="section--body--item song--item"  @onclick="() => PublishMqtt(song.Title)">
+                    <div class="section--body--item--img">
+                        <img src="http://via.placeholder.com/150x150" alt="">
+                    </div>
+                    <p class="section--body--item--title">@song.Title</p>
+                    <p class="section--body--item--subtitle">@song.Artist</p>
+                </div>
+            }
+
+        </section>
+    }
+</main>
+
+
+@code {
+    //MQTT message topic
+    protected readonly string topic = "sound";
+
+    //Instantiating Library object 
+    protected Library songLibrary = new Library();
+
+    //This funtion will run on page load
+    protected override async Task OnInitializedAsync()
+    {
+        //Instantiating HttpClient to make a request
+        HttpClient client = new HttpClient();
+
+        //Reading albums and songs from .json file into a Library
+        songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json");
+    }
+
+    //Publishing a MQTT message
+    protected void PublishMqtt(string message)
+    {
+        _ = MqttConnection.Publish_Message(topic, message);
+    }
+}
