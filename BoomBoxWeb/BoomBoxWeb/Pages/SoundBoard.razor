@@ -1,7 +1,6 @@
 ﻿@page "/SoundBoard"
 @using Songs
 @using Utils
-@using System.Text.Json
 @inject HttpClient HttpClient
 
 <head>
@@ -90,6 +89,11 @@
                 <h1>@album.Name</h1>
                 @foreach (Song song in album.Songs){
                     <li>
+                        @*
+                        Right now we are sending the song title as the MQTT payload for easier debugging
+                        If the songs will be stored on the Wio Board, we'll change it to song.Id
+                        If they'll be sent through MQTT, we'll change it to a frequency array
+                        *@
                         <h4 @onclick="() => PublishMqtt(song.Title)">@song.Title</h4>
                         <p>Artist: @song.Artist</p>
                     </li>
@@ -101,16 +105,25 @@
 
 
 @code {
+    //MQTT message topic
+    protected readonly string topic = "sound";
+
+    //Instantiating Library object 
     protected Library songLibrary = new Library();
 
+    //This funtion will run on page load
     protected override async Task OnInitializedAsync()
     {
+        //Instantiating HttpClient to make a request
         HttpClient client = new HttpClient();
+
+        //Reading albums and songs from .json file into a Library
         songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json");
     }
 
+    //Publishing a MQTT message
     protected void PublishMqtt(string message)
     {
-        _ = MqttConnection.Publish_Message(message);
+        _ = MqttConnection.Publish_Message(topic, message);
     }
 }

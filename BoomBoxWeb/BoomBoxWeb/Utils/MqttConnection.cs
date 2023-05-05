@@ -7,9 +7,8 @@ namespace BoomBoxWeb.Utils
     {
         private readonly static string BrokerIP = "localhost";
         private readonly static string Port = "1883";
-        private readonly static string Topic = "sound";
 
-        public static async Task Publish_Message(string payload)
+        public static async Task Publish_Message(string topic, string payload)
         {
             var mqttFactory = new MqttFactory();
             using (var mqttClient = mqttFactory.CreateMqttClient())
@@ -22,7 +21,7 @@ namespace BoomBoxWeb.Utils
 
                 //Building the message using arguments
                 var appMessage = new MqttApplicationMessageBuilder()
-                    .WithTopic(Topic)
+                    .WithTopic(topic)
                     .WithPayload(payload)
                     .Build();
 
@@ -32,7 +31,7 @@ namespace BoomBoxWeb.Utils
                 //Disconnecting from the broker
                 await mqttClient.DisconnectAsync();
 
-                Console.WriteLine("MQTT message published at " + BrokerIP + ":" + Port);
+                Console.WriteLine("MQTT message " + topic + "/" + payload + " published at " + BrokerIP);
             }
         }
 

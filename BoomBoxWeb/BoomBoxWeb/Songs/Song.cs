@@ -8,9 +8,9 @@
 
         public Song(string title, string artist, string image)
         {
-            this.Title = title;
-            this.Artist = artist;
-            this.Image = image;
+            Title = title;
+            Artist = artist;
+            Image = image;
         }
     }
 }

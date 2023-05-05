@@ -7,8 +7,8 @@
 
         public Album(string name)
         {
-            this.Name = name;
-            this.Songs = new List<Song>();
+            Name = name;
+            Songs = new List<Song>();
         }
 
         public void AddSong(Song song)

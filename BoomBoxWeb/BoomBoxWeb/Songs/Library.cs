@@ -5,7 +5,7 @@
         public List<Album> Albums { get; set; }
 
         public Library() { 
-            this.Albums = new List<Album>();
+            Albums = new List<Album>();
         }
 
         public void AddAlbum(Album album)
