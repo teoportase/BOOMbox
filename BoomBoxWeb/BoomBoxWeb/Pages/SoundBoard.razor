@@ -83,24 +83,27 @@
     </label>
 </div>
 <main>
-    <div style="min-height: 200vh">
-        <ul>
-            @foreach (Album album in songLibrary.Albums){
-                <h1>@album.Name</h1>
-                @foreach (Song song in album.Songs){
-                    <li>
-                        @*
-                        Right now we are sending the song title as the MQTT payload for easier debugging
-                        If the songs will be stored on the Wio Board, we'll change it to song.Id
-                        If they'll be sent through MQTT, we'll change it to a frequency array
-                        *@
-                        <h4 @onclick="() => PublishMqtt(song.Title)">@song.Title</h4>
-                        <p>Artist: @song.Artist</p>
-                    </li>
-                }
+    @foreach(Album album in songLibrary.Albums){
+        <section class="section">
+            <div class="section--header">
+                <div class="section--header--left">
+                    <h2 class="title">@album.Name</h2>
+                </div>
+            </div>
+            <div class="section--body">
+            </div>
+            @foreach(Song song in album.Songs){
+                <div class="section--body--item song--item"  @onclick="() => PublishMqtt(song.Title)">
+                    <div class="section--body--item--img">
+                        <img src="http://via.placeholder.com/150x150" alt="">
+                    </div>
+                    <p class="section--body--item--title">@song.Title</p>
+                    <p class="section--body--item--subtitle">@song.Artist</p>
+                </div>
             }
-        </ul>
-    </div>
+
+        </section>
+    }
 </main>
 
 
