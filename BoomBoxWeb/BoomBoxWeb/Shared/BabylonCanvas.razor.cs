@@ -18,6 +18,8 @@ namespace BoomBoxWeb.Shared
                 Debug.WriteLine("AAAAH");
                 await JsRuntime.InvokeVoidAsync("babylonInterop.initCanvas", "babylon-canvas");
             }
+
+            Debug.WriteLine("AAAAAAAAAAAAAAH");
         }
     }
 }

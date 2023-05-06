@@ -7,9 +7,28 @@
     <link rel="stylesheet" href="css/site.css" />
 </head>
 
+@code{
+    [Inject] IJSRuntime JsRuntime { get; set; }
+    public float CameraSpeed { get; set; } = 4f;
+
+    private async Task UpdateCameraSpeed()
+    {
+        Console.WriteLine("AAAAAAAAAAAh");
+        Console.WriteLine(CameraSpeed);
+        await JsRuntime.InvokeVoidAsync("babylonInterop.updateCameraSpeed", CameraSpeed);
+    }
+}
+
 <div class="center">
     <h1 class="h1-test">WioBoard</h1>
     <p><a asp-page="/Index">Go to Main Page</a></p>
+    <p>Camera Speed: @CameraSpeed</p>
 </div>
+
+<div>
+    <label for="camera-speed-slider">Camera Speed:</label>
+    <input type="range" id="camera-speed-slider" min="-10" max="10" step="0.05" @bind="CameraSpeed" @oninput="UpdateCameraSpeed"/>
+</div>
+
 
 <BabylonCanvas />
