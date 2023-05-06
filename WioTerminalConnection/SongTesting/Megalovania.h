@@ -6,22 +6,9 @@
   That being said, the format used is <octave>.<note>, following the guidelines setup in "Notes.h" (where you can also find more details).
 
   Some notes had to be adapted, as the documentation did not allow for B_SHARP, for example.
-
-  There are also note durations in milliseconds defined for easy changes to the tempo.
 */
 
 #include "Notes.h"
-
-#define half 50
-#define one 50
-#define double 100
-#define triple 200
-
-struct Note{
-  int frequency;
-  int duration;
-  int delay;
-};
 
 Note Megalovania[] = {
 

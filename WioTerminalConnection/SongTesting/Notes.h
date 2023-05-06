@@ -8,10 +8,23 @@
   There are some limitations. Some notes do not have a frequency in the chart linked above, so in practice, you could move up or down to the next octave
   (if possible), and use that note.
   
-  There is also a pause defined, where the speaker does not emit a sound. It does make a small "flick" sound instead.
+  There is also a pause and note durations (milliseconds) defined for breaks and tempo changes. The rest does make a small "flick" sound instead of total silence.
 */
 
+#ifndef _NOTES_
+#define _NOTES_
+
+struct Note{
+  int frequency;
+  int duration;
+  int delay;
+};
+
 #define REST 0
+#define half 50
+#define one 50
+#define double 100
+#define triple 200
 
 struct Bass{
   int C;
@@ -63,3 +76,5 @@ struct Treble{
 };
 
 Treble T = {478, 451, 426, 402, 379, 358, 338, 319, 301, 284, 268, 253};
+
+#endif
