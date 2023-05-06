@@ -17,7 +17,7 @@ void setup()
 
     for(int note_index=0;note_index<SONG_LENGTH;note_index++)
     {
-        sound(note_index);
+        playNote(note_index);
         delay(CurrentSong[note_index].delay);
     }
 }
@@ -31,7 +31,7 @@ void pinSpeaker()
     digitalWrite(SPEAKER,LOW);
 }
 
-void sound(uint8_t note_index)
+void playNote(uint8_t note_index)
 {
     for(int i=0;i<CurrentSong[note_index].duration;i++)
     {
