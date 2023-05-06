@@ -1,12 +1,19 @@
 ﻿using MQTTnet;
 using MQTTnet.Client;
+using MQTTnet.Extensions.ManagedClient;
+using System.Text;
 
 namespace BoomBoxWeb.Utils
 {
     public class MqttConnection
     {
+        //Set this to the IP of a MQTT broker, or localhost if running everything locally
         private readonly static string BrokerIP = "localhost";
-        private readonly static string Port = "1883";
+        
+        //Message that will be proccessed by the Subscribe() method
+        //Value assigned here is the 'default' one, before receiving anything
+        public static string Reply { get; set; } = "Awaiting response...";
+        
 
         public static async Task Publish_Message(string topic, string payload)
         {
@@ -35,53 +42,33 @@ namespace BoomBoxWeb.Utils
             }
         }
 
-        //public void OnGet()
-        //{
-        //    //Starts the async function on page load
-        //    _ = Handle_Received_Application_Message();
-        //}
+        public static async Task Subscribe(string topic)
+        {
+            //Declaring connection options
+            var options = new ManagedMqttClientOptionsBuilder()
+                .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
+                .WithClientOptions(new MqttClientOptionsBuilder()
+                    .WithClientId("TestClient")
+                    .WithWebSocketServer(BrokerIP + ":9001/mqtt")
+                    .Build())
+                .Build();
 
-        //public static async Task Handle_Received_Application_Message()
-        //{
+            //Creating a managed MQTT client using connection options
+            var mqttClient = new MqttFactory().CreateManagedMqttClient();
 
-        //    var mqttFactory = new MqttFactory();
+            //Proccessing the received message
+            mqttClient.ApplicationMessageReceivedAsync += e =>
+            {
+                Reply = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+                Console.WriteLine("Received application message: " + Reply);
+                return Task.CompletedTask;
+            };
 
-        //    using (var mqttClient = mqttFactory.CreateMqttClient())
-        //    {
-        //        //Connecting to the broker with TCP 
-        //        var mqttClientOptions = new MqttClientOptionsBuilder().WithTcpServer(brokerIP).Build();
+            //Subsribing to a topic
+            await mqttClient.SubscribeAsync(topic);
 
-        //        mqttClient.ApplicationMessageReceivedAsync += e =>
-        //        {
-        //            //After recieving a response, gets text from it and saves it in reply
-        //            reply = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
-        //            Console.WriteLine("Received application message: " + reply);
-        //            return Task.CompletedTask;
-
-        //        };
-
-        //        //Connecting to the broker using ClientOptions (TCP)
-        //        await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
-
-        //        var mqttSubscribeOptions = mqttFactory.CreateSubscribeOptionsBuilder()
-        //            .WithTopicFilter(
-        //                f =>
-        //                {
-        //                    f.WithTopic(topic);
-        //                })
-        //            .Build();
-
-        //        //Subscribing to a topic using SubsribeOptions
-        //        await mqttClient.SubscribeAsync(mqttSubscribeOptions, CancellationToken.None);
-
-        //        Console.WriteLine("MQTT client subscribed to topic.");
-        //        Console.ReadLine();
-        //    }
-        //}
-
-        //public JsonResult OnGetReply() //TODO: rename it later in the project so it's less general
-        //{
-        //    return new JsonResult(reply);
-        //}
+            //Conecting to the broker using ClientOptions
+            await mqttClient.StartAsync(options);
+        }
     }
 }
