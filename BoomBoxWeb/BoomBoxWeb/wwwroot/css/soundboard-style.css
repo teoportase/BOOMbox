@@ -1,4 +1,11 @@
-﻿html {
+﻿/* Variables for reuse */
+:root {
+    --index-color: #303A2B;
+    --text-color: #fff;
+    --darkest-color: rgba(4, 4, 4);
+}
+
+html {
     font-size: 16px;
 }
 
@@ -13,33 +20,41 @@ body {
     letter-spacing: -0.35px;
 }
 
+/* Styling the sidebar container*/
 .sidebar {
-    background-color: rgba(4, 4, 4);
+    background-color: var(--darkest-color);
     padding: 24px 24px 0 24px;
     position: fixed;
     height: 100%;
     width: 230px;
+    overflow-y: auto;
 }
 
+/* Sidebar scrollbar to be added*/
+
+/* Centering boombox logo*/
 .sidebar .brand {
     padding-bottom: 18px;
+    display: flex;
+    justify-content: center;
 }
 
 .sidebar .brand img {
     width: 131px;
 }
 
+/* Formatting sidebar text*/
 .sidebar .menu .menu--item {
     font-size: 1.5rem;
     position: relative;
 }
 
-.sidebar .menu.menu-extra .menu--item:not(:first-child) {
+/* Adds margin between menu items (songs)*/
+.sidebar .menu .menu--item:not(:first-child) {
     margin-top: 5px;
 }
 
-.sidebar .menu .menu--item a,
-.sidebar .sidebar--download-app a {
+.sidebar .menu .menu--item a {
     text-decoration: none;
     color: #B3B3B3;
     width: 100%;
@@ -50,18 +65,17 @@ body {
 }
 
 /* creating hover effect (3 down)*/
-.sidebar .menu.menu-extra .menu--item a img {
+.sidebar .menu .menu--item a img {
     opacity: 0.7;
     transition: all 350ms;
 }
 
-.sidebar .menu.menu-extra .menu--item:hover a img {
+.sidebar .menu .menu--item:hover a img {
     opacity: 1;
 }
 
 .sidebar .menu .menu--item.active a,
-.sidebar .menu .menu--item:hover a,
-.sidebar .sidebar--download-app:hover a {
+.sidebar .menu .menu--item:hover a {
     color: #fff;
 }
 
@@ -78,19 +92,20 @@ body {
     border-radius: 5px;
 }
 
-.menu--item--text,
-.sidebar--download-app a span {
+/* Sidebar item text formatting (songs)*/
+.menu--item--text {
     font-size: 0.88rem;
-    font-weight: 700;
+    font-weight: 500;
     margin-left: 15px;
 }
 
+/* Formatting sidebar headers (section titles)*/
 .sidebar--header {
-    margin-top: 1.5rem;
-    margin-bottom: 1.3rem;
     font-size: 0.68rem;
     letter-spacing: 1.5px;
     color: #B3B3B3;
+    margin-top: 1.5rem;
+    margin-bottom: 1.3rem;
 }
 
 .sidebar .separator {
@@ -100,33 +115,34 @@ body {
     margin-top: 16px;
 }
 
-.sidebar .menu.menu-playlist .menu--item--text {
-    font-weight: 400;
-    margin-left: 0;
-    /*
-        Add ellipsis when the text is bigger than the width of the sidebar
-        Read more: https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
-    */
+/* Add ellipsis when the text is bigger than the width of the sidebar
+   Read more: https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow */
+.sidebar .menu--item--text {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 
-.sidebar .sidebar--header, .sidebar .menu.menu-playlist a {
+.sidebar .sidebar--header {
     cursor: default;
 }
 
-
-.sidebar--download-app {
-    position: absolute;
-    bottom: 0;
+/* Styling for header container*/
+.header {
+    position: fixed;
+    top: 0;
+    left: 230px; /* sidebar width */
+    right: 0;
+    height: 60px;
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(18, 18, 18);
 }
 
-/* TOGGLE BUTTON needs to be added somewhere in the header below
-1. create html 
-2. then alter css 
-*/
-
+/* Styling for theme slider (6 down)*/
 .brightnessButton {
     position: fixed;
     top: 10px;
@@ -173,6 +189,7 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
+/* Styling for chevron button (2 down)*/
 .header--button {
     background: rgb(7, 7, 7);
     color: #fff;
@@ -188,27 +205,79 @@ input:checked + .slider:before {
     margin-right: 0.5rem;
 }
 
-.header {
-    position: fixed;
-    top: 0;
-    left: 230px; /* sidebar width */
-    right: 0;
-    height: 60px;
-    padding-left: 24px;
-    padding-right: 24px;
-    display: flex;
-    justify-content: flex-start; /* change when you add theme slider*/
-    align-items: center;
-    background-color: rgb(18, 18, 18);
-}
-
-main {
+/* Styling main content area*/
+body main main {
+    padding: 80px 32px 32px 262px;
     min-height: 100vh;
     max-height: 100vh;
     overflow-y: auto;
-    background-color: dodgerblue;
+    background-color: rgb(18, 18, 18);
 }
 
-body main main {
-    padding: 80px 32px 32px 262px;
+/* Customizing scrollbar (3 down)*/
+body main main::-webkit-scrollbar {
+    width: 16px;
+}
+
+body main main::-webkit-scrollbar-thumb {
+    background-color: #909090;
+}
+
+body main main::-webkit-scrollbar-track {
+    background-color: rgb(18, 18, 18);
+}
+
+/* Aligning Songs within their section*/
+.section--body {
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+/* Adds grey rectangle to album items */
+.section--body--item {
+    width: 165px;
+    height: 240px;
+    background-color: rgb(38, 38, 38);
+}
+
+/* Adds padding to song container and changes cursor*/
+.section--body--item.song--item {
+    padding: 20px;
+    cursor: default;
+}
+
+/* Creates fixed size for the album covers */
+.section--body--item .section--body--item--img {
+    width: 125px;
+    height: 125px;
+    margin: 0 auto;
+}
+
+/* Ensures constistent image size & adds shading */
+.section--body--item .section--body--item--img img {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 10px 30px 0 rgba(0,0,0,.3), 0 1px 2px 0 rgba(0,0,0,.2);
+}
+
+/* Formats song card title */
+.section--body--item--title {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+/* Formats song card subtitle */
+.section--body--item--subtitle {
+    margin: 0;
+    margin-top: 1px;
+    color: #b3b3b3;
+    font-size: 0.8rem;
 }
