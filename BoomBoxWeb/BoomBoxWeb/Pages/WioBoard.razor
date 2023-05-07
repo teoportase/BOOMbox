@@ -32,6 +32,8 @@
     <input type="range" id="camera-speed-slider" min="-10" max="10" step="0.05" @bind="CameraSpeed" @oninput="UpdateCameraSpeed"/>
 </div>
 
+<BabylonCanvas />
+
 @code{
     //This function will run on page load
     protected override async Task OnInitializedAsync()
