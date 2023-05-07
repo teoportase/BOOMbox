@@ -105,6 +105,6 @@
     //Publishing a MQTT message
     protected void PublishMqtt(string message)
     {
-        _ = MqttConnection.Publish_Message(topic, message);
+        _ = MqttConnection.GetInstance().Publish_Message(topic, message);
     }
 }

@@ -4,18 +4,46 @@
 <head>
     @* <link rel="stylesheet" href="/css/site.css"/> *@
     @* You can add the css files here *@
+    <link rel="stylesheet" href="css/site.css" />
 </head>
 
 <div class="center">
-    <h1 class="display-4">WioBoard</h1>
+    <h1 class="h1-test">WioBoard</h1>
     <p><a href="/">Go to Main Page</a></p>
+    <p>MQTT Reply: @mqttReply</p>
 </div>
 
-@code{
+<BabylonCanvas />
+
+@code {
+    [Inject] IJSRuntime JsRuntime { get; set; }
+
+    private string mqttReply;
+
+    private async Task UpdateCameraSpeed()
+    {
+        Console.WriteLine("WioBoard.razor:" + mqttReply);
+        await JsRuntime.InvokeVoidAsync("babylonInterop.updateCameraSpeed", mqttReply);
+    }
+
+    private async Task SubscribeToMqtt()
+    {
+        var mqttConnection = MqttConnection.GetInstance();
+        await mqttConnection.Subscribe("sound");
+
+        while (true)
+        {
+            mqttReply = mqttConnection.Reply;
+            StateHasChanged();
+            await Task.Delay(100);
+            await UpdateCameraSpeed();
+        }
+    }
+
     //This function will run on page load
     protected override async Task OnInitializedAsync()
     {
         //Subsribing to a MQTT topic
-        await MqttConnection.Subscribe("sound");
+        await SubscribeToMqtt();
     }
 }
