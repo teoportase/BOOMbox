@@ -2,12 +2,14 @@
 @using Songs
 @using Utils
 @inject HttpClient HttpClient
+@inject IJSRuntime JSRuntime
 
 <head>
     <!-- Imports page-specific .css file -->
     <link rel="stylesheet" href="css/soundboard-style.css" />
     <!-- Imports icons -->
     <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+
 
 </head>
 
@@ -56,8 +58,8 @@
             </button>
         </a>
     </div>
-    <label class="brightnessButton">
-        <input type="checkbox">
+    <label class="brightnessButton" for="checkbox">
+        <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme"/>
         <span class="slider"></span>
     </label>
 </div>
@@ -84,8 +86,9 @@
         </section>
     }
 </main>
-
 @code {
+    bool themeSwitch;
+
     //MQTT message topic
     protected readonly string topic = "sound";
 
@@ -106,5 +109,16 @@
     protected void PublishMqtt(string message)
     {
         _ = MqttConnection.GetInstance().Publish_Message(topic, message);
+    }
+
+    protected async Task ChangeTheme()
+    {
+        if (themeSwitch)
+        {
+            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','light')");
+        } else
+        {
+            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','dark')");
+        }
     }
 }

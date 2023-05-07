@@ -1,8 +1,22 @@
 ﻿/* Variables for reuse */
 :root {
     --index-color: #303A2B;
-    --text-color: #fff;
-    --darkest-color: rgba(4, 4, 4);
+    --text-color: #B3B3B3;
+    --darkest-color: #1c1c1c;
+    --button-color: #3d4040;
+    --background-color: #2a2a35;
+    --header-color: #818cab;
+    --musicbox-color: #818cab;
+}
+
+[data-theme="dark"] {
+    --index-color: #92a8d1;
+    --text-color: #1a1b1c;
+    --darkest-color: #bcbdbe;
+    --button-color: #fff;
+    --background-color: #bfcad3;
+    --header-color: #d4cacd;
+    --musicbox-color: #d4cacd;
 }
 
 html {
@@ -56,7 +70,7 @@ body {
 
 .sidebar .menu .menu--item a {
     text-decoration: none;
-    color: #B3B3B3;
+    color: var(--text-color);
     width: 100%;
     display: flex;
     align-items: center;
@@ -103,7 +117,7 @@ body {
 .sidebar--header {
     font-size: 0.68rem;
     letter-spacing: 1.5px;
-    color: #B3B3B3;
+    color: var(--text-color);
     margin-top: 1.5rem;
     margin-bottom: 1.3rem;
 }
@@ -139,10 +153,11 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    background-color: rgb(18, 18, 18);
+    background-color: var(--header-color);
 }
 
 /* Styling for theme slider (6 down)*/
+/* Modified the slider button so that it actually changes theme*/
 .brightnessButton {
     position: fixed;
     top: 10px;
@@ -164,7 +179,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #333333;
     border-radius: 34px;
     transition: .4s;
 }
@@ -174,7 +189,7 @@ body {
     content: "";
     height: 26px;
     width: 26px;
-    left: 4px;
+    right: 4px;
     bottom: 4px;
     background-color: white;
     border-radius: 50%;
@@ -186,13 +201,15 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(26px);
+    transform: translateX(-26px);
 }
+
+/* Some of the values were changed because of a new agreement to set the default mode as dark mode.*/
 
 /* Styling for chevron button (2 down)*/
 .header--button {
-    background: rgb(7, 7, 7);
-    color: #fff;
+    background: var(--button-color);
+    color: var(--text-color);
     border: 0;
     border-radius: 50%;
     height: 34px;
@@ -211,7 +228,7 @@ body main main {
     min-height: 100vh;
     max-height: 100vh;
     overflow-y: auto;
-    background-color: rgb(18, 18, 18);
+    background-color: var(--background-color);
 }
 
 /* Customizing scrollbar (3 down)*/
@@ -240,7 +257,7 @@ body main main::-webkit-scrollbar-track {
 .section--body--item {
     width: 165px;
     height: 240px;
-    background-color: rgb(38, 38, 38);
+    background-color: var(--musicbox-color);
 }
 
 /* Adds padding to song container and changes cursor*/
