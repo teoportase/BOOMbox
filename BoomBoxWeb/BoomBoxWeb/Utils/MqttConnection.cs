@@ -11,13 +11,13 @@ namespace BoomBoxWeb.Utils
     {
         /*
          * TODO:
-         * We should make this class a singleton
+         * Refactor the singleton
          */
 
         private static MqttConnection instance;
 
         //Set this to the IP of a MQTT broker, or localhost if running everything locally
-        private readonly string BrokerIP = "localhost";
+        private readonly string BrokerIP = "192.168.137.1"; // We set this to match Ionel's hotspot
         
         //Message that will be proccessed by the Subscribe() method
         //Value assigned here is the 'default' one, before receiving anything

@@ -9,17 +9,24 @@
     <link rel="stylesheet" href="css/site.css" />
 </head>
 
-@code{
+<div class="center">
+    <h1 class="h1-test">WioBoard</h1>
+    <p><a href="/">Go to Main Page</a></p>
+    <p>MQTT Reply: @mqttReply</p>
+</div>
+
+<BabylonCanvas />
+
+@code {
     [Inject] IJSRuntime JsRuntime { get; set; }
-    public float CameraSpeed { get; set; } = 4f;
+
+    private string mqttReply;
 
     private async Task UpdateCameraSpeed()
     {
-        Console.WriteLine("WioBoard.razor:" + CameraSpeed);
-        await JsRuntime.InvokeVoidAsync("babylonInterop.updateCameraSpeed", CameraSpeed);
+        Console.WriteLine("WioBoard.razor:" + mqttReply);
+        await JsRuntime.InvokeVoidAsync("babylonInterop.updateCameraSpeed", mqttReply);
     }
-
-    private string mqttReply;
 
     private async Task SubscribeToMqtt()
     {
@@ -31,7 +38,7 @@
             mqttReply = mqttConnection.Reply;
             StateHasChanged();
             await Task.Delay(100);
-            Console.WriteLine("Testing this");
+            await UpdateCameraSpeed();
         }
     }
 
@@ -42,27 +49,3 @@
         await SubscribeToMqtt();
     }
 }
-
-<div class="center">
-    <h1 class="h1-test">WioBoard</h1>
-    <p><a href="/">Go to Main Page</a></p>
-    <p>Camera Speed: @CameraSpeed</p>
-    <p>MQTT Reply: @mqttReply</p>
-</div>
-
-<div>
-    <label for="camera-speed-slider">Camera Speed:</label>
-    <input type="range" id="camera-speed-slider" min="-10" max="10" step="0.05" @bind="CameraSpeed" @oninput="UpdateCameraSpeed"/>
-</div>
-
-<BabylonCanvas />
-
-@*@code{
-    
-
-    private async Task UpdateCameraWithMqtt()
-    {
-        Console.WriteLine("WioBoard.razor:" + MqttConnection.GetInstance().Reply);
-        await JsRuntime.InvokeVoidAsync("babylonInterop.updateCameraSpeed", MqttConnection.GetInstance().Reply);
-    }
-}*@
