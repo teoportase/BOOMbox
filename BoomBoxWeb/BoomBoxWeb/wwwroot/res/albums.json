@@ -1,62 +1,48 @@
 {
   "Albums": [
     {
+      "name": "Game soundtracks",
+      "songs": [
+        {
+          "id":  "amogus",
+          "title": "Among Us Theme",
+          "artist": "Marcus Bromander",
+          "image": "amogus.webp"
+        },
+        {
+          "id":  "megalovania",
+          "title": "Megalovania",
+          "artist": "Toby Fox",
+          "image": "sans.jpg"
+        }
+      ]
+    },
+    {
       "name": "Pop songs",
       "songs": [
         {
+          "id":  "rain",
           "title": "Rain On Me",
           "artist": "Lady Gaga",
           "image": "gaga.png"
         },
         {
-          "title": "Vroom Vroom",
-          "artist": "Charli XCX",
-          "image": "xcx.png"
-        },
-        {
-          "title": "Hyperballad",
-          "artist": "Bjork",
-          "image": "riddle.png"
-        }
-      ]
-    },
-    {
-      "name": "Indie songs",
-      "songs": [
-        {
-          "title": "Beach Life-in-Death",
-          "artist": "Car Seat Headrest",
-          "image": "will.png"
-        },
-        {
+          "id":  "hehe",
           "title": "Another Bed",
           "artist": "Piggie",
-          "image": "pyrus.png"
+          "image": "piggie.png"
         },
         {
+          "id":  "kkb",
           "title": "Make Believe",
           "artist": "Kero Kero Bonito",
-          "image": "kkb.png"
+          "image": "kkb.jpg"
         },
         {
-          "title": "Up From the South",
-          "artist": "The Budos Band",
-          "image": "tbb.png"
-        },
-        {
-          "title": "Mosaic",
-          "artist": "Sven Wunder",
-          "image": "msw.png"
-        },
-        {
-          "title": "Supalonely (feat. Gus Dapperton)",
-          "artist": "BENEE, Gus Dapperton",
-          "image": "bgd.png"
-        },
-        {
-          "title": "Afraid To Feel",
-          "artist": "LF System",
-          "image": "lfs.png"
+          "id":  "toledo",
+          "title": "Beach Life-In-Death",
+          "artist": "Car Seat Headrest",
+          "image": "twin.jpg"
         }
       ]
     }
