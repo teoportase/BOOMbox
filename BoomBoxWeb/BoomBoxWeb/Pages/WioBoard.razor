@@ -1,4 +1,6 @@
 ﻿@page "/WioBoard"
+@using Utils
+
 <head>
     @* <link rel="stylesheet" href="/css/site.css"/> *@
     @* You can add the css files here *@
@@ -21,7 +23,7 @@
 
 <div class="center">
     <h1 class="h1-test">WioBoard</h1>
-    <p><a asp-page="/Index">Go to Main Page</a></p>
+    <p><a href="/">Go to Main Page</a></p>
     <p>Camera Speed: @CameraSpeed</p>
 </div>
 
@@ -30,5 +32,11 @@
     <input type="range" id="camera-speed-slider" min="-10" max="10" step="0.05" @bind="CameraSpeed" @oninput="UpdateCameraSpeed"/>
 </div>
 
-
-<BabylonCanvas />
+@code{
+    //This function will run on page load
+    protected override async Task OnInitializedAsync()
+    {
+        //Subsribing to a MQTT topic
+        await MqttConnection.Subscribe("sound");
+    }
+}

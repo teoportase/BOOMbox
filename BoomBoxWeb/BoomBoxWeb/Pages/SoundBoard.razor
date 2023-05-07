@@ -15,67 +15,46 @@
 <nav class="sidebar">
     <div class="brand">
         <img src="res/Boombox.svg" class="boombox-logo" alt="boombox icon">
-    </div>
-    <div class="menu">
-        <div class="menu--item">
-            <a href="#">
-                <i class="lni lni-home"></i> <span class="menu--item--text">Home</span>
-            </a>
-        </div>
-        <div class="menu--item">
-            <a href="#">
-                <i class="lni lni-search"></i> <span class="menu--item--text">Search</span>
-            </a>
-        </div>
-        <div class="menu--item">
-            <a href="#">
-                <i class="lni lni-library"></i> <span class="menu--item--text">Library</span>
-            </a>
-        </div>
-    </div>
-    <p class="sidebar--header">PLAYLIST</p>
-    <div class="menu menu-extra">
+    </div><p class="sidebar--header">OUR PICKS</p>
+    <div class="menu recommendations">
         <div class="menu--item">
             <a href="#">
                 <img src="http://via.placeholder.com/32x32" alt="">
-                <span class="menu--item--text">Create a playlist</span>
+                <span class="menu--item--text">Rain On Me</span>
             </a>
         </div>
         <div class="menu--item">
             <a href="#">
                 <img src="http://via.placeholder.com/32x32" alt="">
-                <span class="menu--item--text">Songs that you like</span>
+                <span class="menu--item--text">Supalonely (feat. Gus Dapperton)</span>
             </a>
         </div>
     </div>
     <div class="separator"></div>
-    <div class="menu menu-playlist">
+    <p class="sidebar--header">YOUR FAVOURITES</p>
+    <div class="menu likes">
         <div class="menu--item">
             <a href="#">
-                <span class="menu--item--text">Dev</span>
+                <img src="http://via.placeholder.com/32x32" alt="">
+                <span class="menu--item--text">Up From the South</span>
             </a>
         </div>
         <div class="menu--item">
             <a href="#">
-                <span class="menu--item--text">That playlist that I really liked from the show</span>
+                <img src="http://via.placeholder.com/32x32" alt="">
+                <span class="menu--item--text">Mosaic</span>
             </a>
         </div>
-    </div>
-    <div class="sidebar--download-app">
-        <a href="#">
-            <i class="lni lni-arrow-down-circle"></i> <span>Install the app</span>
-        </a>
     </div>
 </nav>
 <div class="header">
     <div class="header--bg"></div>
     <div class="header--buttons">
-        <button class="header--button previous">
-            <i class="lni lni-chevron-left"></i>
-        </button>
-        <button class="header--button next">
-            <i class="lni lni-chevron-right"></i>
-        </button>
+        <a href="/"> @*change this later*@
+            <button class="header--button previous">
+                <i class="lni lni-chevron-left"></i>
+            </button>
+        </a>
     </div>
     <label class="brightnessButton">
         <input type="checkbox">
@@ -91,21 +70,20 @@
                 </div>
             </div>
             <div class="section--body">
-            </div>
-            @foreach(Song song in album.Songs){
-                <div class="section--body--item song--item"  @onclick="() => PublishMqtt(song.Title)">
-                    <div class="section--body--item--img">
-                        <img src="http://via.placeholder.com/150x150" alt="">
+                @foreach (Song song in album.Songs)
+                {
+                    <div class="section--body--item song--item" @onclick="() => PublishMqtt(song.Title)">
+                        <div class="section--body--item--img">
+                            <img src="http://via.placeholder.com/150x150" alt="">
+                        </div>
+                        <p class="section--body--item--title">@song.Title</p>
+                        <p class="section--body--item--subtitle">@song.Artist</p>
                     </div>
-                    <p class="section--body--item--title">@song.Title</p>
-                    <p class="section--body--item--subtitle">@song.Artist</p>
-                </div>
-            }
-
+                }
+            </div>
         </section>
     }
 </main>
-
 
 @code {
     //MQTT message topic

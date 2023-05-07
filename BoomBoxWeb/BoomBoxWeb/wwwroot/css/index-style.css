@@ -33,7 +33,6 @@ body {
     flex-wrap: wrap;
     align-content: center;
     gap: 1em;
-    outline: dashed 1px white;
 }
 
 /* max-width helps with responsiveness (stops img overflow) */
