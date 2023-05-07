@@ -25,6 +25,7 @@ html {
   .center {
     text-align: center;
     font-family: monospace;
+    align-content: center;
   }
 
   footer {

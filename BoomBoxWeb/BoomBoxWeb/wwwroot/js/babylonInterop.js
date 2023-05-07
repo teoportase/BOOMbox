@@ -28,15 +28,15 @@ babylonInterop.createKirbyScene = function (engine, canvas) {
     var light1 = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
 
     // I tried putting the model in a different directory but it didn't work
-    var kirby = BABYLON.SceneLoader.ImportMeshAsync("", "../assets/","Kirby.glb", scene);
-    // var box = BABYLON.MeshBuilder.CreateBox("box", {}, scene);
+    //var kirby = BABYLON.SceneLoader.ImportMeshAsync("", "../assets/","Kirby.glb", scene);
+     var box = BABYLON.MeshBuilder.CreateBox("box", {}, scene);
 
     return scene;
 };
 
 babylonInterop.updateCameraSpeed = function (cameraSpeed) {
-    console.log(cameraSpeed);
-    var camera = scene.getCameraByName("Camera");
-    camera.useAutoRotationBehavior = true;
-    camera.autoRotationBehavior.idleRotationSpeed = cameraSpeed;
+    console.log('Interop.js: ' + cameraSpeed);
+    //var camera = scene.getCameraByName("Camera");
+    //camera.useAutoRotationBehavior = true;
+    //camera.autoRotationBehavior.idleRotationSpeed = cameraSpeed;
 };

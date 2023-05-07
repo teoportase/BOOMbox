@@ -15,9 +15,31 @@
 
     private async Task UpdateCameraSpeed()
     {
-        Console.WriteLine("AAAAAAAAAAAh");
-        Console.WriteLine(CameraSpeed);
+        Console.WriteLine("WioBoard.razor:" + CameraSpeed);
         await JsRuntime.InvokeVoidAsync("babylonInterop.updateCameraSpeed", CameraSpeed);
+    }
+
+    private string mqttReply;
+
+    private async Task SubscribeToMqtt()
+    {
+        var mqttConnection = MqttConnection.GetInstance();
+        await mqttConnection.Subscribe("sound");
+
+        while (true)
+        {
+            mqttReply = mqttConnection.Reply;
+            StateHasChanged();
+            await Task.Delay(100);
+            Console.WriteLine("Testing this");
+        }
+    }
+
+    //This function will run on page load
+    protected override async Task OnInitializedAsync()
+    {
+        //Subsribing to a MQTT topic
+        await SubscribeToMqtt();
     }
 }
 
@@ -25,6 +47,7 @@
     <h1 class="h1-test">WioBoard</h1>
     <p><a href="/">Go to Main Page</a></p>
     <p>Camera Speed: @CameraSpeed</p>
+    <p>MQTT Reply: @mqttReply</p>
 </div>
 
 <div>
@@ -34,11 +57,12 @@
 
 <BabylonCanvas />
 
-@code{
-    //This function will run on page load
-    protected override async Task OnInitializedAsync()
+@*@code{
+    
+
+    private async Task UpdateCameraWithMqtt()
     {
-        //Subsribing to a MQTT topic
-        await MqttConnection.Subscribe("sound");
+        Console.WriteLine("WioBoard.razor:" + MqttConnection.GetInstance().Reply);
+        await JsRuntime.InvokeVoidAsync("babylonInterop.updateCameraSpeed", MqttConnection.GetInstance().Reply);
     }
-}
+}*@

@@ -1,4 +1,6 @@
-﻿using MQTTnet;
+﻿using BoomBoxWeb.Pages;
+using Microsoft.AspNetCore.Components;
+using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
 using System.Text;
@@ -7,15 +9,34 @@ namespace BoomBoxWeb.Utils
 {
     public class MqttConnection
     {
+        /*
+         * TODO:
+         * We should make this class a singleton
+         */
+
+        private static MqttConnection instance;
+
         //Set this to the IP of a MQTT broker, or localhost if running everything locally
-        private readonly static string BrokerIP = "localhost";
+        private readonly string BrokerIP = "localhost";
         
         //Message that will be proccessed by the Subscribe() method
         //Value assigned here is the 'default' one, before receiving anything
-        public static string Reply { get; set; } = "Awaiting response...";
+        public string Reply { get; set; } = "Awaiting response...";
+
+        private MqttConnection() {
+            // Empty private constructor to prevent instantiation
+            // Initialization code should go here
+        }
+
+        public static MqttConnection GetInstance()
+        {
+            instance ??= new MqttConnection(); // Silly goofy operator haha
+
+            return instance;
+        }
         
 
-        public static async Task Publish_Message(string topic, string payload)
+        public async Task Publish_Message(string topic, string payload)
         {
             var mqttFactory = new MqttFactory();
             using (var mqttClient = mqttFactory.CreateMqttClient())
@@ -42,7 +63,7 @@ namespace BoomBoxWeb.Utils
             }
         }
 
-        public static async Task Subscribe(string topic)
+        public async Task Subscribe(string topic)
         {
             //Declaring connection options
             var options = new ManagedMqttClientOptionsBuilder()
@@ -61,6 +82,7 @@ namespace BoomBoxWeb.Utils
             {
                 Reply = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
                 Console.WriteLine("Received application message: " + Reply);
+
                 return Task.CompletedTask;
             };
 
@@ -69,6 +91,7 @@ namespace BoomBoxWeb.Utils
 
             //Conecting to the broker using ClientOptions
             await mqttClient.StartAsync(options);
+
         }
     }
 }

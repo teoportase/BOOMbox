@@ -15,11 +15,8 @@ namespace BoomBoxWeb.Shared
 
             if (firstRender)
             {
-                Debug.WriteLine("AAAAH");
                 await JsRuntime.InvokeVoidAsync("babylonInterop.initCanvas", "babylon-canvas");
             }
-
-            Debug.WriteLine("AAAAAAAAAAAAAAH");
         }
     }
 }
