@@ -1,12 +1,15 @@
 /*
-Some of the following code used for connecting to a WiFi network is taken from the WiFi page
-on the SeeedStudio webpage (https://wiki.seeedstudio.com/Wio-Terminal-Wi-Fi), under the "Connecting to Specified Network Example Code" section.
+  Some of the following code used for connecting to a WiFi network is taken from the WiFi page
+  on the SeeedStudio webpage (https://wiki.seeedstudio.com/Wio-Terminal-Wi-Fi), under the "Connecting to Specified Network Example Code" section.
+
+  Includes a way to play "Megalovania" if the message is "megalovania" and the song in "Amogus.h" if the message is "amogus". It is case sensitive.
 */
 
 // libraries for WiFi connections and MQTT protocol
 #include "rpcWiFi.h"
 #include <PubSubClient.h>
 #include "ServerData.h"        // file with the server information
+// library for LCD display
 #include "TFT_eSPI.h"
 
 // Song files
@@ -24,7 +27,7 @@ const char* MQTT_TOPIC = "#";
 WiFiClient wifiClient;
 PubSubClient client(wifiClient);
 
-// Define lcd screen
+// Define LCD screen
 TFT_eSPI tft;
 
 // To see if the device connects to the WiFi, open the Serial Monitor here.
@@ -43,34 +46,12 @@ void setup() {
 
   pinSpeaker();
 
-  Serial.println("Connecting to WiFi..");
-  WiFi.begin(SSID, PASSWORD);
-
-  while (WiFi.status() != WL_CONNECTED) {
-      delay(500);
-      Serial.println("Connecting to WiFi..");
-      WiFi.begin(SSID, PASSWORD);
-      printOnScreen("Connecting to WiFi", 10, 50, 3);
-
-  }
-  Serial.println("Connected to the WiFi network");
+  connectWiFi();
 
   client.setServer(MQTT_SERVER, MQTT_PORT);
   client.setCallback(callback);
 
-  // Connect to MQTT broker
-  while (!client.connected()) {
-    Serial.print("Connecting to MQTT broker...");
-    printOnScreen("Connecting to broker", 10, 50, 3);
-    if (client.connect("Wio Terminal")) {
-      Serial.println("connected");
-    } else {
-      Serial.print("failed, rc=");
-      Serial.print(client.state());   // to see more about the reasons the connection failed, check: https://pubsubclient.knolleary.net/api#state
-      Serial.println(" retrying in 5 seconds");
-      delay(5000);
-    }
-  }
+  reconnect();
 
   // The device subscribes to the topic
   client.subscribe(MQTT_TOPIC);
@@ -79,21 +60,9 @@ void setup() {
 }
 
 void loop() {
-// Reestablish the connection if the device disconnects  
-  if (!client.connected()) {
-    Serial.print("Reconnecting to MQTT broker...");
+  
+  reconnect();
 
-    if (client.connect("Wio Terminal")) {
-      Serial.println("connected");
-      client.subscribe(MQTT_TOPIC);
-    }
-    else {
-      Serial.print("failed, rc=");
-      Serial.print(client.state());
-      Serial.println(" retrying in 5 seconds");
-      delay(5000);
-    }
-  }
   client.loop();
 }
 
@@ -112,27 +81,35 @@ void callback(char* topic, byte* message, unsigned int length) {
 
   printOnScreen(received_message, 10, 100, 4);
 
-  if(stringTopic == "music") {
-    Serial.println("Correct topic");
+  playSong(stringTopic, received_message);
+}
 
-    if(received_message == "amogus") {
-      int SONG_LENGTH = sizeof(Amogus) / sizeof(Note);
+// Connects the device to the WiFi
+void connectWiFi() {
+  Serial.println("Connecting to WiFi..");
+  WiFi.begin(SSID, PASSWORD);
 
-      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
-      {
-        playNote(note_index, Amogus);
-        delay(Amogus[note_index].delay);
-      }
-    }
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.println("Connecting to WiFi..");
+    WiFi.begin(SSID, PASSWORD);
+  }
+  Serial.println("Connected to the WiFi network");
+  printOnScreen("Connected to WiFi!", 10, 50, 3);
+}
 
-    if(received_message == "megalovania") {
-      int SONG_LENGTH = sizeof(Megalovania) / sizeof(Note);
-
-      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
-      {
-        playNote(note_index, Megalovania);
-        delay(Megalovania[note_index].delay);
-      }
+// Connects/reconnects the device to the broker using MQTT
+void reconnect() {
+  while (!client.connected()) {
+    Serial.print("Connecting to MQTT broker...");
+    printOnScreen("Connecting to broker", 10, 50, 3);
+    if (client.connect("Wio Terminal")) {
+      Serial.println("connected");
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());   // to see more about the reasons the connection failed, check: https://pubsubclient.knolleary.net/api#state
+      Serial.println(" retrying in 5 seconds");
+      delay(5000);
     }
   }
 }
@@ -154,8 +131,37 @@ void playNote(uint8_t note_index, Note song[]) {
   }
 }
 
+// Play a song based on the message received
+void playSong(String topic, String message) {
+  if(topic == "music") {
+    Serial.println("Correct topic");
+
+    if(message == "amogus") {
+      int SONG_LENGTH = sizeof(Amogus) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        playNote(note_index, Amogus);
+        delay(Amogus[note_index].delay);
+      }
+    }
+
+    if(message == "megalovania") {
+      int SONG_LENGTH = sizeof(Megalovania) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        playNote(note_index, Megalovania);
+        delay(Megalovania[note_index].delay);
+      }
+    }
+  }
+}
+
+// Prints the desired text on screen
+// Parameters: the message, the x position of the text, the y position of the text, the size of the text (we recommend 1 to 3 so the text fits)
 void printOnScreen(String message, int x, int y, int size) {
   tft.setTextSize(size);
-  tft.fillScreen(TFT_RED);
+  tft.fillScreen(TFT_GREEN);
   tft.drawString(message, x, y);
 }
