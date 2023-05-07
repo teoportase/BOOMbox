@@ -74,9 +74,9 @@
             <div class="section--body">
                 @foreach (Song song in album.Songs)
                 {
-                    <div class="section--body--item song--item" @onclick="() => PublishMqtt(song.Title)">
+                    <div class="section--body--item song--item" @onclick="() => PublishMqtt(song.Id)">
                         <div class="section--body--item--img">
-                            <img src="http://via.placeholder.com/150x150" alt="">
+                            <img src="res/album_thumbnail/@song.Image" alt="@song.Title">
                         </div>
                         <p class="section--body--item--title">@song.Title</p>
                         <p class="section--body--item--subtitle">@song.Artist</p>
