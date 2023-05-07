@@ -1,19 +1,24 @@
+/*
+Some of the following code used for connecting to a WiFi network is taken from the WiFi page
+on the SeeedStudio webpage (https://wiki.seeedstudio.com/Wio-Terminal-Wi-Fi), under the "Connecting to Specified Network Example Code" section.
+*/
+
 // libraries for WiFi connections and MQTT protocol
 #include "rpcWiFi.h"
 #include <PubSubClient.h>
 #include "ServerData.h"        // file with the server information
 #include "TFT_eSPI.h"
 
-/*
-Some of the following code used for connecting to a WiFi network is taken from the WiFi page
-on the SeeedStudio webpage (https://wiki.seeedstudio.com/Wio-Terminal-Wi-Fi), under the "Connecting to Specified Network Example Code" section.
-*/
+// Song files
+#include "Amogus.h"
+#include "Megalovania.h"
 
-// If needed, change the default port, topic, and client ID here:
+// Pin definitions
+#define SPEAKER 0
+
+// If needed, change the default port and topic here:
 const int MQTT_PORT = 1883;
 const char* MQTT_TOPIC = "#";
-
-typedef void (*Callback)(char*, byte*, unsigned int);
 
 // Creates a fully instatiated client
 WiFiClient wifiClient;
@@ -29,12 +34,14 @@ void setup() {
   //LCD Setup
   tft.begin();
   tft.setRotation(3);
-  tft.fillScreen(TFT_RED);
+  tft.fillScreen(TFT_GREEN);
   tft.setTextColor(TFT_BLACK);
-  tft.setTextSize(4); // If i delete this doesn't work for some reason
+  tft.setTextSize(3); // If i delete this doesn't work for some reason
 
   // Starts the first connection
   Serial.begin(115200);
+
+  pinSpeaker();
 
   Serial.println("Connecting to WiFi..");
   WiFi.begin(SSID, PASSWORD);
@@ -104,6 +111,47 @@ void callback(char* topic, byte* message, unsigned int length) {
   Serial.println(stringTopic);
 
   printOnScreen(received_message, 10, 100, 4);
+
+  if(stringTopic == "music") {
+    Serial.println("Correct topic");
+
+    if(received_message == "amogus") {
+      int SONG_LENGTH = sizeof(Amogus) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        playNote(note_index, Amogus);
+        delay(Amogus[note_index].delay);
+      }
+    }
+
+    if(received_message == "megalovania") {
+      int SONG_LENGTH = sizeof(Megalovania) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        playNote(note_index, Megalovania);
+        delay(Megalovania[note_index].delay);
+      }
+    }
+  }
+}
+
+// Sets up the speaker
+void pinSpeaker() {
+  pinMode(SPEAKER, OUTPUT);
+  digitalWrite(SPEAKER, LOW);
+}
+
+// Plays one note
+void playNote(uint8_t note_index, Note song[]) {
+  for(int i=0;i<song[note_index].duration;i++)
+  {
+    digitalWrite(SPEAKER,HIGH);
+    delayMicroseconds(song[note_index].frequency);
+    digitalWrite(SPEAKER,LOW);
+    delayMicroseconds(song[note_index].frequency);
+  }
 }
 
 void printOnScreen(String message, int x, int y, int size) {
