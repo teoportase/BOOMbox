@@ -1,12 +1,21 @@
 ﻿@page "/WioBoard"
+@using Utils
+
 <head>
     @* <link rel="stylesheet" href="/css/site.css"/> *@
     @* You can add the css files here *@
-    <!-- Imports jquery library -->
-    <!-- Imports ajaxTest file under the wwwroot/js folder -->
 </head>
 
 <div class="center">
     <h1 class="display-4">WioBoard</h1>
-    <p><a asp-page="/Index">Go to Main Page</a></p>
+    <p><a href="/">Go to Main Page</a></p>
 </div>
+
+@code{
+    //This function will run on page load
+    protected override async Task OnInitializedAsync()
+    {
+        //Subsribing to a MQTT topic
+        await MqttConnection.Subscribe("sound");
+    }
+}
