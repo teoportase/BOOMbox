@@ -32,7 +32,10 @@ cache:
 
 ### Restore project dependencies
 before_script:
-  - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
+  - 'ls'
+  - 'cd "BoomBoxWeb/BoomBoxWeb/"'
+  - 'ls'
+  # - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
 build:
   stage: build
@@ -40,6 +43,7 @@ build:
   tags:
     - docker-build
   script:
+    - 'ls'
     - 'dotnet --version'
 
 # build:
