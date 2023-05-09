@@ -10,7 +10,7 @@ stages:
 ### Define variables
 variables:
   NUGET_PACKAGES_DIRECTORY: '.nuget'
-  SOURCE_CODE_PATH: 'BoomBoxWeb/BoomBoxWeb/'
+  SOURCE_CODE_PATH: 'BoomBoxWeb/'
 
 ### Define global cache
 cache:
