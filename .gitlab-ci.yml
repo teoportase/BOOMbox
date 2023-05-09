@@ -32,9 +32,7 @@ cache:
 
 ### Restore project dependencies
 before_script:
-  - 'ls'
-  - 'ls $SOURCE_CODE_PATH'
-  # - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
+  - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
 build:
   stage: build
@@ -42,7 +40,7 @@ build:
   tags:
     - docker-build
   script:
-    - 'dotnet build --no-restore'
+    - 'dotnet --version'
 
 # build:
 #   stage: build
