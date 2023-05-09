@@ -40,5 +40,7 @@ build:
 
 test:
   stage: test
+  tags:
+    - docker-build
   script:
     - 'dotnet test --no-restore'
