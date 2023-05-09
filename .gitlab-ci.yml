@@ -32,6 +32,7 @@ cache:
 
 ### Restore project dependencies
 before_script:
+  - 'ls'
   - 'ls $SOURCE_CODE_PATH'
   # - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
