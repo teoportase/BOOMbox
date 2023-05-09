@@ -6,6 +6,7 @@ image: mcr.microsoft.com/dotnet/sdk:7.0
 # List of stages for jobs, and their order of execution
 stages:
   - build
+  - test
 
 ### Define variables
 variables:
@@ -31,8 +32,13 @@ before_script:
 
 build:
   stage: build
-  ### Set the correct that for the `Shared Gitlab Runners`
+  ### Set the correct tag for the `Shared Gitlab Runners`
   tags:
     - docker-build
   script:
     - 'dotnet build --no-restore'
+
+test:
+  stage: test
+  script:
+    - 'dotnet test --no-restore'
