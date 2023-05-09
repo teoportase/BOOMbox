@@ -33,7 +33,7 @@ cache:
 ### Restore project dependencies
 before_script:
   # Change to the correct directory
-  - 'cd "BoomBoxWeb/BoomBoxWeb/"'
+  - 'cd $SOURCE_CODE_PATH'
   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
 build:
