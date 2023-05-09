@@ -1,15 +1,52 @@
+### This .gitlab-ci.yml is based on the official dotnet template for gitlab
+### https://gitlab.com/gitlab-org/project-templates/dotnetcore
+
 image: mcr.microsoft.com/dotnet/sdk:7.0
 
+
+### Set the correct that for the `Shared Gitlab Runners`
+tags:
+    - docker-build
+  
 # List of stages for jobs, and their order of execution
 stages:
   - build
-  - test
+
+### Define variables
+variables:
+  OBJECTS_DIRECTORY: 'obj'
+  NUGET_PACKAGES_DIRECTORY: '.nuget'
+  SOURCE_CODE_PATH: '*/*/'
+
+### Define global cache
+cache:
+  key: "CI_JOB_STAGE-$CI_COMMIT_REF_SLUG"
+  paths:
+    # Specify three paths that should be cached
+    # 1) Main JSON file holding information about package dependency tree, packages versions,
+    # frameworks etc. It also holds information where to the dependencies were restored.
+    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/project.assets.json'
+    # 2) Other NuGet and MSBuild related files. Also needed.
+    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/*.csproj.nuget.*'
+    # 3) Path to the directory where restored dependencies are kept.
+    - '$NUGET_PACKAGES_DIRECTORY'
+
+  # 'pull-push' policy means that latest cache will be downloaded (if it exists)
+  # before executing the job, and a newer version will be uploaded afterwards.
+  policy: pull-push
+
+### Restore project dependencies
+before_script:
+  - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
 build:
   stage: build
-  tags:
-    - docker-build
   script:
-    - apt-get update -y
-    - apt-get upgrade -y
-    - dotnet --version
+    - 'dotnet build --no-restore'
+
+# build:
+#   stage: build
+#   script:
+#     - apt-get update -y
+#     - apt-get upgrade -y
+#     - dotnet --version
