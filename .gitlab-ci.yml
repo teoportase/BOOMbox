@@ -42,5 +42,4 @@ build:
   tags:
     - docker-build
   script:
-    - 'ls .nuget -a'
     - 'dotnet build --no-restore'
