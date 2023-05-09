@@ -32,15 +32,16 @@ cache:
 
 ### Restore project dependencies
 before_script:
-  - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
+  - 'ls $SOURCE_CODE_PATH'
+  # - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
-build:
-  stage: build
-  ### Set the correct that for the `Shared Gitlab Runners`
-  tags:
-    - docker-build
-  script:
-    - 'dotnet build --no-restore'
+# build:
+#   stage: build
+#   ### Set the correct that for the `Shared Gitlab Runners`
+#   tags:
+#     - docker-build
+#   script:
+#     - 'dotnet build --no-restore'
 
 # build:
 #   stage: build
