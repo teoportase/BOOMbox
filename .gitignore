@@ -16,6 +16,10 @@
 *.o
 *.out
 
+# Blazor
+*.nuget
+
+
 # Test binary
 *.test
 

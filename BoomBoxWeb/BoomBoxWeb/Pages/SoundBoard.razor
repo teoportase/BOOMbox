@@ -108,7 +108,7 @@
     //Publishing a MQTT message
     protected void PublishMqtt(string message)
     {
-        _ = MqttConnection.GetInstance().Publish_Message(topic, message);
+        _ = MqttConnection.GetInstance().PublishMessage(topic, message);
     }
 
     protected async Task ChangeTheme()
