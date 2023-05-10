@@ -1,4 +1,4 @@
-#include "Notes.h"
+#include "SpeakerNotes.h"
 
 Note Amogus[] = {
     {T.C, 100, 200}, 
