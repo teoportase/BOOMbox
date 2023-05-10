@@ -36,7 +36,7 @@ namespace BoomBoxWeb.Utils
         }
         
 
-        public async Task Publish_Message(string topic, string payload)
+        public async Task PublishMessage(string topic, string payload)
         {
             var mqttFactory = new MqttFactory();
             using (var mqttClient = mqttFactory.CreateMqttClient())
@@ -60,6 +60,36 @@ namespace BoomBoxWeb.Utils
                 await mqttClient.DisconnectAsync();
 
                 Console.WriteLine("MQTT message " + topic + "/" + payload + " published at " + BrokerIP);
+            }
+        }
+
+        /*
+         * Testing method for the pipeline
+         */
+        public async Task PublishMessage(string host, string topic, string payload)
+        {
+            var mqttFactory = new MqttFactory();
+            using (var mqttClient = mqttFactory.CreateMqttClient())
+            {
+                //Building ClientOptions
+                var mqttClientOptions = new MqttClientOptionsBuilder().WithWebSocketServer(host + ":8000/mqtt").Build();
+
+                //Conecting to the broker using ClientOptions
+                await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
+
+                //Building the message using arguments
+                var appMessage = new MqttApplicationMessageBuilder()
+                    .WithTopic(topic)
+                    .WithPayload(payload)
+                    .Build();
+
+                //Publishing the message
+                await mqttClient.PublishAsync(appMessage, CancellationToken.None);
+
+                //Disconnecting from the broker
+                await mqttClient.DisconnectAsync();
+
+                Console.WriteLine("MQTT message " + topic + "/" + payload + " published at " + host);
             }
         }
 
@@ -91,7 +121,6 @@ namespace BoomBoxWeb.Utils
 
             //Conecting to the broker using ClientOptions
             await mqttClient.StartAsync(options);
-
         }
     }
 }
