@@ -60,6 +60,10 @@ void setup() {
 }
 
 void loop() {
+  if(WiFi.status() != WL_CONNECTED) {
+    connectWiFi();
+  }
+  
   if(!client.connected()){
     connectBroker();
   }
