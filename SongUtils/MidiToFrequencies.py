@@ -1,6 +1,6 @@
 '''
-This python script converts midi files to frequencies that can be used with the `Grove Speaker`.
-It also exports them in a csv file for future processing.
+This python script converts midi files to frequencies that can be used with the `Grove Speaker`
+and it exports them in a .txt file for future processing.
 To use this library, you need Python 3.x installed along with the `music21` lirary.
 You can install music21 by running pip install music21 in your selected environment
 '''
@@ -19,14 +19,35 @@ With the following format:
     {frequency_1,duration_1,delay_1},
     ...
     {frequency_n,duration_n,delay_n}
-Where frequency, duration, and delay are Integers
+Where frequency, duration, and delay are Integers.
 '''
-def midi_to_txt(filename):
+def midi_to_txt(filename, melodyInstrument='Piano'):
 
     try:
         midi = converter.parse(filename)
     except FileNotFoundError:
         print('File not found')
+    
+    # # Extract tempo information
+    # tempo = midi.flat.get('MetronomeMark')
+    # if tempo:
+    #     bpm = int(tempo.getQuarterBPM())
+    #     print(f"BPM: {bpm}")
+
+    # Extract tempo information
+    bpm = None
+    for element in midi.flat:
+        if 'MetronomeMark' in element.classes:
+            bpm = element.number
+            break
+
+    if bpm:
+        print(f"BPM: {bpm}")
+    else:
+        bpm = 60
+
+    quarterNoteDuration = getQuarterNoteDuration(bpm)
+    print(f'Duration of a quarter note in seconds: {quarterNoteDuration}')
 
     notes = []
     notes_to_parse = None
@@ -48,12 +69,12 @@ def midi_to_txt(filename):
         return None
     
     try:
-        piano_index = instrument_names.index('Piano')
+        main_instrument_index = instrument_names.index(melodyInstrument)
     except ValueError:
         print('%s does not have any Piano part' % filename)
         return None
     
-    notes_to_parse = parts.parts[piano_index].recurse()
+    notes_to_parse = parts.parts[main_instrument_index].recurse()
 
     for element in notes_to_parse:
         
@@ -63,16 +84,36 @@ def midi_to_txt(filename):
             freq = str(noteToGroveFrequency(element.pitch.midi))
             if (freq == 'None'):
                 continue
-            duration = check_float(str(element.duration)[27:-1])
-            delay = check_float(str(element.offset)) # Need to fix this to get the distance between notes
+            duration = check_float(str(element.duration)[27:-1], quarterNoteDuration)
+            delay = check_float(str(element.offset), quarterNoteDuration) # Need to fix this to get the distance between notes
             notes.append([freq, duration, delay])
     
     baseFilename = os.path.splitext(filename)[0]
-    outputFilename = f"{baseFilename}_new.txt"
+    outputFilename = f"{baseFilename}_delay.txt"
 
     with open(outputFilename, "w") as f:
-        for n in notes:
-            f.write(f"\u007b{n[0]},{n[1]},{n[2]}\u007d,\n")
+        for i, n in enumerate(notes):
+            currentDelay = 0
+
+            '''
+            If it is not the last note, we calculate the delay as it follows:
+                nextOffset - currentOffset - currentDuration
+            Otherwise, we assign a delay of 0.
+            '''
+            if(not i >= len(notes) - 1):
+                nextOffset = int(notes[i + 1][2])
+                currentOffset = int(n[2])
+                currentDuration = int(n[1])
+
+                currentDelay = nextOffset - currentOffset - currentDuration
+
+                currentDelay = currentDelay if currentDelay >= 0 else 0
+
+            f.write(f"\u007b{n[0]},{n[1]},{currentDelay}\u007d")
+            if i < len(notes) - 1:
+                f.write(",\n")
+            else:
+                f.write("\n")
 
 '''
 It is important to note that this function doesn't convert the midi notes to frequencies
@@ -115,17 +156,28 @@ This function fixes the issue which comes from some note's duration.
 Both duration and offset are measured in quarter notes. We decided to
 multiply by 200 since this gives us a good timing in general
 '''
-def check_float(duration):
+def check_float(duration, quarter_note_duration=100):
     if('/' in duration):
         numerator = float(duration.split('/')[0])
         denominator = float(duration.split('/')[1])
         duration = float(numerator/denominator)
     
     durationInMilliseconds = 1
-    durationInMilliseconds = float(duration) * 200
+    durationInMilliseconds = float(duration) * quarter_note_duration
     return round(durationInMilliseconds)
 
-file = input("Enter the path of the file: ")
-midi_to_txt(file)
+def getQuarterNoteDuration(bpm):
+    return round((float(bpm) / 60) * 100)
+
+file = input('Enter the path of the file: ')
+mainInstrument = input('Enter the main instrument you would like to parse: (d: Piano) ')
+
+if mainInstrument == '':
+    midi_to_txt(file)
+else:
+    midi_to_txt(file, mainInstrument)
+
+print(f'The file was stored in: {file}')
+print(f'Thanks for using this script! :)\n')
 
 # midi_to_txt('C:/Users/Asus/Documents/Development/Python/FuckingStupidMidi/amogus.mid')
