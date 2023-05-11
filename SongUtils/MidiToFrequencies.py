@@ -179,5 +179,3 @@ else:
 
 print(f'The file was stored in: {file}')
 print(f'Thanks for using this script! :)\n')
-
-# midi_to_txt('C:/Users/Asus/Documents/Development/Python/FuckingStupidMidi/amogus.mid')
