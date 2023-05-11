@@ -1,0 +1,129 @@
+﻿@page "/SoundBoard"
+@using Songs
+@using Utils
+@inject HttpClient HttpClient
+@inject IJSRuntime JSRuntime
+
+<head>
+    <!-- Imports page-specific .css file -->
+    <link rel="stylesheet" href="css/soundboard-style.css" />
+    <!-- Imports icons -->
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+
+
+</head>
+
+<div id="body-wrapper">
+    <nav class="sidebar">
+        <div class="brand">
+            <img src="res/Boombox.svg" class="boombox-logo" alt="boombox icon">
+        </div><p class="sidebar--header">OUR PICKS</p>
+        <div class="menu recommendations">
+            <div class="menu--item">
+                <a href="#">
+                    <img src="http://via.placeholder.com/32x32" alt="">
+                    <span class="menu--item--text">Rain On Me</span>
+                </a>
+            </div>
+            <div class="menu--item">
+                <a href="#">
+                    <img src="http://via.placeholder.com/32x32" alt="">
+                    <span class="menu--item--text">Supalonely (feat. Gus Dapperton)</span>
+                </a>
+            </div>
+        </div>
+        <div class="separator"></div>
+        <p class="sidebar--header">YOUR FAVOURITES</p>
+        <div class="menu likes">
+            <div class="menu--item">
+                <a href="#">
+                    <img src="http://via.placeholder.com/32x32" alt="">
+                    <span class="menu--item--text">Up From the South</span>
+                </a>
+            </div>
+            <div class="menu--item">
+                <a href="#">
+                    <img src="http://via.placeholder.com/32x32" alt="">
+                    <span class="menu--item--text">Mosaic</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="header">
+        <div class="header--bg"></div>
+        <div class="header--buttons">
+            <a href="/">
+                @*change this later*@
+                <button class="header--button previous">
+                    <i class="lni lni-chevron-left"></i>
+                </button>
+            </a>
+        </div>
+        <label class="brightnessButton" for="checkbox">
+            <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme" />
+            <span class="slider"></span>
+        </label>
+    </div>
+    <main>
+        @foreach (Album album in songLibrary.Albums)
+        {
+            <section class="section">
+                <div class="section--header">
+                    <div class="section--header--left">
+                        <h2 class="title">@album.Name</h2>
+                    </div>
+                </div>
+                <div class="section--body">
+                    @foreach (Song song in album.Songs)
+                    {
+                        <div class="section--body--item song--item" @onclick="() => PublishMqtt(song.Id)">
+                            <div class="section--body--item--img">
+                                <img src="res/album_thumbnail/@song.Image" alt="@song.Title">
+                            </div>
+                            <p class="section--body--item--title">@song.Title</p>
+                            <p class="section--body--item--subtitle">@song.Artist</p>
+                        </div>
+                    }
+                </div>
+            </section>
+        }
+    </main>
+</div>
+
+@code {
+    bool themeSwitch;
+
+    //MQTT message topic
+    protected readonly string topic = "sound";
+
+    //Instantiating Library object 
+    protected Library songLibrary = new Library();
+
+    //This funtion will run on page load
+    protected override async Task OnInitializedAsync()
+    {
+        //Instantiating HttpClient to make a request
+        HttpClient client = new HttpClient();
+
+        //Reading albums and songs from .json file into a Library
+        songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json");
+    }
+
+    //Publishing a MQTT message
+    protected void PublishMqtt(string message)
+    {
+        _ = MqttConnection.GetInstance().PublishMessage(topic, message);
+    }
+
+    protected async Task ChangeTheme()
+    {
+        Console.WriteLine("CTM");
+        if (themeSwitch)
+        {
+            await JSRuntime.InvokeAsync<object>("eval", "document.getElementById('body-wrapper').setAttribute('data-theme','light')");
+        } else
+        {
+            await JSRuntime.InvokeAsync<object>("eval", "document.getElementById('body-wrapper').setAttribute('data-theme','dark')");
+        }
+    }
+}
