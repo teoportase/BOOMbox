@@ -50,21 +50,13 @@ void setup() {
   setupSpeaker();
 
   connectWiFi();
-  client.setServer(MQTT_SERVER, MQTT_PORT);
-  client.setCallback(callback);
   connectBroker();
-
-  client.subscribe(MUSIC_CONTROLS);
-  client.subscribe(MUSIC_SELECT);
-  client.publish(CONNECTION_TOPIC, "Device connected.");
 }
 
 void loop() {
-  if(WiFi.status() != WL_CONNECTED) {
+  if(WiFi.status() != WL_CONNECTED || !client.connected()) {
+    printOnScreen("Connecting... Please wait", TEXT_X, TEXT_Y, TEXT_SIZE);
     connectWiFi();
-  }
-  
-  if(!client.connected()){
     connectBroker();
   }
 
@@ -135,6 +127,9 @@ void playSong(String songName) {
 // Connectivity functions:
 // Connects device to the WiFi network specified
 void connectWiFi() {
+  WiFi.mode(WIFI_STA);
+  WiFi.disconnect();
+
   Serial.println("Connecting to WiFi..");
   WiFi.begin(SSID, PASSWORD);
 
@@ -149,6 +144,9 @@ void connectWiFi() {
 
 // Connects/reconnects the device to the broker using MQTT
 void connectBroker() {
+  client.setServer(MQTT_SERVER, MQTT_PORT);
+  client.setCallback(callback);
+
   while (!client.connected()) {
     Serial.print("Connecting to MQTT broker...");
     if (client.connect("Wio Terminal")) {
@@ -162,6 +160,10 @@ void connectBroker() {
       delay(5000);
     }
   }
+
+  client.subscribe(MUSIC_CONTROLS);
+  client.subscribe(MUSIC_SELECT);
+  client.publish(CONNECTION_TOPIC, "Device connected.");
 }
 
 // Setup functions:
