@@ -13,6 +13,8 @@
 
 // File with server information. Has defined: SSID, PASSWORD, MQTT_SERVER (IP/URL)
 #include "ServerData.h"
+// Includes the Kirby class
+#include "Kirby.h"
 
 // Song files:
 #include "Amogus.h"
@@ -41,6 +43,8 @@ PubSubClient client(wioTerminal);
 
 // Setup LCD screen
 TFT_eSPI screen;
+// Creates a Kirby
+Kirby kirby;
 
 void setup() {
   Serial.begin(115200);
@@ -57,13 +61,15 @@ void setup() {
   client.subscribe(MUSIC_CONTROLS);
   client.subscribe(MUSIC_SELECT);
   client.publish(CONNECTION_TOPIC, "Device connected.");
+
+  kirby.sleep(screen);
 }
 
 void loop() {
   if(WiFi.status() != WL_CONNECTED) {
     connectWiFi();
   }
-  
+
   if(!client.connected()){
     connectBroker();
   }
@@ -85,7 +91,9 @@ void callback(char* topic, byte* message, unsigned int length) {
   Serial.println(received_message);
 
   if(stringTopic.equals(MUSIC_SELECT)){
+    kirby.stand(screen);
     playSong(received_message);
+    kirby.sleep(screen);
   }
 }
 
