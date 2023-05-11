@@ -51,10 +51,6 @@ void setup() {
 
   connectWiFi();
   connectBroker();
-
-  client.subscribe(MUSIC_CONTROLS);
-  client.subscribe(MUSIC_SELECT);
-  client.publish(CONNECTION_TOPIC, "Device connected.");
 }
 
 void loop() {
@@ -164,6 +160,10 @@ void connectBroker() {
       delay(5000);
     }
   }
+
+  client.subscribe(MUSIC_CONTROLS);
+  client.subscribe(MUSIC_SELECT);
+  client.publish(CONNECTION_TOPIC, "Device connected.");
 }
 
 // Setup functions:
