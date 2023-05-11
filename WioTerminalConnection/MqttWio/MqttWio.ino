@@ -117,10 +117,10 @@ void playSong(String songName) {
 
       for(int note_index=0;note_index<SONG_LENGTH;note_index++)
       {
-        kirby.leftFootForward();
+        kirby.startSinging();
         playNote(note_index, Amogus);
         delay(Amogus[note_index].delay);
-        kirby.rightFootForward();
+        kirby.stopSinging();
       }
     }
 
@@ -129,10 +129,10 @@ void playSong(String songName) {
 
       for(int note_index=0;note_index<SONG_LENGTH;note_index++)
       {
-        kirby.leftFootForward();
+        kirby.startSinging();
         playNote(note_index, Megalovania);
         delay(Megalovania[note_index].delay);
-        kirby.rightFootForward();
+        kirby.stopSinging();
       }
     }
 
@@ -141,10 +141,10 @@ void playSong(String songName) {
 
       for(int note_index=0;note_index<SONG_LENGTH;note_index++)
       {
-        kirby.leftFootForward();
+        kirby.startSinging();
         playNote(note_index, BadRomance);
         delay(BadRomance[note_index].delay);
-        kirby.rightFootForward();
+        kirby.stopSinging();
       }
     }
 }

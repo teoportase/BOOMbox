@@ -146,11 +146,25 @@ class Kirby {
         tft.fillCircle(MOUTH_X, MOUTH_Y, MOUTH_RADIUS, MOUTH_COLOR);
       }
 
-      void walk() {
-        leftFootForward();
-        delay(100);
-        rightFootForward();
-        delay(100);
+      void startSinging() {
+        // Open mouth
+        tft.fillCircle(MOUTH_X, MOUTH_Y, MOUTH_RADIUS, MOUTH_COLOR);
+
+        // Singing text
+        tft.setTextColor(TFT_WHITE);
+        tft.setTextSize(2.5);
+        tft.drawString("La la la!", 20, 20);
+      }
+
+      void stopSinging() {
+        // Close mouth
+        tft.fillCircle(MOUTH_X, MOUTH_Y, MOUTH_RADIUS, BODY_COLOR);
+
+        // Draw closed mouth
+        tft.fillRoundRect(MOUTH_X - (MOUTH_RADIUS/2), MOUTH_Y, MOUTH_RADIUS, 5, MOUTH_RADIUS/2, MOUTH_COLOR);
+
+        // Get rid of song text
+        tft.fillRect(0, 0, 140, 50, BACKGROUND);
       }
 
       void rightFootForward() {
