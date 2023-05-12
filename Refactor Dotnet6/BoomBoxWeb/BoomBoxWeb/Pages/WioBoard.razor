@@ -1,5 +1,4 @@
 ﻿@page "/WioBoard"
-@using Utils
 
 <head>
     @* <link rel="stylesheet" href="/css/site.css"/> *@
@@ -13,18 +12,9 @@
     <p>MQTT Reply: @mqttReply</p>
 </div>
 
-<BabylonCanvas />
-
 @code {
-    [Inject] IJSRuntime JsRuntime { get; set; }
 
     private string mqttReply;
-
-    private async Task UpdateCameraSpeed()
-    {
-        Console.WriteLine("WioBoard.razor:" + mqttReply);
-        await JsRuntime.InvokeVoidAsync("babylonInterop.updateCameraSpeed", mqttReply);
-    }
 
     private async Task SubscribeToMqtt()
     {
@@ -36,7 +26,6 @@
             mqttReply = mqttConnection.Reply;
             StateHasChanged();
             await Task.Delay(100);
-            await UpdateCameraSpeed();
         }
     }
 

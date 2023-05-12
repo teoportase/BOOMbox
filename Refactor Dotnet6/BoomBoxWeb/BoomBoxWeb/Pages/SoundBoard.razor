@@ -1,6 +1,4 @@
 ﻿@page "/SoundBoard"
-@using Songs
-@using Utils
 @inject HttpClient HttpClient
 @inject IJSRuntime JSRuntime
 
@@ -96,7 +94,6 @@
 
     protected async Task ChangeTheme()
     {
-        Console.WriteLine("CTM");
         if (themeSwitch)
         {
             await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','light')");
