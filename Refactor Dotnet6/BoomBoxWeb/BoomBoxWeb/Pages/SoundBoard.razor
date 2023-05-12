@@ -120,10 +120,10 @@
         Console.WriteLine("CTM");
         if (themeSwitch)
         {
-            await JSRuntime.InvokeAsync<object>("eval", "document.getElementById('body-wrapper').setAttribute('data-theme','light')");
+            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','light')");
         } else
         {
-            await JSRuntime.InvokeAsync<object>("eval", "document.getElementById('body-wrapper').setAttribute('data-theme','dark')");
+            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','dark')");
         }
     }
 }

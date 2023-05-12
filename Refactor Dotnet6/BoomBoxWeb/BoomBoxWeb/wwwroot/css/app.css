@@ -9,7 +9,7 @@
     --musicbox-color: #818cab;
 }
 
-.dark-mode {
+[data-theme="dark"] {
     --index-color: #92a8d1;
     --text-color: #1a1b1c;
     --darkest-color: #bcbdbe;
