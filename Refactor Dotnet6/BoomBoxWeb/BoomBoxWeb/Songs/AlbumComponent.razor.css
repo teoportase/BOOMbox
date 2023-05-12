@@ -1,0 +1,20 @@
+﻿
+* {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.35px;
+}
+
+.section {
+    /* temporary fix, since David is changing the colors anyways */
+    color: #fff;
+}
+
+/* Aligning Songs within their section*/
+.section--body {
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1em;
+}

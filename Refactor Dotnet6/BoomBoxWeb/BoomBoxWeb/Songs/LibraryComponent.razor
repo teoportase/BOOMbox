@@ -1,0 +1,23 @@
+﻿@inject HttpClient HttpClient
+@inject IJSRuntime JSRuntime
+
+@foreach (Album album in songLibrary.Albums)
+{
+    <AlbumComponent Album="@album" />
+}
+@code {
+
+
+    //Instantiating Library object
+    protected Library songLibrary = new Library();
+
+    //This funtion will run on page load
+    protected override async Task OnInitializedAsync()
+    {
+        //Instantiating HttpClient to make a request
+        HttpClient client = new HttpClient();
+
+        //Reading albums and songs from .json file into a Library
+        songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json");
+    }
+}

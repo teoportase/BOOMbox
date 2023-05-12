@@ -1,0 +1,22 @@
+﻿@using Utils
+
+<div class="section--body--item song--item" @onclick="() => PublishMqtt(song.Id)">
+    <div class="section--body--item--img">
+        <img src="res/album_thumbnail/@song.Image" alt="@song.Title">
+    </div>
+    <p class="section--body--item--title">@song.Title</p>
+    <p class="section--body--item--subtitle">@song.Artist</p>
+</div>
+@code {
+    [Parameter]
+    public Song song { get; set; }
+
+    //MQTT message topic
+    protected readonly string topic = "music";
+
+    //Publishing a MQTT message
+    protected void PublishMqtt(string message)
+    {
+        _ = MqttConnection.GetInstance().PublishMessage(topic, message);
+    }
+}
