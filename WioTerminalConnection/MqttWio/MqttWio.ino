@@ -13,10 +13,13 @@
 
 // File with server information. Has defined: SSID, PASSWORD, MQTT_SERVER (IP/URL)
 #include "ServerData.h"
+// Includes the Kirby class
+#include "Kirby.h"
 
 // Song files:
 #include "Amogus.h"
 #include "Megalovania.h"
+#include "BadRomance.h"
 
 // Pin definitions
 #define SPEAKER 0
@@ -41,6 +44,8 @@ PubSubClient client(wioTerminal);
 
 // Setup LCD screen
 TFT_eSPI screen;
+// Creates a Kirby
+Kirby kirby;
 
 void setup() {
   Serial.begin(115200);
@@ -51,6 +56,8 @@ void setup() {
 
   connectWiFi();
   connectBroker();
+
+  kirby.sleep(screen);
 }
 
 void loop() {
@@ -58,6 +65,7 @@ void loop() {
     printOnScreen("Connecting... Please wait", TEXT_X, TEXT_Y, TEXT_SIZE);
     connectWiFi();
     connectBroker();
+    kirby.sleep(screen);
   }
 
   client.loop();
@@ -67,7 +75,6 @@ void loop() {
 void callback(char* topic, byte* message, unsigned int length) {
   // Converting the topic to string if we want to print it
   String stringTopic(topic);
-  Serial.println(stringTopic);
   
   Serial.print("Message [" + stringTopic + "]: ");
   String received_message = "";
@@ -77,7 +84,9 @@ void callback(char* topic, byte* message, unsigned int length) {
   Serial.println(received_message);
 
   if(stringTopic.equals(MUSIC_SELECT)){
+    kirby.stand(screen);
     playSong(received_message);
+    kirby.sleep(screen);
   }
 }
 
@@ -108,8 +117,10 @@ void playSong(String songName) {
 
       for(int note_index=0;note_index<SONG_LENGTH;note_index++)
       {
+        kirby.startSinging();
         playNote(note_index, Amogus);
         delay(Amogus[note_index].delay);
+        kirby.stopSinging();
       }
     }
 
@@ -118,8 +129,22 @@ void playSong(String songName) {
 
       for(int note_index=0;note_index<SONG_LENGTH;note_index++)
       {
+        kirby.startSinging();
         playNote(note_index, Megalovania);
         delay(Megalovania[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("bad romance")) {
+      int SONG_LENGTH = sizeof(BadRomance) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        kirby.startSinging();
+        playNote(note_index, BadRomance);
+        delay(BadRomance[note_index].delay);
+        kirby.stopSinging();
       }
     }
 }
@@ -179,4 +204,5 @@ void setupScreen(uint8_t orientation, uint32_t backgroundColor, uint32_t textCol
   screen.fillScreen(backgroundColor);
   screen.setTextColor(textColor);
   screen.setTextSize(textSize);
+  printOnScreen("Connecting... Please wait", TEXT_X, TEXT_Y, TEXT_SIZE);
 }
