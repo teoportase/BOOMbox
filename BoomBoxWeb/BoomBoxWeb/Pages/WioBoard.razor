@@ -8,7 +8,8 @@
 
 @code {
 
-    private string mqttReply;
+    // The "?" means that mqttReply may be null
+    private string ? mqttReply;
 
     private async Task SubscribeToMqtt()
     {
