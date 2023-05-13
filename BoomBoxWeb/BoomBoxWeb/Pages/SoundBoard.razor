@@ -69,8 +69,9 @@
     //MQTT message topic
     protected readonly string topic = "sound";
 
-    //Instantiating Library object 
-    protected Library songLibrary = new Library();
+    //Instantiating Library object
+    // The "?" means that songLibrary may be null
+    protected Library ? songLibrary = new Library();
 
     //This funtion will run on page load
     protected override async Task OnInitializedAsync()

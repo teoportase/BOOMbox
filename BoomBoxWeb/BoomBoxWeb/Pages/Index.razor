@@ -1,14 +1,17 @@
 ﻿@page "/"
+@inject NavigationManager nav
 
 <PageTitle>Index</PageTitle>
 
 <nav class="centerbar">
     <div class="container">
-        <a href="/SoundBoard">
-            <img id="boombox-icon" src="res/Boombox.svg" alt="boombox icon">
-        </a>
-        <a href="/WioBoard">
-            <img id="computer-icon" src="res/Computer.svg" alt="computer icon">
-        </a>
+        <input type="image" id="boombox-icon" src="res/Boombox.svg" alt="boombox icon" @onclick="NavButtonClicked" />
     </div>
 </nav>
+
+@code{
+    private void NavButtonClicked()
+    {
+        nav.NavigateTo("SoundBoard");
+    }
+}

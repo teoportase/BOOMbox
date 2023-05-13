@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoomBoxWeb", "BoomBoxWeb\BoomBoxWeb.csproj", "{0B67B39A-C474-45E0-BFF7-D3FE36222685}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoomBoxWeb.Tests", "BoomBoxWeb.Tests\BoomBoxWeb.Tests.csproj", "{A99F4DBB-43E7-4A7B-B2CE-2CB5A9053D94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0B67B39A-C474-45E0-BFF7-D3FE36222685}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B67B39A-C474-45E0-BFF7-D3FE36222685}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B67B39A-C474-45E0-BFF7-D3FE36222685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A99F4DBB-43E7-4A7B-B2CE-2CB5A9053D94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A99F4DBB-43E7-4A7B-B2CE-2CB5A9053D94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A99F4DBB-43E7-4A7B-B2CE-2CB5A9053D94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A99F4DBB-43E7-4A7B-B2CE-2CB5A9053D94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
