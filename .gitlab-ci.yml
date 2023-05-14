@@ -74,5 +74,7 @@ deploy:
   script:
     - 'npm install netlify-cli -g'
     - 'cd publish/wwwroot'
-    - netlify --version
     - 'netlify deploy --prod --dir=. --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID'
+  environment:
+    name: production
+    url: https://boomboxpolska.netlify.app/
