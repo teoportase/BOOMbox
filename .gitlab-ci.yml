@@ -9,6 +9,7 @@ stages:
   - test
   - publish
   - deploy
+  - netlify
 
 ### Define variables
 variables:
@@ -32,7 +33,7 @@ before_script:
   - 'cd $SOURCE_CODE_PATH'
   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
-build:
+.build:
   stage: build
   ### Set the correct tag for the `Shared Gitlab Runners`
   tags:
@@ -40,14 +41,14 @@ build:
   script:
     - 'dotnet build --no-restore'
 
-test:
+.test:
   stage: test
   tags:
     - docker-build
   script:
     - 'dotnet test --no-restore'
 
-publish:
+.publish:
   stage: publish
   tags:
     - docker-build
@@ -57,7 +58,7 @@ publish:
     paths:
       - BoomBoxWeb/publish/
 
-deploy:
+.deploy:
   stage: deploy
   tags:
     - docker-build
@@ -65,7 +66,17 @@ deploy:
   before_script: # Override previous before_script
     - 'cd $SOURCE_CODE_PATH' 
   script:
-    - 'npm install netlify-cli'
+    - 'npm install netlify-cli -g'
     - ls -a
     - 'cd publish/wwwroot'
-    - 'netlify deploy --prod --dir=. --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID'
+    - netlify --version
+    # - 'netlify deploy --prod --dir=. --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID'
+
+netlify:
+  stage: netlify
+  tags:
+    - docker-build
+  image: node:lts-alpine
+  script:
+    - 'npm install netlify-cli -g'
+    - 'netlify --version'
