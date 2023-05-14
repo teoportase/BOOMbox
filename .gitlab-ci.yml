@@ -9,7 +9,6 @@ stages:
   - test
   - publish
   - deploy
-  - netlify
 
 ### Define variables
 variables:
@@ -67,17 +66,6 @@ before_script:
     - 'cd $SOURCE_CODE_PATH' 
   script:
     - 'npm install netlify-cli -g'
-    - ls -a
     - 'cd publish/wwwroot'
     - netlify --version
-    # - 'netlify deploy --prod --dir=. --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID'
-
-netlify:
-  stage: netlify
-  tags:
-    - docker-build
-  image: node:lts-alpine
-  before_script: []
-  script:
-    - 'npm install netlify-cli -g'
-    - 'netlify --version'
+    - 'netlify deploy --prod --dir=. --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID'
