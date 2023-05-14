@@ -1,14 +1,21 @@
-﻿
+﻿@using System.Text.Json;
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+
 <div class="section--body--item song--item" @onclick="() => PublishMqtt(song.Id)">
     <div class="section--body--item--img">
         <img src="res/album_thumbnail/@song.Image" alt="@song.Title">
     </div>
     <p class="section--body--item--title">@song.Title</p>
     <p class="section--body--item--subtitle">@song.Artist</p>
+    <button @onclick="LikeSong">@likeButton</button>
 </div>
 @code {
     [Parameter]
     public Song song { get; set; }
+
+    public bool isLiked { get; set; } = false;
+    public string likeButton { get; set; } = "Like";
+    public List<string> likedSongs { get; set; } = new List<string>();
 
     //MQTT message topic
     protected readonly string topic = "music";
@@ -17,5 +24,30 @@
     protected void PublishMqtt(string message)
     {
         _ = MqttConnection.GetInstance().PublishMessage(topic, message);
+    }
+
+    protected void LikeSong()
+    {
+
+        if(localStorage.ContainKey("liked"))
+        {
+            string readStorage = localStorage.GetItem<string>("liked");
+            likedSongs = JsonSerializer.Deserialize<List<string>>(readStorage);
+        }
+
+        if (!isLiked)
+        {
+            likedSongs.Add(song.Id);
+            likeButton = "Unlike";
+            isLiked = true;
+        }
+        else
+        {
+            likedSongs.Remove(song.Id);
+            likeButton = "Like";
+            isLiked = false;
+        }
+        string json = JsonSerializer.Serialize(likedSongs);
+        localStorage.SetItem("liked", json);
     }
 }

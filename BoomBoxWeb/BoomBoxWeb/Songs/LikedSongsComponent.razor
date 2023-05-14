@@ -1,0 +1,31 @@
+﻿@using System.Text.Json;
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+
+<div class="menu likes">
+    <div class="menu--item">
+        <a href="#">
+            <img src="http://via.placeholder.com/32x32" alt="">
+            <span class="menu--item--text">Up From the South</span>
+        </a>
+    </div>
+    <div class="menu--item">
+        <a href="#">
+            <img src="http://via.placeholder.com/32x32" alt="">
+            <span class="menu--item--text">Mosaic</span>
+        </a>
+    </div>
+</div>
+
+@code {
+    public List<string> likedSongs { get; set; } = new List<string>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (localStorage.ContainKey("liked"))
+        {
+            string readStorage = localStorage.GetItem<string>("liked");
+            likedSongs = JsonSerializer.Deserialize<List<string>>(readStorage);
+        }
+    }
+}
