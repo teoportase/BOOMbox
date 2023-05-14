@@ -1,6 +1,4 @@
-﻿using BoomBoxWeb.Pages;
-using Microsoft.AspNetCore.Components;
-using MQTTnet;
+﻿using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
 using System.Text;
@@ -12,12 +10,13 @@ namespace BoomBoxWeb.Utils
         /*
          * TODO:
          * Refactor the singleton
+         * Add a settings page/reading broker config from file
          */
 
         private static MqttConnection instance;
 
         //Set this to the IP of a MQTT broker, or localhost if running everything locally
-        private readonly string BrokerIP = "192.168.137.1"; // We set this to match Ionel's hotspot
+        private readonly string BrokerIP = "localhost"; // We set this to match Ionel's hotspot
         
         //Message that will be proccessed by the Subscribe() method
         //Value assigned here is the 'default' one, before receiving anything
@@ -39,28 +38,26 @@ namespace BoomBoxWeb.Utils
         public async Task PublishMessage(string topic, string payload)
         {
             var mqttFactory = new MqttFactory();
-            using (var mqttClient = mqttFactory.CreateMqttClient())
-            {
-                //Building ClientOptions
-                var mqttClientOptions = new MqttClientOptionsBuilder().WithWebSocketServer(BrokerIP + ":9001/mqtt").Build();
+            using var mqttClient = mqttFactory.CreateMqttClient();
+            //Building ClientOptions
+            var mqttClientOptions = new MqttClientOptionsBuilder().WithWebSocketServer(BrokerIP + ":9001/mqtt").Build();
 
-                //Conecting to the broker using ClientOptions
-                await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
+            //Conecting to the broker using ClientOptions
+            await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
-                //Building the message using arguments
-                var appMessage = new MqttApplicationMessageBuilder()
-                    .WithTopic(topic)
-                    .WithPayload(payload)
-                    .Build();
+            //Building the message using arguments
+            var appMessage = new MqttApplicationMessageBuilder()
+                .WithTopic(topic)
+                .WithPayload(payload)
+                .Build();
 
-                //Publishing the message
-                await mqttClient.PublishAsync(appMessage, CancellationToken.None);
+            //Publishing the message
+            await mqttClient.PublishAsync(appMessage, CancellationToken.None);
 
-                //Disconnecting from the broker
-                await mqttClient.DisconnectAsync();
+            //Disconnecting from the broker
+            await mqttClient.DisconnectAsync();
 
-                Console.WriteLine("MQTT message " + topic + "/" + payload + " published at " + BrokerIP);
-            }
+            Console.WriteLine("MQTT message " + topic + "/" + payload + " published at " + BrokerIP);
         }
 
         /*

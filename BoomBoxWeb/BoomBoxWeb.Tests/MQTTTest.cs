@@ -1,21 +1,11 @@
+﻿using BoomBoxWeb.Utils;
+
 namespace BoomBoxWeb.Tests
 {
-    using BoomBoxWeb.Utils;
-    using Bunit;
-    using System.Threading.Tasks;
-    using Index = Pages.Index;
-
-    public class Tests : TestContext
+    public class MQTTTest
     {
         [Test]
-        public void TestRenderIndex()
-        {
-            var indexComponent = RenderComponent<Index>();
-            Assert.That(indexComponent, Is.Not.Null);
-        }
-
-        [Test]
-        public async Task TestMqtt()
+        public async Task MQTTPublishTest()
         {
             /*
              * Test that Publish_Message works with the HiveMQ broker

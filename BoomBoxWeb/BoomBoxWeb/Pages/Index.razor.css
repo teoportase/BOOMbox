@@ -1,16 +1,8 @@
-﻿:root {
-    --bg-color: #303A2B;
-}
-
-* {
+﻿* {
     box-sizing: border-box;
     margin: 0;
     font-family: 'Open Sans', sans-serif;
     letter-spacing: -0.35px;
-}
-
-body {
-    background-color: var(--bg-color);
 }
 
 .container {

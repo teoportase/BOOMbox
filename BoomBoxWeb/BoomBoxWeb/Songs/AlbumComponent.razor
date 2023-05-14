@@ -1,0 +1,18 @@
+﻿<section class="section">
+    <div class="section--header">
+        <div class="section--header--left">
+            <h2 class="title">@album.Name</h2>
+        </div>
+    </div>
+    <div class="section--body">
+        @foreach (Song song in album.Songs)
+        {
+            <SongComponent Song="@song" />
+        }
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public Album album { get; set; }
+}

@@ -1,11 +1,4 @@
 ﻿@page "/WioBoard"
-@using Utils
-
-<head>
-    @* <link rel="stylesheet" href="/css/site.css"/> *@
-    @* You can add the css files here *@
-    <link rel="stylesheet" href="css/site.css" />
-</head>
 
 <div class="center">
     <h1 class="h1-test">WioBoard</h1>
@@ -13,18 +6,10 @@
     <p>MQTT Reply: @mqttReply</p>
 </div>
 
-<BabylonCanvas />
-
 @code {
-    [Inject] IJSRuntime JsRuntime { get; set; }
 
-    private string mqttReply;
-
-    private async Task UpdateCameraSpeed()
-    {
-        Console.WriteLine("WioBoard.razor:" + mqttReply);
-        await JsRuntime.InvokeVoidAsync("babylonInterop.updateCameraSpeed", mqttReply);
-    }
+    // The "?" means that mqttReply may be null
+    private string ? mqttReply;
 
     private async Task SubscribeToMqtt()
     {
@@ -36,7 +21,6 @@
             mqttReply = mqttConnection.Reply;
             StateHasChanged();
             await Task.Delay(100);
-            await UpdateCameraSpeed();
         }
     }
 

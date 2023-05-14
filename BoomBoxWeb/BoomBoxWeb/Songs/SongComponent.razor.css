@@ -1,0 +1,52 @@
+﻿* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.35px;
+}
+
+/* Adds grey rectangle to album items */
+.section--body--item {
+    width: 165px;
+    height: 240px;
+    background-color: var(--musicbox-color);
+}
+
+    /* Adds padding to song container and changes cursor*/
+    .section--body--item.song--item {
+        padding: 20px;
+        cursor: default;
+    }
+
+    /* Creates fixed size for the album covers */
+    .section--body--item .section--body--item--img {
+        width: 125px;
+        height: 125px;
+        margin: 0 auto;
+    }
+
+        /* Ensures constistent image size & adds shading */
+        .section--body--item .section--body--item--img img {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 10px 30px 0 rgba(0,0,0,.3), 0 1px 2px 0 rgba(0,0,0,.2);
+        }
+
+/* Formats song card title */
+.section--body--item--title {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+/* Formats song card subtitle */
+.section--body--item--subtitle {
+    margin: 0;
+    margin-top: 1px;
+    color: #b3b3b3;
+    font-size: 0.8rem;
+}
