@@ -61,7 +61,7 @@ deploy:
   stage: deploy
   tags:
     - docker-build
-  image: alpine
+  image: node:lts-alpine
   before_script: [] # Override previous before_script
   script:
     - 'npm install netlify-cli'
