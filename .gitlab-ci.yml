@@ -62,8 +62,9 @@ deploy:
   tags:
     - docker-build
   image: node:lts-alpine
-  before_script: [] # Override previous before_script
+  before_script: # Override previous before_script
+    - 'cd $SOURCE_CODE_PATH' 
   script:
     - 'npm install netlify-cli'
-    - 'cd ./publish/wwwroot'
+    - 'cd /publish/wwwroot'
     - 'netlify deploy --prod --dir=. --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID'
