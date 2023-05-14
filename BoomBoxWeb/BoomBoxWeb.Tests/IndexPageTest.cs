@@ -4,7 +4,7 @@ namespace BoomBoxWeb.Tests
 {
     public class IndexPageTest : TestContext
     {
-        [Test]
+        [Test, Category("IndexPage")]
         public void IndexRenderTest()
         {
             var cut = RenderComponent<Index>();
@@ -15,7 +15,7 @@ namespace BoomBoxWeb.Tests
             boombox.MarkupMatches("<input type=\"image\" id=\"boombox-icon\" src=\"res/Boombox.svg\" alt=\"boombox icon\" />");
         }
 
-        [Test]
+        [Test, Category("IndexPage")]
         public void IndexRedirectTest()
         {
             var ctx = new TestContext();
