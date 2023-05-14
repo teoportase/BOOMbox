@@ -7,6 +7,7 @@ image: mcr.microsoft.com/dotnet/sdk:6.0
 stages:
   - build
   - test
+  - publish
   - deploy
 
 ### Define variables
@@ -46,12 +47,22 @@ test:
   script:
     - 'dotnet test --no-restore'
 
-deploy:
-  stage: deploy
+publish:
+  stage: publish
   tags:
     - docker-build
   script:
     - 'dotnet publish -c Release -o ./publish --no-restore'
+  artifacts:
+    paths:
+      - publish
+
+deploy:
+  stage: deploy
+  tags:
+    - docker-build
+  image: alpine
+  script:
     - 'npm install netlify-cli'
     - 'cd ./publish/wwwroot'
     - 'netlify deploy --prod --dir=. --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID'
