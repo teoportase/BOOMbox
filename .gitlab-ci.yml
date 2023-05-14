@@ -32,7 +32,7 @@ before_script:
   - 'cd $SOURCE_CODE_PATH'
   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
-.build:
+build:
   stage: build
   ### Set the correct tag for the `Shared Gitlab Runners`
   tags:
@@ -40,14 +40,14 @@ before_script:
   script:
     - 'dotnet build --no-restore'
 
-.test:
+test:
   stage: test
   tags:
     - docker-build
   script:
     - 'dotnet test --no-restore'
 
-.publish:
+publish:
   stage: publish
   tags:
     - docker-build
@@ -57,7 +57,7 @@ before_script:
     paths:
       - BoomBoxWeb/publish/
 
-.deploy:
+deploy:
   stage: deploy
   tags:
     - docker-build
