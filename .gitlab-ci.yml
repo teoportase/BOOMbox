@@ -55,13 +55,14 @@ publish:
     - 'dotnet publish -c Release -o ./publish --no-restore'
   artifacts:
     paths:
-      - publish
+      - BoomBoxWeb/publish/
 
 deploy:
   stage: deploy
   tags:
     - docker-build
   image: alpine
+  before_script: [] # Override previous before_script
   script:
     - 'npm install netlify-cli'
     - 'cd ./publish/wwwroot'
