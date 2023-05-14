@@ -66,5 +66,6 @@ deploy:
     - 'cd $SOURCE_CODE_PATH' 
   script:
     - 'npm install netlify-cli'
+    - ls -a
     - 'cd /publish/wwwroot'
     - 'netlify deploy --prod --dir=. --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID'
