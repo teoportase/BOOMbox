@@ -9,13 +9,14 @@
     <p class="section--body--item--subtitle">@song.Artist</p>
     <button @onclick="LikeSong">@likeButton</button>
 </div>
+
 @code {
     [Parameter]
     public Song song { get; set; }
 
     public bool isLiked { get; set; } = false;
     public string likeButton { get; set; } = "Like";
-    public List<string> likedSongs { get; set; } = new List<string>();
+    List<Song> likedSongs;
 
     //MQTT message topic
     protected readonly string topic = "music";
@@ -32,22 +33,32 @@
         if(localStorage.ContainKey("liked"))
         {
             string readStorage = localStorage.GetItem<string>("liked");
-            likedSongs = JsonSerializer.Deserialize<List<string>>(readStorage);
+            likedSongs = JsonSerializer.Deserialize<List<Song>>(readStorage);
         }
 
         if (!isLiked)
         {
-            likedSongs.Add(song.Id);
+            likedSongs.Add(song);
             likeButton = "Unlike";
             isLiked = true;
         }
         else
         {
-            likedSongs.Remove(song.Id);
+            likedSongs.Remove(song);
             likeButton = "Like";
             isLiked = false;
         }
         string json = JsonSerializer.Serialize(likedSongs);
         localStorage.SetItem("liked", json);
+    }
+
+    protected override void OnInitialized()
+    {
+        likedSongs = LikedSongsComponent.likedSongs;
+        if (likedSongs.Contains(song))
+        {
+            likeButton = "Unlike";
+            isLiked = true;
+        }
     }
 }

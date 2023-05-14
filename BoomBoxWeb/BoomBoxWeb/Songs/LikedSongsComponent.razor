@@ -2,22 +2,20 @@
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 
 <div class="menu likes">
-    <div class="menu--item">
-        <a href="#">
-            <img src="http://via.placeholder.com/32x32" alt="">
-            <span class="menu--item--text">Up From the South</span>
+    @foreach(Song song in likedSongs)
+    {
+        <div class="menu--item">
+        <a @onclick="() => PublishMqtt(song.Id)">
+            <img src="res/album_thumbnail/@song.Image" alt="@song.Title">
+            <span class="menu--item--text">@song.Title</span>
         </a>
     </div>
-    <div class="menu--item">
-        <a href="#">
-            <img src="http://via.placeholder.com/32x32" alt="">
-            <span class="menu--item--text">Mosaic</span>
-        </a>
-    </div>
+    }
 </div>
 
 @code {
-    public List<string> likedSongs { get; set; } = new List<string>();
+    public static List<Song> likedSongs { get; set; } = new List<Song>();
+    public string topic { get; set; } = "music";
 
 
     protected override async Task OnInitializedAsync()
@@ -25,7 +23,13 @@
         if (localStorage.ContainKey("liked"))
         {
             string readStorage = localStorage.GetItem<string>("liked");
-            likedSongs = JsonSerializer.Deserialize<List<string>>(readStorage);
+            likedSongs = JsonSerializer.Deserialize<List<Song>>(readStorage);
         }
+    }
+
+    //Publishing a MQTT message
+    protected void PublishMqtt(string message)
+    {
+        _ = MqttConnection.GetInstance().PublishMessage(topic, message);
     }
 }
