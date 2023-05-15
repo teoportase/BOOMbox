@@ -79,4 +79,4 @@ deploy:
     name: production
     url: https://boomboxpolska.netlify.app/
   only:
-    - master
+    - main
