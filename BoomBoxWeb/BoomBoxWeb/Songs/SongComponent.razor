@@ -11,7 +11,7 @@
     public Song song { get; set; }
 
     //MQTT message topic
-    protected readonly string topic = "music";
+    protected readonly string topic = "boombox/songs";
 
     //Publishing a MQTT message
     protected void PublishMqtt(string message)
