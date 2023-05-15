@@ -4,6 +4,10 @@
 
 This is a mini-project for DIT113 Systems Development course with an emphasis on music. Do you listen to music on a daily basis? Are you tired of your big speakers? Do you want a small companion to react to the music? If your answer is **YES** to any of the previous questions, then today is your lucky day! Introducing to you project **BOOMbox**! A small, portable, and effortless device to listen to your favourite songs anywhere, anytime! This project is a creative idea from group 12 to make your daily lives better. **You're Welcome!**
 
+## Purpose and Benefits
+
+The goal of this project is to add a spark of joy to our daily lives while doing what we love to do most! **listening to music**
+
 ## Description
 
 As mentioned previously, this project comes in the form of a classic boombox (a speaker-like container for the device is optional, but highly encouraged). Controlling the device happens through a web application we have created where you can select the songs you want played, like them, and see recommendations. On the speaker side, when the device is turned on, the screen displays a sleeping [Kirby](https://kirby.nintendo.com/) when there is no music playing, and one that is singing when the opposite is true.
@@ -16,7 +20,7 @@ The hardware for this project is a [Seeed Wio Terminal](https://www.seeedstudio.
 
 The first two are in relation to the way the device communicates with our web application. The device connects to a specified WiFi network and an MQTT broker. It "listens" for any commands that come from the web application. When the sleeping Kirby appears on screen, you are ready to play songs! Kirby "sings" by animating his mouth to open and close, as well as add the "La la la!" text to help with the illusion of singing. The animation plays for every note of the song.
 
-TODO: *add more abt the frameworks and web app; add section abt other sensor we're adding*
+TODO: *add more abt the frameworks and web app; add section abt other sensor we're adding; diagrams*
 
 ### Frameworks
 - ASP.NET
@@ -56,9 +60,9 @@ Other information that you may need to change in the `MqttWio` file is the port 
 
 (To be added: *How users can get started with the project?*)
 
-## Purpose and Benefits
+## Video Demo
 
-The goal of this project is to add a spark of joy to our daily lives while doing what we love to do most! **listening to music**
+TODO: *add link here*
 
 ## Contact Us
 
@@ -67,9 +71,11 @@ If you have any questions relating this project feel free to contact us [here]()
 ## Contributors
 
 Group 12 consists of 6 beautiful young minds:
-- **Arvin Rahimi** (<gusrahimar@student.gu.se>)
-- **Adrian Hassa** (<gushasade@student.gu.se>)
-- **David Boram Hong** (<guscholcda@student.gu.se>)
-- **Ionel Pop** (<guspopio@student.gu.se>)
-- **Marko Mojsov** (<gusmojsma@student.gu.se>)
-- **Teodora Portase** (<gusportte@student.gu.se>)
+- **Arvin Rahimi** (<gusrahimar@student.gu.se>) - focused on the implementation of the various sensors connected to the boombox, including some that did not make the final version and the connection between the Wio Terminal and the web application;
+- **Adrian Hassa** (<gushasade@student.gu.se>) - worked on the development of the backend of the web application;
+- **David Boram Hong** (<guscholcda@student.gu.se>) - focused on the frontend of the application, including adding the dark theme - light theme feature;
+- **Ionel Pop** (<guspopio@student.gu.se>) - aided in the development of the backend of the web application, as well as creating on CI/CD for the project and the script for converting ```midi``` files to readable text by the device;
+- **Marko Mojsov** (<gusmojsma@student.gu.se>) - focused on the frontend of the web application and its design;
+- **Teodora Portase** (<gusportte@student.gu.se>) - worked on a way for the speaker to play the necessary notes by creating a class that has notes and their octave to the respective frequency, as well as implementing the Kirby singing and sleeping.
+
+TODO: *add everyone's major contributions to the project here*
