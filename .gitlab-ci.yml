@@ -63,6 +63,8 @@ publish:
   artifacts:
     paths:
       - BoomBoxWeb/publish/
+  only:
+    - main
 
 deploy:
   stage: deploy
