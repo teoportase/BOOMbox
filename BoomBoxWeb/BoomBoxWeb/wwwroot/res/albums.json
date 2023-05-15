@@ -4,7 +4,7 @@
       "name": "Game soundtracks",
       "songs": [
         {
-          "id":  "amogus",
+          "id":  "amongus",
           "title": "Among Us Theme",
           "artist": "Marcus Bromander",
           "image": "amogus.webp"
@@ -21,8 +21,8 @@
       "name": "Pop songs",
       "songs": [
         {
-          "id":  "rain",
-          "title": "Rain On Me",
+          "id":  "bad romance",
+          "title": "Bad Romance",
           "artist": "Lady Gaga",
           "image": "gaga.png"
         },
