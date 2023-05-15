@@ -83,12 +83,6 @@
         songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json");
     }
 
-    ////Publishing a MQTT message
-    //protected void PublishMqtt(string message)
-    //{
-    //    _ = MqttConnection.GetInstance().PublishMessage(topic, message);
-    //}
-
     protected async Task ChangeTheme()
     {
         if (themeSwitch)
