@@ -63,6 +63,8 @@ publish:
   artifacts:
     paths:
       - BoomBoxWeb/publish/
+  only:
+    - main
 
 deploy:
   stage: deploy
@@ -79,4 +81,4 @@ deploy:
     name: production
     url: https://boomboxpolska.netlify.app/
   only:
-    - master
+    - main
