@@ -6,7 +6,25 @@ This is a mini-project for DIT113 Systems Development course with an emphasis on
 
 ## Description
 
-(To be added: *What the project does?*)
+As mentioned previously, this project comes in the form of a classic boombox (a speaker-like container for the device is optional, but highly encouraged). Controlling the device happens through a web application we have created where you can select the songs you want played, like them, and see recommendations. On the speaker side, when the device is turned on, the screen displays a sleeping [Kirby](https://kirby.nintendo.com/) when there is no music playing, and one that is singing when the opposite is true.
+
+The hardware for this project is a [Seeed Wio Terminal](https://www.seeedstudio.com/Wio-Terminal-p-4509.html), a [Grove Speaker](https://www.seeedstudio.com/Grove-Speaker-p-1445.html), and a wire to connect the two. When running the program on the device, you will see some of the following things on the Wio screen:
+- a "Connecting to WiFi" message,
+- a "Connecting to broker" message,
+- a sleeping Kirby,
+- a simple animation of Kirby singing "La la la!".
+
+The first two are in relation to the way the device communicates with our web application. The device connects to a specified WiFi network and an MQTT broker. It "listens" for any commands that come from the web application. When the sleeping Kirby appears on screen, you are ready to play songs! Kirby "sings" by animating his mouth to open and close, as well as add the "La la la!" text to help with the illusion of singing. The animation plays for every note of the song.
+
+TODO: *add more abt the frameworks and web app; add section abt other sensor we're adding*
+
+### Frameworks
+- ASP.NET
+
+### Hardware limitations
+- The speaker mentioned is not powerful enough to play lyrics to songs, so the device will only play a basic melody for the selected song;
+- The device sometimes disconnects from the broker, and it erases the queue of songs. The device will automatically reconnect, but the user will need to reselect which songs they want to play;
+- For very fast-paced songs, the animation of Kirby singing may cause a very slight delay. We have tried to reduce it as much as possible, but there is a small chance it may still be noticeable for some songs;
 
 ## Setup guide
 
@@ -38,7 +56,7 @@ Other information that you may need to change in the `MqttWio` file is the port 
 
 (To be added: *How users can get started with the project?*)
 
-## Purpose
+## Purpose and Benefits
 
 The goal of this project is to add a spark of joy to our daily lives while doing what we love to do most! **listening to music**
 
