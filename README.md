@@ -4,10 +4,6 @@
 
 This is a mini-project for DIT113 Systems Development course with an emphasis on music. Do you listen to music on a daily basis? Are you tired of your big speakers? Do you want a small companion to react to the music? If your answer is **YES** to any of the previous questions, then today is your lucky day! Introducing to you project **BOOMbox**! A small, portable, and effortless device to listen to your favourite songs anywhere, anytime! This project is a creative idea from group 12 to make your daily lives better. **You're Welcome!**
 
-## Purpose and Benefits
-
-The goal of this project is to add a spark of joy to our daily lives while doing what we love to do most! **listening to music**
-
 ## Description
 
 As mentioned previously, this project comes in the form of a classic boombox (a speaker-like container for the device is optional, but highly encouraged). Controlling the device happens through a web application we have created where you can select the songs you want played, like them, and see recommendations. On the speaker side, when the device is turned on, the screen displays a sleeping [Kirby](https://kirby.nintendo.com/) when there is no music playing, and one that is singing when the opposite is true.
@@ -33,6 +29,10 @@ TODO: *add more abt the frameworks and web app; add section abt other sensor we'
 - The device has a bug where sometimes it disconnects from the broker, and it erases the queue of songs. The device will automatically reconnect, but the user will need to reselect which songs they want to play;
 - For very fast-paced songs, the animation of Kirby singing may cause a very slight delay. We have tried to reduce it as much as possible, but there is a small chance it may still be noticeable for some songs;
 
+## Purpose and Benefits
+
+The goal of this project is to add a spark of joy to our daily lives while doing what we love to do most! **listening to music**
+
 ## Setup guide
 
 In order to run this project, you need to specify the WiFi network through which the device and web application will communicate. The necessary hardware is the Wio Terminal and accessories mentioned above, and the software is a text editing app that can create and edit C header files.
@@ -57,10 +57,6 @@ Afterwards, on [this page](https://git.chalmers.se/courses/dit113/2023/group-12/
 
 TODO: *add link here*
 
-## Contact Us
-
-If you have any questions relating this project feel free to contact us [here]().
-
 ## Contributors
 
 Group 12 consists of 6 beautiful young minds:
@@ -72,3 +68,7 @@ Group 12 consists of 6 beautiful young minds:
 - **Teodora Portase** (<gusportte@student.gu.se>) - worked on a way for the speaker to play the necessary notes by creating a class that has notes and their octave to the respective frequency, as well as implementing the Kirby singing and sleeping.
 
 TODO: *add everyone's major contributions to the project here*
+
+## Contact Us
+
+If you have any questions relating this project feel free to contact us [here]().
