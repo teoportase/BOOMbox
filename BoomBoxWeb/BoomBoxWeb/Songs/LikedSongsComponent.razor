@@ -1,4 +1,8 @@
 ﻿@using System.Text.Json;
+@using System.Collections.ObjectModel
+@using System.ComponentModel
+@using Blazored.LocalStorage
+@using Blazored.LocalStorage.StorageOptions
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 
 <div class="menu likes">
@@ -18,7 +22,42 @@
     public string topic { get; set; } = "music";
 
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
+    {
+        DeserializeSongs();
+    }
+
+    public void AddSong(Song song, ISyncLocalStorageService storage)
+    {
+        likedSongs.Add(song);
+        SerializeSongs(storage);
+    }
+
+    public void RemoveSong(Song song, ISyncLocalStorageService storage)
+    {
+        likedSongs.Remove(song);
+        SerializeSongs(storage);
+    }
+
+    public void SerializeSongs(ISyncLocalStorageService storage)
+    {
+        string json = JsonSerializer.Serialize(likedSongs);
+        storage.SetItem("liked", json);
+    }
+
+    public bool ContainsSong(Song song)
+    {
+        if (likedSongs.Contains(song))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void DeserializeSongs()
     {
         if (localStorage.ContainKey("liked"))
         {

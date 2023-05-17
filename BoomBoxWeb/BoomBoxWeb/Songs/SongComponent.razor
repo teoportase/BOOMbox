@@ -1,5 +1,7 @@
-﻿@using System.Text.Json;
+﻿@using Blazored.LocalStorage
+@using Blazored.LocalStorage.StorageOptions
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+@inject LikedSongsComponent likedSongsComponent
 
 <div class="section--body--item song--item" @onclick="() => PublishMqtt(song.Id)">
     <div class="section--body--item--img">
@@ -16,10 +18,9 @@
 
     public bool isLiked { get; set; } = false;
     public string likeButton { get; set; } = "Like";
-    List<Song> likedSongs;
 
     //MQTT message topic
-    protected readonly string topic = "music";
+    protected readonly string topic = "boombox/songs";
 
     //Publishing a MQTT message
     protected void PublishMqtt(string message)
@@ -29,33 +30,24 @@
 
     protected void LikeSong()
     {
-
-        if(localStorage.ContainKey("liked"))
+        if (!likedSongsComponent.ContainsSong(song))
         {
-            string readStorage = localStorage.GetItem<string>("liked");
-            likedSongs = JsonSerializer.Deserialize<List<Song>>(readStorage);
-        }
-
-        if (!isLiked)
-        {
-            likedSongs.Add(song);
+            likedSongsComponent.AddSong(song, localStorage);
             likeButton = "Unlike";
             isLiked = true;
         }
         else
         {
-            likedSongs.Remove(song);
+            likedSongsComponent.RemoveSong(song, localStorage);
             likeButton = "Like";
             isLiked = false;
         }
-        string json = JsonSerializer.Serialize(likedSongs);
-        localStorage.SetItem("liked", json);
+        
     }
 
     protected override void OnInitialized()
     {
-        likedSongs = LikedSongsComponent.likedSongs;
-        if (likedSongs.Contains(song))
+        if (likedSongsComponent.ContainsSong(song))
         {
             likeButton = "Unlike";
             isLiked = true;
