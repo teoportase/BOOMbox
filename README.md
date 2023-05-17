@@ -12,13 +12,16 @@ The goal of this project is to add a spark of joy to our daily lives while doing
 
 As mentioned previously, this project comes in the form of a classic boombox (a speaker-like container for the device is optional, but highly encouraged). Controlling the device happens through a web application we have created where you can select the songs you want played, like them, and see recommendations. On the speaker side, when the device is turned on, the screen displays a sleeping [Kirby](https://kirby.nintendo.com/) when there is no music playing, and one that is singing when the opposite is true.
 
-The hardware for this project is a [Seeed Wio Terminal](https://www.seeedstudio.com/Wio-Terminal-p-4509.html), a [Grove Speaker](https://www.seeedstudio.com/Grove-Speaker-p-1445.html), and a wire to connect the two. When running the program on the device, you will see some of the following things on the Wio screen:
+The hardware for this project is a [Seeed Wio Terminal](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/), a [Grove Speaker](https://wiki.seeedstudio.com/Grove-Speaker/), and a wire to connect the two. When running the program on the device, you will see some of the following things on the Wio screen:
+- a "Connecting... Please wait" message,
 - a "Connecting to WiFi" message,
 - a "Connecting to broker" message,
 - a sleeping Kirby,
 - a simple animation of Kirby singing "La la la!".
 
-The first two are in relation to the way the device communicates with our web application. The device connects to a specified WiFi network and an MQTT broker. It "listens" for any commands that come from the web application. When the sleeping Kirby appears on screen, you are ready to play songs! Kirby "sings" by animating his mouth to open and close, as well as add the "La la la!" text to help with the illusion of singing. The animation plays for every note of the song.
+The first message is a loading message as the connection process begins. The second and third usually for a split second and are in relation to the way the device communicates with our web application. The device connects to a specified WiFi network and an MQTT broker. It "listens" for any commands that come from the web application. When the sleeping Kirby appears on screen, you are ready to play songs! Kirby "sings" by animating his mouth to open and close, as well as add the "La la la!" text to help with the illusion of singing. The animation plays for every note of the song.
+
+For more information about how to use the application, check out the user manual on the Wiki page.
 
 TODO: *add more abt the frameworks and web app; add section abt other sensor we're adding; diagrams; python midi script; the CD deployment*
 
@@ -27,36 +30,22 @@ TODO: *add more abt the frameworks and web app; add section abt other sensor we'
 
 ### Hardware limitations
 - The speaker mentioned is not powerful enough to play lyrics to songs, so the device will only play a basic melody for the selected song;
-- The device sometimes disconnects from the broker, and it erases the queue of songs. The device will automatically reconnect, but the user will need to reselect which songs they want to play;
+- The device has a bug where sometimes it disconnects from the broker, and it erases the queue of songs. The device will automatically reconnect, but the user will need to reselect which songs they want to play;
 - For very fast-paced songs, the animation of Kirby singing may cause a very slight delay. We have tried to reduce it as much as possible, but there is a small chance it may still be noticeable for some songs;
 
 ## Setup guide
 
-In order to run this project, the broker, the Wio Terminal, and the Web App should be in the same network.
+In order to run this project, you need to specify the WiFi network through which the device and web application will communicate. The necessary hardware is the Wio Terminal and accessories mentioned above, and the software is a text editing app that can create and edit C header files.
 
-Before starting the app, the `mosquitto.conf` file should be modified. The file can be found in the installation directory for mosquitto.
+In the folder ```WioTerminalConnection > MqttWio``` create a C header file named ```ServerData.h```. Inside add the following text:
 
 ```txt
-listener 1883 0.0.0.0
-listener 9001
-protocol websockets
-allow_anonymous true
-```
-
-This will allow incoming connections under the same network but from different machines, and allow the use of websockets under port 9001.
-
-This is important because the Web App uses websockets to use the MQTT protocol.
-
-The next step is creating a header file with the server information in the `WioTerminalConnection` folder. After opening the `MqttWio` file in the ArduinoIDE, create a new tab using **Ctrl + Shift + N**. Name the file `ServerData.h`, and include the following information:
-```arduino
 #define SSID "<WiFi name>"
 #define PASSWORD "<WiFi password>"
-#define MQTT_SERVER "<Server IP>"
+#define MQTT_SERVER "18.116.40.41"
 ```
-After that, make sure the line `#include "ServerData.h"` is near the top of the `MqttWio` file.
 
-Other information that you may need to change in the `MqttWio` file is the port number, the topic name, and the pin the buzzer is connected to (the last one is only applicable if using the buzzer test).
-//TODO: remove the buzzer test later
+The text inside the ```< >``` brackets, including the brackets, should be replaced by the WiFi name and password your device that you are running the web application is connected to.
 
 (To be added: *How users can get started with the project?*)
 
