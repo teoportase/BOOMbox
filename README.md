@@ -20,7 +20,7 @@ The hardware for this project is a [Seeed Wio Terminal](https://www.seeedstudio.
 
 The first two are in relation to the way the device communicates with our web application. The device connects to a specified WiFi network and an MQTT broker. It "listens" for any commands that come from the web application. When the sleeping Kirby appears on screen, you are ready to play songs! Kirby "sings" by animating his mouth to open and close, as well as add the "La la la!" text to help with the illusion of singing. The animation plays for every note of the song.
 
-TODO: *add more abt the frameworks and web app; add section abt other sensor we're adding; diagrams*
+TODO: *add more abt the frameworks and web app; add section abt other sensor we're adding; diagrams; python midi script; the CD deployment*
 
 ### Frameworks
 - ASP.NET
