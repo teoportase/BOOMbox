@@ -55,6 +55,8 @@ TODO: *add missing frameworks/information*
 
 The goal of this project is to add a spark of joy to our daily lives while doing what we love to do most! **listening to music**
 
+TODO: *finish this section*
+
 &nbsp;
 
 
