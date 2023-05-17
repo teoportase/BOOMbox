@@ -87,10 +87,10 @@
     {
         if (themeSwitch)
         {
-            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','light')");
+            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','dark')");
         } else
         {
-            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','dark')");
+            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','light')");
         }
     }
 }
