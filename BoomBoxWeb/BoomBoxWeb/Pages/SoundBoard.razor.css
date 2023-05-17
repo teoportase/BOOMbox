@@ -324,3 +324,26 @@ body main main::-webkit-scrollbar-track {
   height: 600px;
   transform: translate(60%,-30%);
 }
+
+/* Create a Button to change the language setting of the site */
+.language-button {
+  background-color: #444;
+  color: #FFF;
+  padding: 80px 20px;
+  border-radius: 5px;
+
+  
+  -webkit-transition: background-color .3s ease-in-out;
+  -moz-transition: background-color .3s ease-in-out;
+  -o-transition: background-color .3s ease-in-out;
+  -ms-transition: background-color .3s ease-in-out;
+  transition: background-color .3s ease-in-out;
+}
+.language-button:hover, .current-language {
+  background-color: #777; 
+  -webkit-transition: background-color .3s ease-in-out;
+  -moz-transition: background-color .3s ease-in-out;
+  -o-transition: background-color .3s ease-in-out;
+  -ms-transition: background-color .3s ease-in-out;
+  transition: background-color .3s ease-in-out;
+}
