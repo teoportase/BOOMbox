@@ -63,7 +63,12 @@
         </div>
         <nav class="@navToggle" id="nav">
             <ul>
-                <li><a href="#">Option 1</a></li>
+                <li><a 
+                    <label class="brightnessButton" for="checkbox">
+                        <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme"/>
+                        <span class="slider"></span>
+                        </label>
+                </a></li>
                 <li><a href="#">Option 2</a></li>
                 <li><a href="#">Option 3</a></li>
                 <li><a href="#">Option 4</a></li>
