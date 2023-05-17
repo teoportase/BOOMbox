@@ -10,7 +10,7 @@
 #include "rpcWiFi.h"              // for WiFi connection
 #include "PubSubClient.h"         // for MQTT protocol
 #include "TFT_eSPI.h"             // for Wio LCD display
-#include <Grove_LED_Bar.h>        // for Grove LED bar
+#include "Grove_LED_Bar.h"        // for Grove LED bar
 
 // File with server information. Has defined: SSID, PASSWORD, MQTT_SERVER (IP/URL)
 #include "ServerData.h"
@@ -159,7 +159,7 @@ void playSong(String songName) {
       {
         int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
         bar.setLevel(level);
-        
+
         kirby.startSinging();
         playNote(note_index, BadRomance);
         delay(BadRomance[note_index].delay);
