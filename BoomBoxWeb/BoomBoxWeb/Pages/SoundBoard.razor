@@ -110,6 +110,20 @@
 
         //Reading albums and songs from .json file into a Library
         songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json");
+
+        // Not functioning right now. Tried to do the automatic theme change. If anyone can fix it pls do so!! //
+
+        /*int currentHour = DateTime.Now.Hour;
+
+        if (currentHour >= 6 && currentHour < 20)
+        {
+            await JSRuntime.InvokeVoidAsync("setTheme", "light");
+        }
+        else
+        {
+            await JSRuntime.InvokeVoidAsync("setTheme", "dark");
+        }
+        */
     }
 
     protected async Task ChangeTheme()
