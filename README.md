@@ -19,7 +19,7 @@ The hardware for this project is a [Seeed Wio Terminal](https://wiki.seeedstudio
 - a sleeping Kirby,
 - a simple animation of Kirby singing "La la la!".
 
-The first message is a loading message as the connection process begins. The second and third usually for a split second and are in relation to the way the device communicates with our web application. The device connects to a specified WiFi network and an MQTT broker. It "listens" for any commands that come from the web application. When the sleeping Kirby appears on screen, you are ready to play songs! Kirby "sings" by animating his mouth to open and close, as well as add the "La la la!" text to help with the illusion of singing. The animation plays for every note of the song.
+The first message is a loading message as the connection process begins. The second and third usually appear for a split second and are in relation to the way the device communicates with our web application. The device connects to a specified WiFi network and an MQTT broker. It "listens" for any commands that come from the web application. When the sleeping Kirby appears on screen, you are ready to play songs! Kirby "sings" by animating his mouth to open and close, as well as add the "La la la!" text to help with the illusion of singing. The animation plays for every note of the song.
 
 For more information about how to use the application, check out the user manual on the Wiki page.
 
@@ -37,7 +37,7 @@ TODO: *add more abt the frameworks and web app; add section abt other sensor we'
 
 In order to run this project, you need to specify the WiFi network through which the device and web application will communicate. The necessary hardware is the Wio Terminal and accessories mentioned above, and the software is a text editing app that can create and edit C header files.
 
-In the folder ```WioTerminalConnection > MqttWio``` create a C header file named ```ServerData.h```. Inside add the following text:
+Open the folder ```WioTerminalConnection > MqttWio``` in your text editor, create a C header file inside named ```ServerData.h```. Add the following text inside:
 
 ```txt
 #define SSID "<WiFi name>"
@@ -45,7 +45,15 @@ In the folder ```WioTerminalConnection > MqttWio``` create a C header file named
 #define MQTT_SERVER "18.116.40.41"
 ```
 
-The text inside the ```< >``` brackets, including the brackets, should be replaced by the WiFi name and password your device that you are running the web application is connected to.
+The text inside the ```<>``` brackets, including the brackets, should be replaced by the WiFi name and password your device that you are running the web application is connected to.
+
+Afterwards, on [this page](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/environments) of the repository, click on the ```Open``` button. It looks like this: 
+
+![Screenshot of the Gitlab environments page where the open button is located.](/ReadmeImages/setup-deployment.png).
+
+<img src="/ReadmeImages/setup-deployment.png" alt="Screenshot of the Gitlab environments page where the open button is located.">
+
+<p align='center'><img src='ReadmeImages/setup-deployment.png' width=300></p>
 
 (To be added: *How users can get started with the project?*)
 
