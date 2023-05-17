@@ -169,7 +169,31 @@ def check_float(duration, quarter_note_duration=100):
 def getQuarterNoteDuration(bpm):
     return round((float(bpm) / 60) * 200)
 
+def getInstrumentsAvailable(filename):
+
+    try:
+        midi = converter.parse(filename)
+    except FileNotFoundError:
+        print('File not found')
+
+    parts = instrument21.partitionByInstrument(midi)
+
+    instrument_names = []
+
+    try:
+        for instrument in parts:
+            name = (str(instrument).split(' ')[-1])[:-1]
+            instrument_names.append(name)
+    except TypeError:
+        print('Type is not iterable')
+        return None
+    
+    return instrument_names
+
+
 file = input('Enter the path of the file: ')
+instrumentsAvailabe = getInstrumentsAvailable(file)
+print(f'Instruments Available: {instrumentsAvailabe}')
 mainInstrument = input('Enter the main instrument you would like to parse: (d: Piano) ')
 
 if mainInstrument == '':

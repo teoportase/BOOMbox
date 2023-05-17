@@ -21,6 +21,8 @@
 #include "Amogus.h"
 #include "Megalovania.h"
 #include "BadRomance.h"
+#include "Digimon.h"
+#include "Chameleon.h"
 
 // Pin definitions
 #define SPEAKER 0
@@ -163,6 +165,36 @@ void playSong(String songName) {
         kirby.startSinging();
         playNote(note_index, BadRomance);
         delay(BadRomance[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("digimon")) {
+      int SONG_LENGTH = sizeof(Digimon) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Digimon);
+        delay(Digimon[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("chameleon")) {
+      int SONG_LENGTH = sizeof(Chameleon) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Chameleon);
+        delay(Chameleon[note_index].delay);
         kirby.stopSinging();
       }
     }
