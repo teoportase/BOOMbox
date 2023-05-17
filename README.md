@@ -49,11 +49,7 @@ The text inside the ```<>``` brackets, including the brackets, should be replace
 
 Afterwards, on [this page](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/environments) of the repository, click on the ```Open``` button. It looks like this: 
 
-![Screenshot of the Gitlab environments page where the open button is located.](/ReadmeImages/setup-deployment.png).
-
-<img src="/ReadmeImages/setup-deployment.png" alt="Screenshot of the Gitlab environments page where the open button is located.">
-
-<p align='center'><img src='ReadmeImages/setup-deployment.png' width=300></p>
+![Screenshot of the Gitlab environments page where the open button is located.](/ReadmeImages/setup-deployment.png)
 
 (To be added: *How users can get started with the project?*)
 
