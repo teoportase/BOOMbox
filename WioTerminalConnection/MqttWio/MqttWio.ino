@@ -10,6 +10,7 @@
 #include "rpcWiFi.h"              // for WiFi connection
 #include "PubSubClient.h"         // for MQTT protocol
 #include "TFT_eSPI.h"             // for Wio LCD display
+#include <Grove_LED_Bar.h>        // for Grove LED bar
 
 // File with server information. Has defined: SSID, PASSWORD, MQTT_SERVER (IP/URL)
 #include "ServerData.h"
@@ -23,6 +24,11 @@
 
 // Pin definitions
 #define SPEAKER 0
+#define LED_BAR_DATA_PIN 2
+#define LED_BAR_CLOCK_PIN 3
+
+// 10 segments LED bar settings
+#define LED_BAR_ORIENTATION 0
 
 // Wio Terminal LCD Display is 320 px wide (X), and 240 px tall (Y)
 #define SCREEN_ORIENTATION 3          // (0,0) is in the top left corner
@@ -46,6 +52,8 @@ PubSubClient client(wioTerminal);
 TFT_eSPI screen;
 // Creates a Kirby
 Kirby kirby;
+// Setup LED bar
+Grove_LED_Bar bar(LED_BAR_CLOCK_PIN, LED_BAR_DATA_PIN, LED_BAR_ORIENTATION);
 
 void setup() {
   Serial.begin(115200);
@@ -58,6 +66,8 @@ void setup() {
   connectBroker();
 
   kirby.sleep(screen);
+
+  bar.begin();
 }
 
 void loop() {
@@ -117,6 +127,9 @@ void playSong(String songName) {
 
       for(int note_index=0;note_index<SONG_LENGTH;note_index++)
       {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
         kirby.startSinging();
         playNote(note_index, Amogus);
         delay(Amogus[note_index].delay);
@@ -129,6 +142,9 @@ void playSong(String songName) {
 
       for(int note_index=0;note_index<SONG_LENGTH;note_index++)
       {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
         kirby.startSinging();
         playNote(note_index, Megalovania);
         delay(Megalovania[note_index].delay);
@@ -141,6 +157,9 @@ void playSong(String songName) {
 
       for(int note_index=0;note_index<SONG_LENGTH;note_index++)
       {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+        
         kirby.startSinging();
         playNote(note_index, BadRomance);
         delay(BadRomance[note_index].delay);
