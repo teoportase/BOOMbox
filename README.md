@@ -9,7 +9,9 @@ This is a mini-project for DIT113 Systems Development course with an emphasis on
 
 ## Description
 
-As mentioned previously, this project comes in the form of a classic boombox (a speaker-like container for the device is optional, but highly encouraged). Controlling the device happens through a web application we have created where you can select the songs you want played, like them, and see recommendations. On the speaker side, when the device is turned on, the screen displays a sleeping [Kirby](https://kirby.nintendo.com/) when there is no music playing, and one that is singing when the opposite is true.
+As mentioned previously, this project comes in the form of a classic boombox (a speaker-like container for the device is optional, but highly encouraged). Controlling the device happens through a web application we have created where you can select the songs you want played, like them, and see recommendations. On the speaker side, when the device is turned on, the screen displays a sleeping [Kirby](https://kirby.nintendo.com/) when there is no music playing, and one that is singing when the opposite is true. An LED bar will light up and turn off as it gets closer to the end of the song.
+
+TODO: *add diagrams that explain how the system works*
 
 ### Folder Organization
 
@@ -27,21 +29,7 @@ Under the `WioTerminalConnection > MqttWio` folder, you'll find the Arduino prog
 
 For now, adding new songs is done by creating a new C header file that looks like below, and then re-uploading the program to the Wio Terminal:
 
-
 TODO: *add how to add more songs.*
-
-TODO: *move following section to the user manual*
-
-When running the program on the device, you will see some of the following things on the Wio screen:
-- a "Connecting... Please wait" message,
-- a "Connecting to WiFi" message,
-- a "Connecting to broker" message,
-- a sleeping Kirby,
-- a simple animation of Kirby singing "La la la!".
-
-The first message is a loading message as the connection process begins. The second and third usually appear for a split second and are in relation to the way the device communicates with our web application. The device connects to a specified WiFi network and an MQTT broker. It "listens" for any commands that come from the web application. When the sleeping Kirby appears on screen, you are ready to play songs! Kirby "sings" by animating his mouth to open and close, as well as add the "La la la!" text to help with the illusion of singing. The animation plays for every note of the song.
-
-<!-- end of section to move -->
 
 &nbsp;
 
@@ -50,15 +38,10 @@ The first message is a loading message as the connection process begins. The sec
 
 **For developers looking to start with our project, check out the [Getting Started](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/wikis/Get-started-for-developers) page on the Wiki.**
 
-TODO: *add more abt the frameworks; add section abt other sensor we're adding; diagrams*
-
-### Hardware and Software required
-The hardware for this project is a , a , and a wire to connect the two.
-
-TODO: *add software*
-
 ### Frameworks
 - ASP.NET
+
+TODO: *add missing frameworks/information*
 
 ### Hardware limitations
 - The speaker mentioned is not powerful enough to play lyrics to songs, so the device will only play a basic melody for the selected song;
