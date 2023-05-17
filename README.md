@@ -61,14 +61,12 @@ TODO: *add link here*
 
 Group 12 consists of 6 beautiful young minds:
 - **Arvin Rahimi** (<gusrahimar@student.gu.se>) - focused on the implementation of the various sensors connected to the boombox, including some that did not make the final version and the connection between the Wio Terminal and the web application;
-- **Adrian Hassa** (<gushasade@student.gu.se>) - worked on the development of the backend of the web application;
+- **Adrian Hassa** (<gushasade@student.gu.se>) - worked on the development of the backend of the web application, and aided with the frontend and the midi file reading program;
 - **David Boram Hong** (<guscholcda@student.gu.se>) - focused on the frontend of the application, including adding the dark theme - light theme feature;
 - **Ionel Pop** (<guspopio@student.gu.se>) - aided in the development of the backend of the web application, as well as creating on CI/CD for the project and the script for converting ```midi``` files to readable text by the device;
 - **Marko Mojsov** (<gusmojsma@student.gu.se>) - focused on the frontend of the web application and its design;
 - **Teodora Portase** (<gusportte@student.gu.se>) - worked on a way for the speaker to play the necessary notes by creating a class that has notes and their octave to the respective frequency, as well as implementing the Kirby singing and sleeping.
 
+If you have any questions relating this project feel free to contact us at our respective emails.
+
 TODO: *add everyone's major contributions to the project here*
-
-## Contact Us
-
-If you have any questions relating this project feel free to contact us [here]().
