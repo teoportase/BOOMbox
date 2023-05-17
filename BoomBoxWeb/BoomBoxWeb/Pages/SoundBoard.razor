@@ -53,10 +53,36 @@
                 </button>
             </a>
         </div>
-        <label class="brightnessButton" for="checkbox">
-            <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme" />
-            <span class="slider"></span>
-        </label>
+
+        <!-- Hamburger Button Implementation -->
+            <div id="menu">
+        <div class="@hamburgerToggle" @onclick="ToggleHamburger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <nav class="@navToggle" id="nav">
+            <ul>
+                <li><a 
+                    <label class="brightnessButton" for="checkbox">
+                        <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme"/>
+                        <span class="slider"></span>
+                        </label>
+                </a></li>
+                <li><a href="#">
+                    <!-- Not decided whether to implement the language button or not -->
+                        <ul class="language-button">
+                            <vr id="en_click" class="language-button current-language">EN</vr>
+                            <vr id="kr_click" class="language-button">KR</vr>
+                            <vr id="se_click" class="language-button">SE</vr>
+                        </ul>
+                </a></li>
+                <li><a href="#">Option 3</a></li>
+                <li><a href="#">Option 4</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="@menuBg" id="menu-bg"></div>
     </div>
     <main>
         <LibraryComponent />
@@ -65,6 +91,9 @@
 
 @code {
     bool themeSwitch;
+    string hamburgerToggle { get; set; } = "setting";
+    string navToggle { get; set; } = "nav";
+    string menuBg { get; set; } = "menu-bg";
 
     //MQTT message topic
     protected readonly string topic = "sound";
@@ -81,16 +110,48 @@
 
         //Reading albums and songs from .json file into a Library
         songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json");
+
+        // Not functioning right now. Tried to do the automatic theme change. If anyone can fix it pls do so!! //
+
+        /*int currentHour = DateTime.Now.Hour;
+
+        if (currentHour >= 6 && currentHour < 20)
+        {
+            await JSRuntime.InvokeVoidAsync("setTheme", "light");
+        }
+        else
+        {
+            await JSRuntime.InvokeVoidAsync("setTheme", "dark");
+        }
+        */
     }
 
     protected async Task ChangeTheme()
     {
         if (themeSwitch)
         {
-            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','light')");
+            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','dark')");
         } else
         {
-            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','dark')");
+            await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','light')");
+        }
+    }
+    // Method to open the Hamburger Button
+    protected void ToggleHamburger()
+    {
+        if (hamburgerToggle == "setting")
+        {
+            hamburgerToggle = "setting change";
+            menuBg = "menu-bg change-bg change";
+            navToggle = "nav change";
+
+
+        }
+        else if (hamburgerToggle == "setting change")
+        {
+            hamburgerToggle = "setting";
+            menuBg = "menu-bg";
+            navToggle = "nav";
         }
     }
 }
