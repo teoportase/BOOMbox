@@ -1,0 +1,56 @@
+﻿/* Formatting sidebar text*/
+.menu .menu--item {
+    font-size: 1.5rem;
+    position: relative;
+}
+
+    /* Adds margin between menu items (songs)*/
+    .menu .menu--item:not(:first-child) {
+        margin-top: 5px;
+    }
+
+    .menu .menu--item a {
+        text-decoration: none;
+        color: var(--text-color);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        height: 40px;
+        transition: all 350ms;
+    }
+
+        /* creating hover effect (3 down)*/
+        .menu .menu--item a img {
+            width: 32px;
+            opacity: 0.7;
+            transition: all 350ms;
+        }
+
+    .menu .menu--item:hover a img {
+        opacity: 1;
+    }
+
+    .menu .menu--item.active a,
+    .menu .menu--item:hover a {
+        color: #fff;
+    }
+
+    /* Active state of the menu  item, adds a background color to the element */
+    .menu .menu--item.active:before {
+        content: ' ';
+        position: absolute;
+        top: 0;
+        height: 100%;
+        left: -16px; /* -(Sidebar's padding left) + 8px */
+        right: -16px; /* -(Sidebar's padding left) + 8px */
+        background: rgb(40, 40, 40);
+        z-index: -1;
+        border-radius: 5px;
+    }
+
+/* Sidebar item text formatting (songs)*/
+.menu--item--text {
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-left: 15px;
+}

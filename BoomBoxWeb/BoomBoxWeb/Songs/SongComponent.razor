@@ -1,14 +1,23 @@
-﻿
+﻿@using Blazored.LocalStorage
+@using Blazored.LocalStorage.StorageOptions
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+@inject LikedSongsComponent likedSongsComponent
+
 <div class="section--body--item song--item" @onclick="() => PublishMqtt(song.Id)">
     <div class="section--body--item--img">
         <img src="res/album_thumbnail/@song.Image" alt="@song.Title">
     </div>
     <p class="section--body--item--title">@song.Title</p>
     <p class="section--body--item--subtitle">@song.Artist</p>
+    <button @onclick="LikeSong">@likeButton</button>
 </div>
+
 @code {
     [Parameter]
     public Song song { get; set; }
+
+    public bool isLiked { get; set; } = false;
+    public string likeButton { get; set; } = "Like";
 
     //MQTT message topic
     protected readonly string topic = "boombox/songs";
@@ -17,5 +26,31 @@
     protected void PublishMqtt(string message)
     {
         _ = MqttConnection.GetInstance().PublishMessage(topic, message);
+    }
+
+    protected void LikeSong()
+    {
+        if (!likedSongsComponent.ContainsSong(song))
+        {
+            likedSongsComponent.AddSong(song, localStorage);
+            likeButton = "Unlike";
+            isLiked = true;
+        }
+        else
+        {
+            likedSongsComponent.RemoveSong(song, localStorage);
+            likeButton = "Like";
+            isLiked = false;
+        }
+        
+    }
+
+    protected override void OnInitialized()
+    {
+        if (likedSongsComponent.ContainsSong(song))
+        {
+            likeButton = "Unlike";
+            isLiked = true;
+        }
     }
 }

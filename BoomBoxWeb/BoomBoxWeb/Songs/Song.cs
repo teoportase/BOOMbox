@@ -13,5 +13,18 @@
             Artist = artist;
             Image = image;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (obj is not Song)
+            {
+                return false;
+            }
+            return (this.Id == ((Song)obj).Id);
+        }
     }
 }
