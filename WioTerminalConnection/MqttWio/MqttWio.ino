@@ -17,10 +17,8 @@
 // Includes the Kirby class
 #include "Kirby.h"
 
-// Song files:
-#include "Amogus.h"
-#include "Megalovania.h"
-#include "BadRomance.h"
+// Folder with song files:
+#include "Songs/Songs.h"
 
 // Pin definitions
 #define SPEAKER 0
