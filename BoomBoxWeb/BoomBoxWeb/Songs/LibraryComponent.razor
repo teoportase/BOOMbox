@@ -18,6 +18,6 @@
         HttpClient client = new HttpClient();
 
         //Reading albums and songs from .json file into a Library
-        songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json");
+        songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json") ?? new Library();
     }
 }

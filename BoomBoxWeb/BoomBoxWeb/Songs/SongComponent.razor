@@ -8,7 +8,7 @@
 </div>
 @code {
     [Parameter]
-    public Song song { get; set; }
+    public Song song { get; set; } = Song.Emtpy;
 
     //MQTT message topic
     protected readonly string topic = "boombox/songs";
