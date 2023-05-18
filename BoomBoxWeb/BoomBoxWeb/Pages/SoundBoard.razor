@@ -33,43 +33,35 @@
     </nav>
     <div class="header">
         <div class="header--bg"></div>
-        <div class="header--buttons">
-            <a href="/">
-                @*change this later*@
-                <button class="header--button previous">
-                    <i class="lni lni-chevron-left"></i>
-                </button>
-            </a>
-        </div>
-
+        
         <!-- Hamburger Button Implementation -->
-            <div id="menu">
-        <div class="@hamburgerToggle" @onclick="ToggleHamburger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
+        <div id="menu">
+            <div class="@hamburgerToggle" @onclick="ToggleHamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <nav class="@navToggle" id="nav">
+                <ul>
+                    <li><a> 
+                        <label class="brightnessButton" for="checkbox">
+                            <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme"/>
+                            <span class="slider"></span>
+                            </label>
+                    </a></li>
+                    <li><a href="#">
+                        <!-- Not decided whether to implement the language button or not -->
+                            <ul class="language-button">
+                                <vr id="en_click" class="language-button current-language">EN</vr>
+                                <vr id="kr_click" class="language-button">KR</vr>
+                                <vr id="se_click" class="language-button">SE</vr>
+                            </ul>
+                    </a></li>
+                    <li><a href="#">Option 3</a></li>
+                    <li><a href="#">Option 4</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav class="@navToggle" id="nav">
-            <ul>
-                <li><a 
-                    <label class="brightnessButton" for="checkbox">
-                        <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme"/>
-                        <span class="slider"></span>
-                        </label>
-                </a></li>
-                <li><a href="#">
-                    <!-- Not decided whether to implement the language button or not -->
-                        <ul class="language-button">
-                            <vr id="en_click" class="language-button current-language">EN</vr>
-                            <vr id="kr_click" class="language-button">KR</vr>
-                            <vr id="se_click" class="language-button">SE</vr>
-                        </ul>
-                </a></li>
-                <li><a href="#">Option 3</a></li>
-                <li><a href="#">Option 4</a></li>
-            </ul>
-        </nav>
-    </div>
     <div class="@menuBg" id="menu-bg"></div>
     </div>
     <main>

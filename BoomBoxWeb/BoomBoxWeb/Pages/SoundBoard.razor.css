@@ -182,24 +182,6 @@ input:checked + .slider:before {
     transform: translateX(-26px);
 }
 
-/* Some of the values were changed because of a new agreement to set the default mode as dark mode.*/
-
-/* Styling for chevron button (2 down)*/
-.header--button {
-    background: var(--button-color);
-    color: var(--text-color);
-    border: 0;
-    border-radius: 50%;
-    height: 34px;
-    width: 34px;
-    cursor: pointer;
-    outline: 0;
-}
-
-.header--button.previous {
-    margin-right: 0.5rem;
-}
-
 /* Styling main content area*/
 body main main {
     padding: 80px 32px 32px 262px;
