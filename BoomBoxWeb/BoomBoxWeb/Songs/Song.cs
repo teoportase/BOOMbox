@@ -1,8 +1,8 @@
-﻿namespace BoomBoxWeb.Songs
+namespace BoomBoxWeb.Songs
 {
     public class Song
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = String.Empty;
         public string Title { get; set; }
         public string Artist { get; set; }
         public string Image { get; set; }
@@ -26,5 +26,7 @@
             }
             return (this.Id == ((Song)obj).Id);
         }
+
+        public static Song Emtpy { get; } = new Song(String.Empty, String.Empty, String.Empty);
     }
 }
