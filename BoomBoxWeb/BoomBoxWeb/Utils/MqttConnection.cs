@@ -13,10 +13,10 @@ namespace BoomBoxWeb.Utils
          * Add a settings page/reading broker config from file
          */
 
-        private static MqttConnection instance;
+        private static MqttConnection ? instance;
 
         //Set this to the IP of a MQTT broker, or localhost if running everything locally
-        private readonly string BrokerIP = "18.116.40.41"; // We set this to match Ionel's hotspot
+        private readonly string BrokerIP = "18.116.40.41"; // We set this to match the new broker running in AWS
         
         //Message that will be proccessed by the Subscribe() method
         //Value assigned here is the 'default' one, before receiving anything

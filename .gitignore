@@ -33,6 +33,9 @@
 [Oo]bj/
 [Oo]ut/
 
+# Deploy results
+[Pp]ublish/
+
 # Package Managers
 vendor/
 node_modules/

@@ -1,22 +1,26 @@
 ﻿/* Variables for reuse */
 :root {
-    --index-color: #303A2B;
     --text-color: #B3B3B3;
     --darkest-color: #1c1c1c;
     --button-color: #3d4040;
     --background-color: #2a2a35;
     --header-color: #818cab;
     --musicbox-color: #818cab;
+    --title-color: white;
+    --subtitle-color: #b3b3b3;
+    --hover-color: black;
 }
 
-[data-theme="dark"] {
-    --index-color: #92a8d1;
+[data-theme="light"] {
     --text-color: #1a1b1c;
-    --darkest-color: #bcbdbe;
+    --darkest-color: #ceb899;
     --button-color: #fff;
-    --background-color: #bfcad3;
-    --header-color: #d4cacd;
-    --musicbox-color: #d4cacd;
+    --background-color: #e5ccaf;
+    --header-color: #f4e8e0;
+    --musicbox-color: #f4e8e0;
+    --title-color: #1c1c1c;
+    --subtitle-color: #4a4a4a;
+    --hover-color: white;
 }
 
 html, body {

@@ -4,7 +4,7 @@ namespace BoomBoxWeb.Tests
 {
     public class MQTTTest
     {
-        [Test]
+        [Test, Category("MQTT")]
         public async Task MQTTPublishTest()
         {
             /*

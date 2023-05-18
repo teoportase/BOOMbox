@@ -7,6 +7,8 @@ image: mcr.microsoft.com/dotnet/sdk:6.0
 stages:
   - build
   - test
+  - publish
+  - deploy
 
 ### Define variables
 variables:
@@ -38,9 +40,45 @@ build:
   script:
     - 'dotnet build --no-restore'
 
-test:
+index_page_test:
   stage: test
   tags:
     - docker-build
   script:
-    - 'dotnet test --no-restore'
+    - 'dotnet test --filter TestCategory=IndexPage --no-restore'
+
+mqtt_test:
+  stage: test
+  tags:
+    - docker-build
+  script:
+    - 'dotnet test --filter TestCategory=MQTT --no-restore'
+
+publish:
+  stage: publish
+  tags:
+    - docker-build
+  script:
+    - 'dotnet publish -c Release -o ./publish --no-restore'
+  artifacts:
+    paths:
+      - BoomBoxWeb/publish/
+  only:
+    - main
+
+deploy:
+  stage: deploy
+  tags:
+    - docker-build
+  image: node:lts-alpine
+  before_script: # Override previous before_script
+    - 'cd $SOURCE_CODE_PATH' 
+  script:
+    - 'npm install netlify-cli -g'
+    - 'cd publish/wwwroot'
+    - 'netlify deploy --prod --dir=. --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID'
+  environment:
+    name: production
+    url: https://boomboxpolska.netlify.app/
+  only:
+    - main
