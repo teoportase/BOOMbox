@@ -26,6 +26,19 @@ namespace BoomBoxWeb.Tests
             cut.Find("#boombox-icon").Click();
 
             Assert.That(nav.Uri.ToString(), Is.EqualTo("http://localhost/SoundBoard"));
-        }       
+        }
+
+        [Test, Category("IndexPage")]
+        public async Task IndexLocalStorageTest()
+        {
+            string valueSet = "Test value";
+            var localStorage = this.AddBlazoredLocalStorage();
+
+            await localStorage.SetItemAsync("testKey", valueSet);
+
+            string valueGet = await localStorage.GetItemAsync<string>("testKey");
+
+            Assert.That(valueSet, Is.EqualTo(valueGet));
+        }
     }
 }
