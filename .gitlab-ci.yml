@@ -60,11 +60,13 @@ publish:
     - docker-build
   script:
     - 'dotnet publish -c Release -o ./publish --no-restore'
+    - |
+      echo "/*    /index.html   200" > ./publish/wwwroot/_redirects
   artifacts:
     paths:
       - BoomBoxWeb/publish/
-  only:
-    - main
+  # only:
+  #   - main
 
 deploy:
   stage: deploy
@@ -80,5 +82,5 @@ deploy:
   environment:
     name: production
     url: https://boomboxpolska.netlify.app/
-  only:
-    - main
+  # only:
+  #   - main
