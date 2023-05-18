@@ -70,7 +70,13 @@
 </div>
 
 @code {
+    //themeSwitch is bound to the checkbox
+    //true == dark mode; false == light mode
     bool themeSwitch;
+
+    //hamburger menu state
+    //true == expanded; false == hidden
+    bool hamburgerMenu = false;
     string hamburgerToggle { get; set; } = "setting";
     string navToggle { get; set; } = "nav";
     string menuBg { get; set; } = "menu-bg";
@@ -93,17 +99,19 @@
 
         // Not functioning right now. Tried to do the automatic theme change. If anyone can fix it pls do so!! //
 
-        /*int currentHour = DateTime.Now.Hour;
+        int currentHour = DateTime.Now.Hour;
 
         if (currentHour >= 6 && currentHour < 20)
         {
-            await JSRuntime.InvokeVoidAsync("setTheme", "light");
+            themeSwitch = false;
+            await ChangeTheme();
         }
         else
         {
-            await JSRuntime.InvokeVoidAsync("setTheme", "dark");
+            themeSwitch = true;
+            await ChangeTheme();
         }
-        */
+    
     }
 
     protected async Task ChangeTheme()
@@ -119,19 +127,20 @@
     // Method to open the Hamburger Button
     protected void ToggleHamburger()
     {
-        if (hamburgerToggle == "setting")
+        if (hamburgerMenu == false)
         {
             hamburgerToggle = "setting change";
             menuBg = "menu-bg change-bg change";
             navToggle = "nav change";
-
+            hamburgerMenu = true;
 
         }
-        else if (hamburgerToggle == "setting change")
+        else if (hamburgerMenu == true)
         {
             hamburgerToggle = "setting";
             menuBg = "menu-bg";
             navToggle = "nav";
+            hamburgerMenu = false;
         }
     }
 }
