@@ -19,7 +19,7 @@ Our system can be briefly described using this diagram:
 
 Under the `BoomBoxWeb` folder, you can find everything regarding the web application.
 
-TODO: *add web app description here*
+It consists of two directories, `BoombBoxWeb.Tests`, containing unit tests for the website, and `BoomBoxWeb`, containing the code for the website. Inside `BoomBoxWeb`, you can find a multitude of folders. The most important ones are `Pages`, where structures of the individual pages are located, and `Songs`, which includes the logic and the visual components responsible for generating song content on the website. In the `Utils` folder, you can find a `MqttConnection.cs` file, which enables us to send messages through MQTT. All of the necessary assets, shared between pages, are located in the `wwwroot` directory.
 
 The `ReadmeImages` folder is for storing the images found inside this markdown file.
 
@@ -66,7 +66,13 @@ and <SongName> based on what you added in step 2:
 
 5. Reupload the code to the Wio Terminal.
 
-TODO: *add how to add more songs in the web app.*
+
+
+Adding more songs, or editing existing ones, in the web application, is done via modifying the `albums.json` file under the `BoomBoxWeb > wwwroot > res` directory. It contains an array of `Albums`, which have a `name`, displayed as the section headline on the website, and an array of `Songs`. You can add a new one, by adding the following fields:
+- `id` - the payload that will get sent through MQTT. It should be unique, and the same as `songName` in `MqttWio.ino`.
+- `title` - the song's title
+- `artist` - full name of the song's author
+- `image` - name of the file containing the song's cover image, including the file extension. The image should be placed in the `BoomBoxWeb > wwwroot > res > album_thumbnail` folder.
 
 &nbsp;
 
@@ -75,8 +81,11 @@ TODO: *add how to add more songs in the web app.*
 
 **For developers looking to start with our project, check out the [Getting Started](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/wikis/Get-started-for-developers) page on the Wiki.**
 
-### Frameworks
+### Technologies and frameworks
+- HTML
+- CSS
 - ASP.NET
+- Blazor WebAssembly
 
 TODO: *add missing frameworks/information*
 
