@@ -1,3 +1,7 @@
+/*
+    The first opening for "Digimon Adventure"
+*/
+
 #include "SpeakerNotes.h"
 
 Note Digimon[] = {

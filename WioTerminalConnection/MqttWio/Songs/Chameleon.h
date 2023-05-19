@@ -1,3 +1,7 @@
+/*
+    "Chameleon" by Herbie Hancock
+*/
+
 #include "SpeakerNotes.h"
 
 Note Chameleon[] = {

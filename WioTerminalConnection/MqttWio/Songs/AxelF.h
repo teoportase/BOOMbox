@@ -1,3 +1,7 @@
+/*
+    This is the song "Crazy Frog" by Axel F.
+*/
+
 #include "SpeakerNotes.h"
 
 Note AxelF[] = {

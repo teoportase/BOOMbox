@@ -1,3 +1,7 @@
+/*
+    The opening for "Neon Genesis Evangelion"
+*/
+
 #include "SpeakerNotes.h"
 
 Note Evangelion[] = {
