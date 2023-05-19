@@ -23,6 +23,12 @@
 #include "BadRomance.h"
 #include "Digimon.h"
 #include "Chameleon.h"
+#include "AxelF.h"
+#include "Devilman.h"
+#include "Evangelion.h"
+#include "Gerudo.h"
+#include "RunningInThe90s.h"
+
 
 // Pin definitions
 #define SPEAKER 0
@@ -195,6 +201,81 @@ void playSong(String songName) {
         kirby.startSinging();
         playNote(note_index, Chameleon);
         delay(Chameleon[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("gerudo")) {
+      int SONG_LENGTH = sizeof(Gerudo) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Gerudo);
+        delay(Gerudo[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("devilman")) {
+      int SONG_LENGTH = sizeof(Devilman) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Devilman);
+        delay(Devilman[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("evangelion")) {
+      int SONG_LENGTH = sizeof(Evangelion) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Evangelion);
+        delay(Evangelion[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("running")) {
+      int SONG_LENGTH = sizeof(Running) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Running);
+        delay(Running[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("axel")) {
+      int SONG_LENGTH = sizeof(AxelF) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, AxelF);
+        delay(AxelF[note_index].delay);
         kirby.stopSinging();
       }
     }

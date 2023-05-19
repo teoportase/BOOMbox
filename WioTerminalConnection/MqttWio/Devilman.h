@@ -1,6 +1,6 @@
 #include "SpeakerNotes.h"
 
-Note TestSong[] = {
+Note Devilman[] = {
 {1432,50,50},
 {1432,150,0},
 {1204,50,0},
