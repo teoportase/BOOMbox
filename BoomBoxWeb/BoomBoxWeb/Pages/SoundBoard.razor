@@ -34,7 +34,12 @@
     </nav>
     <div class="header">
         <div class="header--bg"></div>
-        
+            <a>
+                <label class="brightnessButton" for="checkbox">
+                    <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme" />
+                    <span class="slider"></span>
+                </label>
+            </a>
         <!-- Hamburger Button Implementation -->
         <div id="menu">
             <div class="@hamburgerToggle" @onclick="ToggleHamburger">
@@ -45,17 +50,11 @@
             <nav class="@navToggle" id="nav">
                 <ul>
                     <li><a>
-                        <label class="brightnessButton" for="checkbox">
-                            <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme"/>
-                            <span class="slider"></span>
-                        </label>
-                    </a></li>
-                    <li><a>
-                        <label class="check--container" for="auto--checkbox">
+                    <label class="check--container" for="auto--checkbox">
                             Automatic theme change
-                            <input type="checkbox" name="auto--checkbox" @bind="automaticChange" @oninput="ToggleAutomaticChange"/>
-                            <span class="checkmark"></span>
-                        </label>
+                        <input type="checkbox" name="auto--checkbox" @bind="automaticChange" @oninput="ToggleAutomaticChange"/>
+                        <span class="checkmark"></span>
+                    </label>
                     </a></li>
                     <li><a href="#">About us</a></li>
                 </ul>

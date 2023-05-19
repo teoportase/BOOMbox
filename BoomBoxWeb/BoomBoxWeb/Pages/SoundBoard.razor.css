@@ -129,7 +129,7 @@ body {
     padding-left: 24px;
     padding-right: 24px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
     background-color: var(--header-color);
 }
@@ -137,8 +137,8 @@ body {
 /* Styling for theme slider (6 down)*/
 .brightnessButton {
     position: fixed;
-    top: 50px;
-    right: 100px;
+    top: 13px;
+    right: 60px;
     display: inline-block;
     width: 60px;
     height: 34px;
@@ -229,32 +229,21 @@ input:checked + .slider:before {
 }
 
 .nav {
-transition: 0.3s ease;
-display: none;
+    transition: 0.3s ease;
+    display: none;
+    padding: 50px 0 0;
 }
 
 .nav ul {
-    padding: 0 22px;
-}
-
-.nav li {
-    list-style: none;
-    padding: 40px 0;
-}
-
-/* The following code is just to line the language 
-setting button (Not realated to Hamburger) */
-.nav vr {
-    list-style: none;
+    margin: 0px;
     padding: 0 10px;
 }
 
-.nav li a {
-    color: white;
-    font-size: 20px;
-    text-decoration: none;
+/* Styling of list elements*/
+.nav li {
+    list-style: none;
+    margin-top: 10px;
 }
-
 
 .menu-bg, #menu {
     top: 0;
@@ -277,8 +266,8 @@ setting button (Not realated to Hamburger) */
 }
 
 .change-bg {
-    width: 600px;
-    height: 550px;
+    width: 400px;
+    height: 150px;
     transform: translate(50%,-30%);
 }
 
