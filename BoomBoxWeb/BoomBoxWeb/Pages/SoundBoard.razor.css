@@ -135,7 +135,6 @@ body {
 }
 
 /* Styling for theme slider (6 down)*/
-/* Modified the slider button so that it actually changes theme*/
 .brightnessButton {
     position: fixed;
     top: 50px;
@@ -180,28 +179,6 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(-26px);
-}
-
-/* Styling main content area*/
-body main main {
-    padding: 80px 32px 32px 262px;
-    min-height: 100vh;
-    max-height: 100vh;
-    overflow-y: auto;
-    background-color: var(--background-color);
-}
-
-/* Customizing scrollbar (3 down)*/
-body main main::-webkit-scrollbar {
-    width: 16px;
-}
-
-body main main::-webkit-scrollbar-thumb {
-    background-color: #909090;
-}
-
-body main main::-webkit-scrollbar-track {
-    background-color: rgb(18, 18, 18);
 }
 
 /* Creating the Hamburger Setting Menu */
@@ -252,80 +229,80 @@ body main main::-webkit-scrollbar-track {
 }
 
 .nav {
-  transition: 0.3s ease;
-  display: none;
+transition: 0.3s ease;
+display: none;
 }
 
 .nav ul {
-  padding: 0 22px;
+    padding: 0 22px;
 }
 
 .nav li {
-  list-style: none;
-  padding: 40px 0;
+    list-style: none;
+    padding: 40px 0;
 }
 
-/* The following code is just to line the language setting button (Not realated to Hamburger) */
+/* The following code is just to line the language 
+setting button (Not realated to Hamburger) */
 .nav vr {
     list-style: none;
     padding: 0 10px;
 }
 
 .nav li a {
-  color: white;
-  font-size: 20px;
-  text-decoration: none;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
 }
 
 .nav li a:hover {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .menu-bg, #menu {
-  top: 0;
-  right: 0;
-  position: absolute;
+    top: 0;
+    right: 0;
+    position: absolute;
 }
 
 .menu-bg {
-  z-index: 1;
-  width: 0;
-  height: 0;
-  margin: 30px 20px 20px auto;
-  background: radial-gradient(circle, var(--background-color), var(--header-color));
-  border-radius: 50%;
-  transition: 0.3s ease;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    margin: 30px 20px 20px auto;
+    background: radial-gradient(circle, var(--background-color), var(--header-color));
+    border-radius: 20px;
+    transition: 0.3s ease;
 }
 
 .change {
-  display: block;
+    display: block;
 }
 
 .change-bg {
-  width: 650px;
-  height: 600px;
-  transform: translate(60%,-30%);
+    width: 350px;
+    height: 200px;
+    transform: translate(50%,-30%);
 }
 
-/* Create a Button to change the language setting of the site */
-.language-button {
-  background-color: #444;
-  color: #FFF;
-  padding: 80px 20px;
-  border-radius: 5px;
-
-  
-  -webkit-transition: background-color .3s ease-in-out;
-  -moz-transition: background-color .3s ease-in-out;
-  -o-transition: background-color .3s ease-in-out;
-  -ms-transition: background-color .3s ease-in-out;
-  transition: background-color .3s ease-in-out;
+/* Styling main content area*/
+body main main {
+    padding: 80px 32px 32px 262px;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background-color: var(--background-color);
 }
-.language-button:hover, .current-language {
-  background-color: #777; 
-  -webkit-transition: background-color .3s ease-in-out;
-  -moz-transition: background-color .3s ease-in-out;
-  -o-transition: background-color .3s ease-in-out;
-  -ms-transition: background-color .3s ease-in-out;
-  transition: background-color .3s ease-in-out;
+
+/* Customizing scrollbar (3 down)*/
+body main main::-webkit-scrollbar {
+    width: 16px;
+}
+
+body main main::-webkit-scrollbar-thumb {
+    background-color: #909090;
+}
+
+body main main::-webkit-scrollbar-track {
+    background-color: rgb(18, 18, 18);
 }
