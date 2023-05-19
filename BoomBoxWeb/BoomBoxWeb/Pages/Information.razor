@@ -1,0 +1,43 @@
+﻿@page "/Information"
+@inject HttpClient HttpClient
+@inject IJSRuntime JSRuntime
+
+<head>
+    <!-- Imports icons -->
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+</head>
+
+<div id="body-wrapper">
+    <div class="header">
+        <div class="header--bg"></div>
+        <div class="header--buttons">
+            <a href="/">
+                @*change this later*@
+                <button class="header--button previous">
+                    <i class="lni lni-chevron-left"></i>
+                </button>
+            </a>
+        </div>
+    </div>
+    <main>
+    </main>
+    <div class="profile-cards">
+        <div class="profile-box"></div>
+        <div class="profile-box"></div>
+        <div class="profile-box"></div>
+        <div class="profile-box"></div>
+        <div class="profile-box"></div>
+        <div class="profile-box"></div>
+    </div>
+</div>
+
+@code {
+
+    //MQTT message topic
+    protected readonly string topic = "sound";
+
+    //Instantiating Library object
+    // The "?" means that songLibrary may be null
+    protected Library ? songLibrary = new Library();
+
+}

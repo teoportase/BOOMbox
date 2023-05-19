@@ -1,0 +1,78 @@
+﻿html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    color: #fff;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.35px;
+}
+
+/* Styling for header container*/
+.header {
+    position: fixed;
+    top: 0;
+    left: 0px;
+    right: 0;
+    height: 60px;
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--header-color);
+}
+
+.profile-cards {
+    position: fixed;
+    top: 100px; /* Hight of the header */
+    width: 1200px;
+    height: 300px;
+    margin: 240px auto;
+}
+
+/* Styling for chevron button (2 down)*/
+.header--button {
+    background: var(--button-color);
+    color: var(--text-color);
+    border: 0;
+    border-radius: 50%;
+    height: 34px;
+    width: 34px;
+    cursor: pointer;
+    outline: 0;
+
+}
+
+.header--button.previous {
+    float: right;
+}
+
+.profile-cards .profile-box {
+    position: relative;
+    width: 300px;
+    height: 250px;
+    background: grey;
+    float: left;
+    margin: 40px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.profile-box:hover {
+    cursor: pointer;
+}
+
+/* Styling main content area*/
+body main main {
+    padding: 80px 32px 32px 32px;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background-color: var(--background-color);
+}
