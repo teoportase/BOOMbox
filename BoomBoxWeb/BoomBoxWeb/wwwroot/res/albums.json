@@ -14,6 +14,12 @@
           "title": "Megalovania",
           "artist": "Toby Fox",
           "image": "sans.jpg"
+        },
+        {
+          "id":  "gerudo",
+          "title": "Gerudo Valley",
+          "artist": "Koji Kondo",
+          "image": "ocarina.webp"
         }
       ]
     },
@@ -24,25 +30,48 @@
           "id":  "bad romance",
           "title": "Bad Romance",
           "artist": "Lady Gaga",
-          "image": "gaga.png"
+          "image": "badromance.png"
         },
         {
-          "id":  "hehe",
-          "title": "Another Bed",
-          "artist": "Piggie",
-          "image": "piggie.png"
+          "id":  "chameleon",
+          "title": "Chameleon",
+          "artist": "Herbie Hancock",
+          "image": "chameleon.jpg"
         },
         {
-          "id":  "kkb",
-          "title": "Make Believe",
-          "artist": "Kero Kero Bonito",
-          "image": "kkb.jpg"
+          "id":  "axel",
+          "title": "Axel F",
+          "artist": "Crazy Frog",
+          "image": "axel.jpg"
+        }
+      ]
+    },
+    {
+      "name": "Songs from TV shows",
+      "songs": [
+        {
+          "id":  "digimon",
+          "title": "Butterfly (from Digimon)",
+          "artist": "Kōji Wada",
+          "image": "digimon.jpg"
         },
         {
-          "id":  "toledo",
-          "title": "Beach Life-In-Death",
-          "artist": "Car Seat Headrest",
-          "image": "twin.jpg"
+          "id":  "devilman",
+          "title": "Devilman No Uta",
+          "artist": "Kensuke Ushio",
+          "image": "devilman.png"
+        },
+        {
+          "id":  "evangelion",
+          "title": "A Cruel Angel's Thesis",
+          "artist": "Toshiyuki Ōmori",
+          "image": "rei.jpg"
+        },
+        {
+          "id":  "running",
+          "title": "Running in the 90's",
+          "artist": "Maurizio De Jorio, Max Coveri",
+          "image": "running.jpg"
         }
       ]
     }
