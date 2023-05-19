@@ -11,7 +11,9 @@ This is a mini-project for DIT113 Systems Development course with an emphasis on
 
 As mentioned previously, this project comes in the form of a classic boombox (a speaker-like container for the device is optional, but highly encouraged). Controlling the device happens through a web application we have created where you can select the songs you want played, like them, and see recommendations. On the speaker side, when the device is turned on, the screen displays a sleeping [Kirby](https://kirby.nintendo.com/) when there is no music playing, and one that is singing when the opposite is true. An LED bar will light up and turn off as it gets closer to the end of the song.
 
-TODO: *add diagrams that explain how the system works*
+Our system can be briefly described using this diagram:
+
+![Diagram of the BOOMbox system illustrating the user application, broker, Wio Terminal, and accessories](/ReadmeImages/system-design.jpg)
 
 ### Folder Organization
 
