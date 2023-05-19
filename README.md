@@ -100,8 +100,13 @@ TODO: *add missing frameworks/information*
 ## Purpose and Benefits
 
 The goal of this project is to add a spark of joy to our daily lives while doing what we love to do most! **listening to music**
-
-TODO: *finish this section*
+Spotify, Youtube Music, Apple Music...
+There has been so many platforms developed for one single purpose which is listening to music, making it a red ocean.
+Most likely, it would be difficult for our system to survive in a market like this.
+Therefore, we have decided to dive a little deeper to find the blue ocean.
+Swimming deaper to avoid the numerous planktons, we found a possibility which was the game industry.
+Creating a music platform for one specific reason, our team beleive that it definately would be possible to nail down our narrow customers' need
+leading to a profitable business model.
 
 &nbsp;
 
