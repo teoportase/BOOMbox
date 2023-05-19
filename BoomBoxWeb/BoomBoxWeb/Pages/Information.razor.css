@@ -33,14 +33,6 @@ body {
     background-color: var(--header-color);
 }
 
-.profile-cards {
-    position: fixed;
-    top: 100px; /* Hight of the header */
-    width: 1200px;
-    height: 300px;
-    margin: 240px auto;
-}
-
 /* Styling for chevron button (2 down)*/
 .header--button {
     background: var(--button-color);
@@ -58,20 +50,6 @@ body {
     float: right;
 }
 
-.profile-cards .profile-box {
-    position: relative;
-    width: 250px;
-    height: 300px;
-    background: grey;
-    float: left;
-    margin: 40px;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-
-.profile-box:hover {
-    cursor: pointer;
-}
 
 /* Styling main content area*/
 body main main {
@@ -82,6 +60,7 @@ body main main {
     background-color: var(--background-color);
 }
 
+/* Profile card per person */
 .profiles {
     margin-bottom: 35px;
 }
@@ -99,6 +78,7 @@ body main main {
 }
 
 .profiles-body-profile {
+    /* Please change the sizes if anyone wants to */
     width: 200px;
     height: 300px;
     background-color: var(--musicbox-color);
@@ -110,6 +90,7 @@ body main main {
 }
 
 .profiles-body-profile .profiles-body-profile-img {
+    /* Please change the sizes if anyone wants to */
     width: 150px;
     height: 150px;
     margin: 0 auto;
@@ -124,10 +105,10 @@ body main main {
     margin-top: 3rem;
     margin-bottom: 0;
     margin-left: 2.5rem;
-    font-weight: 700;
-    font-size: 1rem;
+    font-weight: 700; /* Change the font weight if you think it's too small or too big */
+    font-size: 1rem; /* Change the font size if you think it's too small or too big */
     text-overflow: ellipsis;
     overflow-x: hidden;
     white-space: nowrap;
-    color: var(--title-color);
+    color: var(--title-color); /* Based on the light mode dark mode */
 }

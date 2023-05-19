@@ -12,7 +12,6 @@
         <div class="header--bg"></div>
         <div class="header--buttons">
             <a href="/">
-                @*change this later*@
                 <button class="header--button previous">
                     <i class="lni lni-chevron-left"></i>
                 </button>
@@ -22,13 +21,16 @@
     <main>
         <section class="profiles">
             <div class="profiles-header">
+                <!-- Just a brief explanation of who we are -->
                 <h2 class="title">We are Group 12</h2>
             </div>
         <div class="profiles-body">
                 <div class="profiles-body-profile profile-picture">
                     <div class="profiles-body-profile-img">
+                        <!-- When inserting profile pictures, insert them here -->
                         <img src="http://via.placeholder.com/150x150" alt="">
                     </div>
+                    <!-- When inserting profiles, write names here -->
                     <p class="profiles-body-profile-name">Our Name</p>
                 </div>
         </div>
@@ -36,14 +38,3 @@
     </main>
       
 </div>
-
-@code {
-
-    //MQTT message topic
-    protected readonly string topic = "sound";
-
-    //Instantiating Library object
-    // The "?" means that songLibrary may be null
-    protected Library ? songLibrary = new Library();
-
-}
