@@ -2,8 +2,11 @@
   This is the conversion of the song "Megalovania" by Toby Fox into readable frequencies for the Wio Terminal.
   The notes are gotten from a conversion for Arduino (https://github.com/AnonymousAlly/Arduino-Music-Codes/blob/master/Megalovania.ino).
 
-  This is mapped by someone without musical knowledge, so there could be some mistakes regarding music theory, naming etc.
-  That being said, the format used is <octave>.<note>, following the guidelines setup in "Notes.h" (where you can also find more details).
+  This is hand-mapped by someone without musical knowledge, so there could be some mistakes regarding music theory, naming etc.
+  That being said, the format used is <octave>.<note>, following the guidelines setup in "SpeakerNotes.h"
+  (where you can also find more details).
+
+  This is using the note durations defined in "SpeakerNotes.h".
 
   Some notes had to be adapted, as the documentation did not allow for B_SHARP, for example.
 */

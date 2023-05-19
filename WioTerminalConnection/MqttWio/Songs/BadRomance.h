@@ -1,3 +1,9 @@
+/*
+    This is the conversion of an excerpt of "Bad Romance"  by Lady Gaga into readable information for the Seeeduino Wio Terminal.
+    This information was gotten by converting the midi file of the song to text using the Python program found under the 
+    folder "SongUtils".
+*/
+
 #include "SpeakerNotes.h"
 
 Note BadRomance[] = {

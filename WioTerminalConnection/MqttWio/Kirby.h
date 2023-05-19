@@ -1,3 +1,21 @@
+/*
+    This file holds the information for drawing Kirby on the Wio Terminal screen. There are many dimensions and colors defined.
+    Most of the dimensions are scalable by changing the center point of Kirby's body and the radius of it. When Kirby is too small,
+    some features will not appear, so be aware of that.
+
+    Currently, Kirby is medium sized for the screen and is centered on the center point of the screen. The dimensions of the
+    Wio Terminal LCD screen is 320 pixels by 240 pixels.
+
+    The Kirby class has only one attribute of type TFT_eSPI. This is the variable that controls the LCD screen. It needs to be stored,
+    otherwise we cannot draw Kirby on the screen.
+
+    Kirby is capable of doing the following actions:
+      - sleep: Kirby's default state is sleeping. Their eyes are closed, and there are "zzz"s on the screen;
+      - stand: Kirby is standing with their arms around their body (as best as could be done given the drawing limitations);
+      - start singing: Kirby opens their mouth and sings "La la la!" when there is music playing;
+      - stop singing: Kirby closes their mouth and stops singing
+*/
+
 #ifndef _TFT_eSPI_
 #define _TFT_eSPI_
 #include "TFT_eSPI.h"
@@ -165,81 +183,5 @@ class Kirby {
 
         // Get rid of song text
         tft.fillRect(0, 0, 140, 50, BACKGROUND);
-      }
-
-      void rightFootForward() {
-          // Left foot
-          tft.fillEllipse(LEFT_FOOT_X, FOOT_Y, FOOT_RADIUS_X, FOOT_RADIUS_Y, FOOT_COLOR);
-
-          // Left hand
-          tft.fillEllipse(LEFT_HAND_X, HAND_Y, HAND_RADIUS_X, HAND_RADIUS_Y, BODY_COLOR);
-
-          // Right hand
-          tft.fillEllipse(RIGHT_HAND_X, HAND_Y, HAND_RADIUS_X, HAND_RADIUS_Y, BODY_COLOR);
-
-          // Body
-          tft.fillCircle(KIRBY_CENTER_X, KIRBY_CENTER_Y, KIRBY_RADIUS, BODY_COLOR);
-
-          // Right foot
-          tft.fillEllipse(RIGHT_FOOT_X, FOOT_Y, FOOT_RADIUS_X, FOOT_RADIUS_Y, FOOT_COLOR);
-
-          // Left eye (black)
-          tft.fillEllipse(LEFT_EYE_X, EYE_Y, EYE_RX, EYE_RY, EYE_COLOR);
-
-          // Right eye (black)
-          tft.fillEllipse(RIGHT_EYE_X, EYE_Y, EYE_RX, EYE_RY, EYE_COLOR);
-
-          // Left shine
-          tft.fillEllipse(LEFT_SHINE_X, SHINE_Y, SHINE_RX, SHINE_RY, SHINE_COLOR);
-
-          // Right shine
-          tft.fillEllipse(RIGHT_SHINE_X, SHINE_Y, SHINE_RX, SHINE_RY, SHINE_COLOR);
-
-          // Left blush
-          tft.fillEllipse(LEFT_BLUSH_X, BLUSH_Y, BLUSH_RX, BLUSH_RY, BLUSH_COLOR);
-
-          // Right blush
-          tft.fillEllipse(RIGHT_BLUSH_X, BLUSH_Y, BLUSH_RX, BLUSH_RY, BLUSH_COLOR);
-
-          // Mouth
-          tft.fillCircle(MOUTH_X, MOUTH_Y, MOUTH_RADIUS, MOUTH_COLOR);
-      }
-
-      void leftFootForward() {
-          // Right foot
-          tft.fillEllipse(RIGHT_FOOT_X, FOOT_Y, FOOT_RADIUS_X, FOOT_RADIUS_Y, FOOT_COLOR);
-
-          // Left hand
-          tft.fillEllipse(LEFT_HAND_X, HAND_Y, HAND_RADIUS_X, HAND_RADIUS_Y, BODY_COLOR);
-
-          // Right hand
-          tft.fillEllipse(RIGHT_HAND_X, HAND_Y, HAND_RADIUS_X, HAND_RADIUS_Y, BODY_COLOR);
-
-          // Body
-          tft.fillCircle(KIRBY_CENTER_X, KIRBY_CENTER_Y, KIRBY_RADIUS, BODY_COLOR);
-
-          // Left foot
-          tft.fillEllipse(LEFT_FOOT_X, FOOT_Y, FOOT_RADIUS_X, FOOT_RADIUS_Y, FOOT_COLOR);
-
-          // Left eye (black)
-          tft.fillEllipse(LEFT_EYE_X, EYE_Y, EYE_RX, EYE_RY, EYE_COLOR);
-
-          // Right eye (black)
-          tft.fillEllipse(RIGHT_EYE_X, EYE_Y, EYE_RX, EYE_RY, EYE_COLOR);
-
-          // Left shine
-          tft.fillEllipse(LEFT_SHINE_X, SHINE_Y, SHINE_RX, SHINE_RY, SHINE_COLOR);
-
-          // Right shine
-          tft.fillEllipse(RIGHT_SHINE_X, SHINE_Y, SHINE_RX, SHINE_RY, SHINE_COLOR);
-
-          // Left blush
-          tft.fillEllipse(LEFT_BLUSH_X, BLUSH_Y, BLUSH_RX, BLUSH_RY, BLUSH_COLOR);
-
-          // Right blush
-          tft.fillEllipse(RIGHT_BLUSH_X, BLUSH_Y, BLUSH_RX, BLUSH_RY, BLUSH_COLOR);
-
-          // Mouth
-          tft.fillCircle(MOUTH_X, MOUTH_Y, MOUTH_RADIUS, MOUTH_COLOR);
       }
 };

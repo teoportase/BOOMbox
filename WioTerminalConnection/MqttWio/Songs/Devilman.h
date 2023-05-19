@@ -1,3 +1,7 @@
+/*
+    The opening for the 1972 TV show "Devilman".
+*/
+
 #include "SpeakerNotes.h"
 
 Note Devilman[] = {

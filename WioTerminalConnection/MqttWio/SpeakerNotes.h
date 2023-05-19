@@ -1,14 +1,18 @@
 /*
-  This file is a useful implementation for easily writing notes for the Seeed Wio Terminal Speaker. The notes (using the letter system) have been mapped to their
-  respective frequencies (us) according to the documentation (https://files.seeedstudio.com/wiki/Grove-Speaker/res/Tone.pdf).
+  This file is a useful implementation for easily writing notes for the Seeed Wio Terminal Speaker. The notes
+  (using the letter system) have been mapped to their respective frequencies (us) according to the documentation
+  (https://files.seeedstudio.com/wiki/Grove-Speaker/res/Tone.pdf).
 
-  The speaker is capable of 3 octaves: bass, alto, and treble (in ascending order of pitch). The structures below are named with the initial of the octave they represent.
+  The speaker is capable of 3 octaves: bass, alto, and treble (in ascending order of pitch).
+  The structures below are named with the initial of the octave they represent.
   Usually, Bass corresponds to octave 3 on the piano, Alto to octave 4, and Treble to octave 5.
 
-  There are some limitations. Some notes do not have a frequency in the chart linked above, so in practice, you could move up or down to the next octave
-  (if possible), and use that note.
+  There are some limitations. Some notes do not have a frequency in the chart linked above, so in practice, you could move up
+  or down to the next octave (if possible), and use that note. If not, it is possible to choose a frequency between the preset
+  notes, but they are harder to pin point.
   
-  There is also a pause and note durations (milliseconds) defined for breaks and tempo changes. The rest does make a small "flick" sound instead of total silence.
+  There is also a pause and note durations (milliseconds) defined for breaks and tempo changes. The rest does make
+  a small "flick" sound instead of total silence.
 */
 
 #ifndef _NOTES_

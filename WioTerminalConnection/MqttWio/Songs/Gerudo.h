@@ -1,3 +1,7 @@
+/*
+    This is the song "Gerudo Valley" from the game "Legend of Zelda: Ocarina of Time"
+*/
+
 #include "SpeakerNotes.h"
 
 Note Gerudo[] = {
