@@ -1,4 +1,5 @@
 ﻿@page "/SoundBoard"
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 @inject HttpClient HttpClient
 @inject IJSRuntime JSRuntime
 
@@ -43,22 +44,20 @@
             </div>
             <nav class="@navToggle" id="nav">
                 <ul>
-                    <li><a> 
+                    <li><a>
                         <label class="brightnessButton" for="checkbox">
                             <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme"/>
                             <span class="slider"></span>
-                            </label>
+                        </label>
                     </a></li>
-                    <li><a href="#">
-                        <!-- Not decided whether to implement the language button or not -->
-                            <ul class="language-button">
-                                <vr id="en_click" class="language-button current-language">EN</vr>
-                                <vr id="kr_click" class="language-button">KR</vr>
-                                <vr id="se_click" class="language-button">SE</vr>
-                            </ul>
+                    <li><a>
+                        <label class="check--container" for="auto--checkbox">
+                            Automatic theme change
+                            <input type="checkbox" name="auto--checkbox" @bind="automaticChange" @oninput="ToggleAutomaticChange"/>
+                            <span class="checkmark"></span>
+                        </label>
                     </a></li>
-                    <li><a href="#">Option 3</a></li>
-                    <li><a href="#">Option 4</a></li>
+                    <li><a href="#">About us</a></li>
                 </ul>
             </nav>
         </div>
@@ -73,6 +72,8 @@
     //themeSwitch is bound to the checkbox
     //true == dark mode; false == light mode
     bool themeSwitch;
+    bool automaticChange = true;
+    string isChecked = "checked";
 
     //hamburger menu state
     //true == expanded; false == hidden
@@ -97,25 +98,51 @@
         //Reading albums and songs from .json file into a Library
         songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json");
 
-        // Not functioning right now. Tried to do the automatic theme change. If anyone can fix it pls do so!! //
-
-        int currentHour = DateTime.Now.Hour;
-
-        if (currentHour >= 6 && currentHour < 20)
+        //Read values from the local storage (if they exist)
+        if (localStorage.ContainKey("auto"))
         {
-            themeSwitch = false;
-            await ChangeTheme();
+            automaticChange = localStorage.GetItem<bool>("auto");
         }
+
+        if (localStorage.ContainKey("theme"))
+        {
+            themeSwitch= localStorage.GetItem<bool>("theme");
+        }
+
+        if (automaticChange)
+        {
+            int currentHour = DateTime.Now.Hour;
+
+            if (currentHour >= 6 && currentHour < 20)
+            {
+                await ChangeTheme("light");
+                themeSwitch = true;
+            }
+            else
+            {
+                await ChangeTheme("dark");
+                themeSwitch = false;
+            }
+        } 
         else
         {
-            themeSwitch = true;
-            await ChangeTheme();
+            if (themeSwitch)
+            {
+                await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','dark')");
+                themeSwitch = false;
+            }
+            else
+            {
+                await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','light')");
+                themeSwitch = true;
+            }
         }
-    
     }
 
+    //Function for the checkbox
     protected async Task ChangeTheme()
     {
+        Console.WriteLine(themeSwitch);
         if (themeSwitch)
         {
             await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','dark')");
@@ -123,6 +150,15 @@
         {
             await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','light')");
         }
+        localStorage.SetItem("theme", themeSwitch);
+        Console.WriteLine(themeSwitch);
+    }
+    
+    //Function for calling a specific theme
+    protected async Task ChangeTheme(string theme)
+    {
+        await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','"+ theme + "')");
+        localStorage.SetItem("theme", themeSwitch);
     }
     // Method to open the Hamburger Button
     protected void ToggleHamburger()
@@ -142,5 +178,18 @@
             navToggle = "nav";
             hamburgerMenu = false;
         }
+    }
+
+    protected void ToggleAutomaticChange()
+    {
+        if(automaticChange == false)
+        {
+            automaticChange = true;
+        }
+        else
+        {
+            automaticChange = false;
+        }
+        localStorage.SetItem("auto", automaticChange);
     }
 }
