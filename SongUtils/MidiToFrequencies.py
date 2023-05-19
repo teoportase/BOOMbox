@@ -167,7 +167,7 @@ def check_float(duration, quarter_note_duration=100):
     return round(durationInMilliseconds)
 
 def getQuarterNoteDuration(bpm):
-    return round((float(bpm) / 60) * 200)
+    return round((float(bpm) / 60) * 100)
 
 def getInstrumentsAvailable(filename):
 
