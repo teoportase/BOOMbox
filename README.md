@@ -174,3 +174,12 @@ Group 12 consists of 6 beautiful young minds:
 If you have any questions relating this project feel free to contact us at our respective emails.
 
 TODO: *add everyone's major contributions to the project here*
+
+### Front End Development Team
+
+For the marvelous back end created by the other group of our team, we created a modern and aesthetic UI.
+Through CSS and Razor, we created a site that is divided into 3 sections which are header, sidfe bar, and the main page.
+The different pages are evidently divided but shows a harmoney throught the 'Pantone Color of the Year'.
+Also, the various buttons like go to home, menu button, theme switch button etc allows an easy to use environment for our users.
+Most importantly, just by reading the genre, user can easily select the desired song just with a click.
+It was an honor for our front end team to work with the whole group.
