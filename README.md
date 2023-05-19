@@ -4,7 +4,7 @@
 
 This is a mini-project for DIT113 Systems Development course with an emphasis on music. Do you listen to music on a daily basis? Are you tired of your big speakers? Do you want a small companion to react to the music? If your answer is **YES** to any of the previous questions, then today is your lucky day! Introducing to you project **BOOMbox**! A small, portable, and effortless device to listen to your favourite songs anywhere, anytime! This project is a creative idea from group 12 to make your daily lives better. **You're Welcome!**
 
-&nbsp;
+&nbsp;              <!-- This is the empty space character -->
 
 
 ## Description
@@ -25,11 +25,48 @@ The `SongUtils` folder contains a Python script that converts midi files into a 
 
 TODO: *add python description here*
 
-Under the `WioTerminalConnection > MqttWio` folder, you'll find the Arduino program (`MqttWio.ino`) and its associated files to upload to the Wio Terminal. It currently has some test songs stored in the following files: `Amogus.h`, `BadRomance.h`, and `Megalovania.h`. In order to play these songs through the speaker, we created a class called `SpeakerNotes.h` that creates a template for every note.
+Under the `WioTerminalConnection > MqttWio` folder, you'll find the Arduino program (`MqttWio.ino`) and its associated files to upload to the Wio Terminal. It currently has some test songs in the folder `Songs` such as: `Amogus.h`, `BadRomance.h`, `Megalovania.h`, and more. All of the songs in the folder are included in the file `Songs.h`, which is then included in the Arduino program. In order to play these songs through the speaker, we created a class called `SpeakerNotes.h` that creates a template for every note.
 
-For now, adding new songs is done by creating a new C header file that looks like below, and then re-uploading the program to the Wio Terminal:
+Adding songs is a bit tedious as that is as much as both our time and knowledge of the topic allowed. For now, this is done by following these steps: 
 
-TODO: *add how to add more songs.*
+    1. In the aforementioned `Songs` folder, create a new C header file titled `<file name>.h`. You can name the file anything you would like, just make sure it is something you can associate with the song;
+    2. Inside, add the following text (you can change <SongName> for what you want):
+
+    ```txt
+        #include "SpeakerNotes.h"
+
+        Note <SongName>[] = {
+            // add the text from the midi to txt Python program below.
+        };
+    ```
+
+    3. Open `Songs.h` and add this:
+
+    `#include "<file name>.h"`
+
+    4. In `MqttWio.ino` inside the function `playSong()`, add another if statement following this template where you can <key word>
+    and <SongName> based on what you added in step 2:
+
+    ```txt
+    if(songName.equalsIgnoreCase("<key word>")) {
+        int SONG_LENGTH = sizeof(<SongName>) / sizeof(Note);
+
+        for(int note_index = 0; note_index < SONG_LENGTH; note_index++) {
+            int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+            bar.setLevel(level);
+
+            kirby.startSinging();
+            playNote(note_index, <SongName>);
+            delay(<SongName>[note_index].delay);
+            kirby.stopSinging();
+        }
+    }
+
+    ```
+
+    5. Reupload the code to the Wio Terminal.
+
+TODO: *add how to add more songs in the web app.*
 
 &nbsp;
 
