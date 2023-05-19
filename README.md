@@ -29,25 +29,24 @@ Under the `WioTerminalConnection > MqttWio` folder, you'll find the Arduino prog
 
 Adding songs is a bit tedious as that is as much as both our time and knowledge of the topic allowed. For now, this is done by following these steps: 
 
-    1. In the aforementioned `Songs` folder, create a new C header file titled `<file name>.h`. You can name the file anything you would like, just make sure it is something you can associate with the song;
-    2. Inside, add the following text (you can change <SongName> for what you want):
+1. In the aforementioned `Songs` folder, create a new C header file titled `<file name>.h`. You can name the file anything you would like, just make sure it is something you can associate with the song;
 
-    ```txt
-        #include "SpeakerNotes.h"
+2. Inside, add the following text (you can change <SongName> for what you want):
 
-        Note <SongName>[] = {
-            // add the text from the midi to txt Python program below.
-        };
-    ```
+```txt
+    #include "SpeakerNotes.h"
 
-    3. Open `Songs.h` and add this:
+    Note <SongName>[] = {
+        // add the text from the midi to txt Python program below.
+    };
+```
 
-    `#include "<file name>.h"`
+3. Open `Songs.h` and add this: `#include "<file name>.h"`
 
-    4. In `MqttWio.ino` inside the function `playSong()`, add another if statement following this template where you can <key word>
-    and <SongName> based on what you added in step 2:
+4. In `MqttWio.ino` inside the function `playSong()`, add another if statement following this template where you can <key word>
+and <SongName> based on what you added in step 2:
 
-    ```txt
+```txt
     if(songName.equalsIgnoreCase("<key word>")) {
         int SONG_LENGTH = sizeof(<SongName>) / sizeof(Note);
 
@@ -61,10 +60,9 @@ Adding songs is a bit tedious as that is as much as both our time and knowledge 
             kirby.stopSinging();
         }
     }
+```
 
-    ```
-
-    5. Reupload the code to the Wio Terminal.
+5. Reupload the code to the Wio Terminal.
 
 TODO: *add how to add more songs in the web app.*
 
