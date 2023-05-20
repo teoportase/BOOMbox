@@ -1,0 +1,24 @@
+﻿<div class="section--body--item team--item">
+    <div class="section--body--item--img">
+        <img src="res/team/@Photo" alt="@Name">
+    </div>
+    <p class="section--body--item--title">@Name</p>
+    <p class="section--body--item--subtitle">@Description</p>
+</div>
+
+@code {
+    [Parameter]
+    public string Photo { get; set; }
+
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Description { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+
+    }
+}

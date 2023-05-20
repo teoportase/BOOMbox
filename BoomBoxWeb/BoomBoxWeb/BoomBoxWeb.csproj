@@ -14,4 +14,8 @@
     <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="4.2.0.706" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\res\team\" />
+  </ItemGroup>
+
 </Project>

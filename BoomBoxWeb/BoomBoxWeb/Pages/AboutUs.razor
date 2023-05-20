@@ -1,4 +1,5 @@
 ﻿@page "/AboutUs"
+@using Team
 @inject HttpClient HttpClient
 @inject IJSRuntime JSRuntime
 
@@ -25,14 +26,36 @@
                 <h2 class="title">We are Group 12</h2>
             </div>
         <div class="profiles-body">
-                <div class="profiles-body-profile profile-picture">
-                    <div class="profiles-body-profile-img">
-                        <!-- When inserting profile pictures, insert them here -->
-                        <img src="http://via.placeholder.com/150x150" alt="">
-                    </div>
-                    <!-- When inserting profiles, write names here -->
-                    <p class="profiles-body-profile-name">Our Name</p>
-                </div>
+                <MemberComponent 
+                    Name="Adrian Hassa" 
+                    Photo="adrian.jpg"
+                    Description="Lorem ipsum" />
+
+                <MemberComponent 
+                    Name="Arvin Rahimi" 
+                    Photo="adrian.jpg"
+                    Description="Lorem ipsum" />
+
+                <MemberComponent 
+                    Name="David Boram Hong" 
+                    Photo="adrian.jpg"
+                    Description="Lorem ipsum" />
+
+                <MemberComponent 
+                    Name="Ionel" 
+                    Photo="adrian.jpg"
+                    Description="Lorem ipsum" />
+
+                <MemberComponent 
+                    Name="Marko Mojsov" 
+                    Photo="adrian.jpg"
+                    Description="Lorem ipsum" />
+
+                <MemberComponent 
+                    Name="Teo Portase" 
+                    Photo="adrian.jpg"
+                    Description="Lorem ipsum" />
+
         </div>
     </section>
     </main>
