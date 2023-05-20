@@ -1,0 +1,24 @@
+h1, body, p {
+    color: azure;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.35px;
+}
+
+.center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+img:hover {
+    transform: rotate(360deg);
+    transition: 1s;
+}
+
+button {
+    font-family: 'Open Sans', sans-serif;
+    height:100px;
+    padding: 12px 24px;
+}

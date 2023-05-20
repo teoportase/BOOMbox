@@ -1,0 +1,40 @@
+﻿@page "/Information"
+@inject HttpClient HttpClient
+@inject IJSRuntime JSRuntime
+
+<head>
+    <!-- Imports icons -->
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+</head>
+
+<div id="body-wrapper">
+    <div class="header">
+        <div class="header--bg"></div>
+        <div class="header--buttons">
+            <a href="/">
+                <button class="header--button previous">
+                    <i class="lni lni-chevron-left"></i>
+                </button>
+            </a>
+        </div>
+    </div>
+    <main>
+        <section class="profiles">
+            <div class="profiles-header">
+                <!-- Just a brief explanation of who we are -->
+                <h2 class="title">We are Group 12</h2>
+            </div>
+        <div class="profiles-body">
+                <div class="profiles-body-profile profile-picture">
+                    <div class="profiles-body-profile-img">
+                        <!-- When inserting profile pictures, insert them here -->
+                        <img src="http://via.placeholder.com/150x150" alt="">
+                    </div>
+                    <!-- When inserting profiles, write names here -->
+                    <p class="profiles-body-profile-name">Our Name</p>
+                </div>
+        </div>
+    </section>
+    </main>
+      
+</div>

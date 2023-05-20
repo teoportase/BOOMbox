@@ -1,0 +1,114 @@
+﻿html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    color: #fff;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.35px;
+}
+
+.title {
+    color: #8f8f8f;
+    font-size: 3rem;   
+}
+
+/* Styling for header container*/
+.header {
+    position: fixed;
+    top: 0;
+    left: 0px;
+    right: 0;
+    height: 60px;
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--header-color);
+}
+
+/* Styling for chevron button (2 down)*/
+.header--button {
+    background: var(--button-color);
+    color: var(--text-color);
+    border: 0;
+    border-radius: 50%;
+    height: 34px;
+    width: 34px;
+    cursor: pointer;
+    outline: 0;
+
+}
+
+.header--button.previous {
+    float: right;
+}
+
+
+/* Styling main content area*/
+body main main {
+    padding: 80px 32px 32px 32px;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background-color: var(--background-color);
+}
+
+/* Profile card per person */
+.profiles {
+    margin-bottom: 35px;
+}
+
+.profiles-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profiles-body {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -16px;
+    margin-bottom: -16px;
+}
+
+.profiles-body-profile {
+    /* Please change the sizes if anyone wants to */
+    width: 200px;
+    height: 300px;
+    background-color: var(--musicbox-color);
+}
+
+.profiles-body-profile.profile-picture {
+    padding: 20px;
+    cursor: pointer;
+}
+
+.profiles-body-profile .profiles-body-profile-img {
+    /* Please change the sizes if anyone wants to */
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.profiles-body-profile .profiles-body-profile-img img {
+    max-width: 100%;
+    height: auto;
+}
+
+.profiles-body-profile-name {
+    margin-top: 3rem;
+    margin-bottom: 0;
+    margin-left: 2.5rem;
+    font-weight: 700; /* Change the font weight if you think it's too small or too big */
+    font-size: 1rem; /* Change the font size if you think it's too small or too big */
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+    color: var(--title-color); /* Based on the light mode dark mode */
+}

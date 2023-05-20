@@ -14,7 +14,7 @@
 
 @code {
     [Parameter]
-    public Song song { get; set; }
+    public Song song { get; set; } = Song.Emtpy;
 
     public bool isLiked { get; set; } = false;
     public string likeButton { get; set; } = "Like";

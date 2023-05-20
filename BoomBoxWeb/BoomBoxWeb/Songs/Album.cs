@@ -15,5 +15,7 @@
         {
             Songs.Add(song);
         }
+
+        public static Album Empty { get; } = new Album(string.Empty);
     }
 }

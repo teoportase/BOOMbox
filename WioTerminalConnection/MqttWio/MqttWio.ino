@@ -1,8 +1,16 @@
 /*
-  Some of the following code used for connecting to a WiFi network is taken from the WiFi page
-  on the SeeedStudio webpage (https://wiki.seeedstudio.com/Wio-Terminal-Wi-Fi), under the "Connecting to Specified Network Example Code" section.
+  For information about the hardware used, check the README.md file.
+  
+  This program is used along with the web application under the folder "BoomBoxWeb". By selecting the songs from the web app,
+  you can play that song through the Grove Speaker. Along with playing the song, the LED bar slowly turns off its lights as it 
+  reaches the end of the song.
 
-  Includes a way to play "Megalovania" if the message is "megalovania" and the song in "Amogus.h" if the message is "amogus". It is case sensitive.
+  Besides the accessories, there is also something displayed on the screen! A Kirby appears sleeping or singing depending is there
+  is no music or the opposite.
+  
+  Some of the following code used for connecting to a WiFi network is taken from the WiFi page on the SeeedStudio webpage
+  (https://wiki.seeedstudio.com/Wio-Terminal-Wi-Fi), under the "Connecting to Specified Network Example Code" section.
+
   To check if the device connects properly to both WiFi and broker, open the Serial Monitor.
 */
 
@@ -17,10 +25,8 @@
 // Includes the Kirby class
 #include "Kirby.h"
 
-// Song files:
-#include "Amogus.h"
-#include "Megalovania.h"
-#include "BadRomance.h"
+// Folder with song files:
+#include "Songs/Songs.h"
 
 // Pin definitions
 #define SPEAKER 0
@@ -40,7 +46,6 @@
 
 // If needed, change the default port and topics here:
 const int MQTT_PORT = 1883;
-const char* MUSIC_CONTROLS = "boombox/controls";
 const char* MUSIC_SELECT = "boombox/songs";
 const char* CONNECTION_TOPIC = "boombox/connect";
 
@@ -86,6 +91,7 @@ void callback(char* topic, byte* message, unsigned int length) {
   // Converting the topic to string if we want to print it
   String stringTopic(topic);
   
+  // Prints in the Serial for debugging purposes
   Serial.print("Message [" + stringTopic + "]: ");
   String received_message = "";
   for (int i = 0; i < length; i++) {
@@ -93,7 +99,7 @@ void callback(char* topic, byte* message, unsigned int length) {
   }
   Serial.println(received_message);
 
-  if(stringTopic.equals(MUSIC_SELECT)){
+  if(stringTopic.equals(MUSIC_SELECT)) {
     kirby.stand(screen);
     playSong(received_message);
     kirby.sleep(screen);
@@ -111,8 +117,7 @@ void printOnScreen(String message, int x, int y, int size) {
 // Song playing functions:
 // Plays one note
 void playNote(uint8_t note_index, Note song[]) {
-  for(int i=0;i<song[note_index].duration;i++)
-  {
+  for(int i = 0; i < song[note_index].duration; i++) {
     digitalWrite(SPEAKER,HIGH);
     delayMicroseconds(song[note_index].frequency);
     digitalWrite(SPEAKER,LOW);
@@ -125,8 +130,7 @@ void playSong(String songName) {
   if(songName.equalsIgnoreCase("amongus")) {
       int SONG_LENGTH = sizeof(Amogus) / sizeof(Note);
 
-      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
-      {
+      for(int note_index = 0; note_index < SONG_LENGTH; note_index++) {
         int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
         bar.setLevel(level);
 
@@ -140,8 +144,7 @@ void playSong(String songName) {
     if(songName.equalsIgnoreCase("megalovania")) {
       int SONG_LENGTH = sizeof(Megalovania) / sizeof(Note);
 
-      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
-      {
+      for(int note_index = 0; note_index < SONG_LENGTH; note_index++) {
         int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
         bar.setLevel(level);
 
@@ -155,14 +158,118 @@ void playSong(String songName) {
     if(songName.equalsIgnoreCase("bad romance")) {
       int SONG_LENGTH = sizeof(BadRomance) / sizeof(Note);
 
-      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
-      {
+      for(int note_index = 0; note_index < SONG_LENGTH; note_index++) {
         int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
         bar.setLevel(level);
 
         kirby.startSinging();
         playNote(note_index, BadRomance);
         delay(BadRomance[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("digimon")) {
+      int SONG_LENGTH = sizeof(Digimon) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Digimon);
+        delay(Digimon[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("chameleon")) {
+      int SONG_LENGTH = sizeof(Chameleon) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Chameleon);
+        delay(Chameleon[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("gerudo")) {
+      int SONG_LENGTH = sizeof(Gerudo) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Gerudo);
+        delay(Gerudo[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("devilman")) {
+      int SONG_LENGTH = sizeof(Devilman) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Devilman);
+        delay(Devilman[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("evangelion")) {
+      int SONG_LENGTH = sizeof(Evangelion) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Evangelion);
+        delay(Evangelion[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("running")) {
+      int SONG_LENGTH = sizeof(Running) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Running);
+        delay(Running[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
+
+    if(songName.equalsIgnoreCase("axel")) {
+      int SONG_LENGTH = sizeof(AxelF) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, AxelF);
+        delay(AxelF[note_index].delay);
         kirby.stopSinging();
       }
     }
@@ -205,7 +312,6 @@ void connectBroker() {
     }
   }
 
-  client.subscribe(MUSIC_CONTROLS);
   client.subscribe(MUSIC_SELECT);
   client.publish(CONNECTION_TOPIC, "Device connected.");
 }
