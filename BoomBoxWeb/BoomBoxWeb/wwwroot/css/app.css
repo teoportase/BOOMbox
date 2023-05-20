@@ -11,6 +11,7 @@
     --hover-color: #000;
     --scrollbar-color: #909090;
     --scrollbar-bg: #121212;
+    --color-heart: #EA442B;
 }
 
 [data-theme="light"] {
@@ -25,6 +26,7 @@
     --hover-color: #FFF;
     --scrollbar-color: #121212;
     --scrollbar-bg: #ceb899;
+    --color-heart: #EA442B;
 }
 
 html, body {
