@@ -39,13 +39,13 @@ namespace BoomBoxWeb.Utils
         {
             var mqttFactory = new MqttFactory();
             using var mqttClient = mqttFactory.CreateMqttClient();
-            //Building ClientOptions
+            //Building MQTT client options - connection protocol
             var mqttClientOptions = new MqttClientOptionsBuilder().WithWebSocketServer(BrokerIP + ":9001/mqtt").Build();
 
             //Conecting to the broker using ClientOptions
             await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
-            //Building the message using arguments
+            //Building the message with a topic and a payload
             var appMessage = new MqttApplicationMessageBuilder()
                 .WithTopic(topic)
                 .WithPayload(payload)
@@ -68,13 +68,13 @@ namespace BoomBoxWeb.Utils
             var mqttFactory = new MqttFactory();
             using (var mqttClient = mqttFactory.CreateMqttClient())
             {
-                //Building ClientOptions
+                //Building MQTT client options - connection protocol
                 var mqttClientOptions = new MqttClientOptionsBuilder().WithWebSocketServer(host + ":8000/mqtt").Build();
 
                 //Conecting to the broker using ClientOptions
                 await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
-                //Building the message using arguments
+                //Building the message with a topic and a payload
                 var appMessage = new MqttApplicationMessageBuilder()
                     .WithTopic(topic)
                     .WithPayload(payload)
@@ -113,7 +113,7 @@ namespace BoomBoxWeb.Utils
                 return Task.CompletedTask;
             };
 
-            //Subsribing to a topic
+            //Subscribing to a topic
             await mqttClient.SubscribeAsync(topic);
 
             //Conecting to the broker using ClientOptions
