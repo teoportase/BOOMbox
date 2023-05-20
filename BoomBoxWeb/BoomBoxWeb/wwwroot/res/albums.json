@@ -33,12 +33,6 @@
           "image": "badromance.png"
         },
         {
-          "id":  "chameleon",
-          "title": "Chameleon",
-          "artist": "Herbie Hancock",
-          "image": "chameleon.jpg"
-        },
-        {
           "id":  "axel",
           "title": "Axel F",
           "artist": "Crazy Frog",
@@ -50,28 +44,45 @@
       "name": "Songs from TV shows",
       "songs": [
         {
-          "id":  "digimon",
+          "id": "digimon",
           "title": "Butterfly (from Digimon)",
           "artist": "Kōji Wada",
           "image": "digimon.jpg"
         },
         {
-          "id":  "devilman",
+          "id": "devilman",
           "title": "Devilman No Uta",
           "artist": "Kensuke Ushio",
           "image": "devilman.png"
         },
         {
-          "id":  "evangelion",
+          "id": "evangelion",
           "title": "A Cruel Angel's Thesis",
           "artist": "Toshiyuki Ōmori",
           "image": "rei.jpg"
         },
         {
-          "id":  "running",
+          "id": "running",
           "title": "Running in the 90's",
           "artist": "Maurizio De Jorio, Max Coveri",
           "image": "running.jpg"
+        },
+        {
+          "id": "avatar",
+          "title": "The Avatar's Love",
+          "artist": "Jeremy Zuckerman",
+          "image": "avatar.jpg"
+        }
+      ]
+    },
+    {
+      "name": "Jazz-funk",
+      "songs": [
+        {
+          "id": "chameleon",
+          "title": "Chameleon",
+          "artist": "Herbie Hancock",
+          "image": "chameleon.jpg"
         }
       ]
     }

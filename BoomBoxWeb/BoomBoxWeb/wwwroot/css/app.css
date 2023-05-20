@@ -1,26 +1,32 @@
 ﻿/* Variables for reuse */
 :root {
     --text-color: #B3B3B3;
-    --darkest-color: #1c1c1c;
+    --darkest-color: #000000;
     --button-color: #3d4040;
-    --background-color: #2a2a35;
-    --header-color: #818cab;
-    --musicbox-color: #818cab;
-    --title-color: white;
+    --background-color: #121212;
+    --header-color: #1a1a1a;
+    --musicbox-color: #222222;
+    --title-color: #FFF;
     --subtitle-color: #b3b3b3;
-    --hover-color: black;
+    --hover-color: #000;
+    --scrollbar-color: #909090;
+    --scrollbar-bg: #121212;
+    --color-heart: #EA442B;
 }
 
 [data-theme="light"] {
     --text-color: #1a1b1c;
     --darkest-color: #ceb899;
-    --button-color: #fff;
+    --button-color: #FFF;
     --background-color: #e5ccaf;
     --header-color: #f4e8e0;
     --musicbox-color: #f4e8e0;
-    --title-color: #1c1c1c;
+    --title-color: #121212;
     --subtitle-color: #4a4a4a;
-    --hover-color: white;
+    --hover-color: #FFF;
+    --scrollbar-color: #121212;
+    --scrollbar-bg: #ceb899;
+    --color-heart: #EA442B;
 }
 
 html, body {

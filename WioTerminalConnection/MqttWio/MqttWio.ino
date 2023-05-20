@@ -273,6 +273,21 @@ void playSong(String songName) {
         kirby.stopSinging();
       }
     }
+
+    if(songName.equalsIgnoreCase("avatar")) {
+      int SONG_LENGTH = sizeof(Avatar) / sizeof(Note);
+
+      for(int note_index=0;note_index<SONG_LENGTH;note_index++)
+      {
+        int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
+        bar.setLevel(level);
+
+        kirby.startSinging();
+        playNote(note_index, Avatar);
+        delay(Avatar[note_index].delay);
+        kirby.stopSinging();
+      }
+    }
 }
 
 // Connectivity functions:
