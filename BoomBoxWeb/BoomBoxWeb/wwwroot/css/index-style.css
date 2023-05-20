@@ -1,0 +1,34 @@
+﻿#boombox--container {
+    width: 100%;
+    margin: 0 auto;
+    /* positioning in center relative to page size*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    /* spacing & alignment (enabling responsiveness)*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+    align-content: center;
+}
+
+/* max-width helps with responsiveness (stops img overflow) */
+#boombox {
+    width: 450px;
+    max-width: 100%;
+    animation: pulsing alternate-reverse 1s;
+}
+
+@keyframes pulsing {
+    from {
+        transform: scale(0.95);
+    }
+
+    to {
+        transform: scale(1.05);
+    }
+}
