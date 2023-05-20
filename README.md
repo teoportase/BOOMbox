@@ -88,7 +88,9 @@ Afterwards, on [this page](https://git.chalmers.se/courses/dit113/2023/group-12/
 
 ![Screenshot of the Gitlab environments page where the open button is located.](/ReadmeImages/setup-deployment.png)
 
-This will open the web application. Enjoy!
+This will open the web application. For it to successfully connect to the broker, you need to enable insecure content in your browser. A guide on how to do that in different browsers is available [here](https://experienceleague.adobe.com/docs/target/using/experiences/vec/troubleshoot-composer/mixed-content.html?lang=en). We had to go with this solution, since we didn't have time nor resources to implement network security features.
+
+Enjoy!
 
 **If you wish to run the application locally or the deployment is not working, check the section regarding [Running the Web App](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/wikis/Get-started-for-developers#running-the-web-app) in the "Getting Started" page on the Wiki.**
 
