@@ -21,10 +21,14 @@ Our system can be briefly described using this diagram:
 **For developers looking to start with our project, check out the [Getting Started](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/wikis/Get-started-for-developers) page on the Wiki.**
 
 ### Technologies and frameworks
-- HTML
-- CSS
-- ASP.NET
 - Blazor WebAssembly
+- Arduino IDE
+- Seeeduino Wio Terminal
+- an attachable battery for the Wio Terminal
+- Grove Speaker
+- Grove LED bar
+
+For more detailed information of technology
 
 TODO: *add missing frameworks/information*
 
@@ -52,13 +56,7 @@ leading to a profitable business model.
 
 ## Setup guide
 
-In order to run this project, you will need the following:
-- a [Seeed Wio Terminal](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/),
-- a [Grove Speaker](https://wiki.seeedstudio.com/Grove-Speaker/),
-- a [Grove LED bar](https://wiki.seeedstudio.com/Grove-LED_Bar/),
-- two wires* to connect the two accessories to the Wio,
-- the Arduino IDE,
-- a WiFi connection.
+Besides the hardware mentioned in the **"Technologies and frameworks"** section and the Arduino IDE, you will also need two wires* to connect the two accessories to the Wio and a WiFi connection.
 
 \* *There are two types of wires: [jumper type](https://www.seeedstudio.com/Grove-4-pin-Male-Jumper-to-Grove-4-pin-Conversion-Cable-5-PCs-per-Pack.html?queryID=8b2492180bba9d5ebee0d287da73b02f&objectID=1321&indexName=bazaar_retailer_products) and [buckled type](https://www.seeedstudio.com/Grove-Universal-4-Pin-Buckled-5cm-Cable-5-PCs-Pack.html). The buckled cables require an [extra battery](https://www.seeedstudio.com/Wio-Terminal-Chassis-Battery-650mAh-p-4756.html?queryID=efb6faccaebf56fd6b9b2c02df2d36f6&objectID=4756&indexName=bazaar_retailer_products) to connect, while the jumper type are enough for just the Wio Terminal. However, we assume that if you are using the jumper cables, you know how to connect them properly.*
 
