@@ -28,9 +28,7 @@ Our system can be briefly described using this diagram:
 - Grove Speaker
 - Grove LED bar
 
-For more detailed information of the technology used such as documentation for them, check out [the respective section](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/wikis/home#tech-stack) of the wiki.
-
-TODO: *add missing frameworks/information*
+**For more detailed information of the technology used such as documentation for them, check out [the respective section](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/wikis/home#tech-stack) of the wiki.**
 
 ### Hardware limitations
 - The speaker mentioned is not powerful enough to play lyrics to songs, so the device will only play a basic melody for the selected song;
@@ -96,6 +94,8 @@ Afterwards, on [this page](https://git.chalmers.se/courses/dit113/2023/group-12/
 
 This will open the web application. Enjoy!
 
+**If you wish to run the application locally or the deployment is not working, check the section regarding [Running the Web App](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/wikis/Get-started-for-developers#running-the-web-app) in the "Getting Started" page on the Wiki.**
+
 &nbsp;
 
 
@@ -109,9 +109,9 @@ TODO: *add link here*
 ## Contributors
 
 Group 12 consists of 6 beautiful young minds:
-- **Arvin Rahimi** (<gusrahimar@student.gu.se>) - focused on the implementation of the various sensors connected to the boombox, including some that did not make the final version and the connection between the Wio Terminal and the web application;
-- **Adrian Hassa** (<gushasade@student.gu.se>) - worked on the development of the backend of the web application, and aided with the frontend and the midi file reading program;
-- **David Boram Hong** (<guscholcda@student.gu.se>) - focused on the frontend of the application, including adding the dark theme - light theme feature;
+- **Arvin Rahimi** (<gusrahimar@student.gu.se>) - focused on the implementation of the various sensors connected to the boombox, including some that did not make the final version and the connection between the Wio Terminal and the web application, and worked on the README skeleton;
+- **Adrian Hassa** (<gushasade@student.gu.se>) - worked on the development of the backend of the web application, aided with the frontend and the midi file reading program;
+- **David Boram Hong** (<guscholcda@student.gu.se>) - focused on the frontend of the application, including adding the dark theme - light theme feature, the sidebar, and a pause-play feature which did not make the final version;
 - **Ionel Pop** (<guspopio@student.gu.se>) - aided in the development of the backend of the web application, as well as creating on CI/CD for the project and the script for converting `.midi` files to readable text by the device;
 - **Marko Mojsov** (<gusmojsma@student.gu.se>) - focused on the frontend of the web application and its design;
 - **Teodora Portase** (<gusportte@student.gu.se>) - worked on a way for the speaker to play the necessary notes by creating a class that has notes and their octave to the respective frequency, as well as implementing the Kirby singing and sleeping.
