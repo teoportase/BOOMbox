@@ -78,20 +78,12 @@
     //themeSwitch is bound to the checkbox
     //true == dark mode; false == light mode
     bool themeSwitch;
+
+    //Variable for automatic theme change
     bool automaticChange = true;
-    string isChecked = "checked";
+
+    //Boolean for the popup
     bool isVisible = false;
-
-    protected async Task ShowPopup()
-    {
-        isVisible = true;
-        //await Task.Delay(1);
-        StateHasChanged();
-
-        await Task.Delay(3000);
-        isVisible = false;
-
-    }
 
 
     //hamburger menu state
@@ -158,6 +150,22 @@
                 themeSwitch = true;
             }
         }
+        var mqttConnection = MqttConnection.GetInstance();
+        await mqttConnection.Subscribe("boombox/connect", ShowPopup);
+
+
+    }
+
+    protected async Task ShowPopup()
+    {
+        isVisible = true;
+        // Delay is crucial for this function to work, don't remove it
+        await Task.Delay(1);
+        StateHasChanged();
+
+        await Task.Delay(3000);
+        isVisible = false;
+        StateHasChanged();
     }
 
     //Function for the checkbox
