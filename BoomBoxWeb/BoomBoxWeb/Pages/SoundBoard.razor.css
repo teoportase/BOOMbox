@@ -285,10 +285,10 @@ body main main::-webkit-scrollbar {
     width: 16px;
 }
 
-body main main::-webkit-scrollbar-thumb {
-    background-color: #909090;
-}
+    body main main::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-color);
+    }
 
 body main main::-webkit-scrollbar-track {
-    background-color: rgb(18, 18, 18);
+    background-color: var(--scrollbar-bg);
 }

@@ -9,6 +9,8 @@
     --title-color: white;
     --subtitle-color: #b3b3b3;
     --hover-color: black;
+    --scrollbar-color: #909090;
+    --scrollbar-bg: rgb(18, 18, 18);
 }
 
 [data-theme="light"] {
@@ -21,6 +23,8 @@
     --title-color: #1c1c1c;
     --subtitle-color: #4a4a4a;
     --hover-color: white;
+    --scrollbar-color: rgb(18, 18, 18);
+    --scrollbar-bg: #ceb899;
 }
 
 html, body {
