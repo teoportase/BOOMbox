@@ -72,43 +72,9 @@ body main main {
 
 .profiles-body {
     display: flex;
+    justify-content: left;
+    align-items: flex-end;
     flex-wrap: wrap;
-    margin-right: -16px;
-    margin-bottom: -16px;
+    gap: 1em;
 }
 
-.profiles-body-profile {
-    /* Please change the sizes if anyone wants to */
-    width: 200px;
-    height: 300px;
-    background-color: var(--musicbox-color);
-}
-
-.profiles-body-profile.profile-picture {
-    padding: 20px;
-    cursor: pointer;
-}
-
-.profiles-body-profile .profiles-body-profile-img {
-    /* Please change the sizes if anyone wants to */
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
-}
-
-.profiles-body-profile .profiles-body-profile-img img {
-    max-width: 100%;
-    height: auto;
-}
-
-.profiles-body-profile-name {
-    margin-top: 3rem;
-    margin-bottom: 0;
-    margin-left: 2.5rem;
-    font-weight: 700; /* Change the font weight if you think it's too small or too big */
-    font-size: 1rem; /* Change the font size if you think it's too small or too big */
-    text-overflow: ellipsis;
-    overflow-x: hidden;
-    white-space: nowrap;
-    color: var(--title-color); /* Based on the light mode dark mode */
-}
