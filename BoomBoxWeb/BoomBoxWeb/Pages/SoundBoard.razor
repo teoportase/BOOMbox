@@ -29,7 +29,7 @@
             </div>
         </div>*@
         <div class="separator"></div>
-        <p class="sidebar--header">YOUR FAVOURITES</p>
+        <p class="sidebar--header" @onclick="ShowPopup">YOUR FAVOURITES</p>
         <LikedSongsComponent />
     </nav>
     <div class="header">
@@ -65,6 +65,13 @@
     <main>
         <LibraryComponent />
     </main>
+    @if (isVisible)
+    {
+        <div class="connection--popup">
+            <p>Connected to the <br />Wio Board!</p>
+        </div>
+    }
+    
 </div>
 
 @code {
@@ -73,6 +80,19 @@
     bool themeSwitch;
     bool automaticChange = true;
     string isChecked = "checked";
+    bool isVisible = false;
+
+    protected async Task ShowPopup()
+    {
+        isVisible = true;
+        //await Task.Delay(1);
+        StateHasChanged();
+
+        await Task.Delay(3000);
+        isVisible = false;
+
+    }
+
 
     //hamburger menu state
     //true == expanded; false == hidden
