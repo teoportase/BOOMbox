@@ -10,7 +10,7 @@
     width: 165px;
     height: 240px;
     background-color: var(--musicbox-color);
-    border-radius: 23px;
+    border-radius: 10px;
 }
 
 /* Adds padding to song container and changes cursor*/
@@ -24,6 +24,7 @@
     width: 125px;
     height: 125px;
     margin: 0 auto;
+    transition: all .3s ease-in-out;
 }
 
 /* Ensures constistent image size & adds shading */
@@ -32,8 +33,15 @@
     height: auto;
     box-shadow: 0 10px 30px 0 rgba(0,0,0,.3), 0 1px 2px 0 rgba(0,0,0,.2);
     cursor: pointer;
-
+        
 }
+
+/* Animation on album cover hover */
+.section--body--item--img:hover {
+    transform: scale(1.1, 1.1);
+}
+
+
 /* Formats song card title */
 .section--body--item--title {
     margin-top: 1rem;

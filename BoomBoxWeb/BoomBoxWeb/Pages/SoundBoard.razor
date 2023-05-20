@@ -1,4 +1,5 @@
 ﻿@page "/SoundBoard"
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 @inject HttpClient HttpClient
 @inject IJSRuntime JSRuntime
 
@@ -33,38 +34,32 @@
     </nav>
     <div class="header">
         <div class="header--bg"></div>
-        <div class="header--buttons">
-            <a href="/">
-                @*change this later*@
-                <button class="header--button previous">
-                    <i class="lni lni-chevron-left"></i>
-                </button>
+            <a>
+                <label class="brightnessButton" for="checkbox">
+                    <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme" />
+                    <span class="slider"></span>
+                </label>
             </a>
-        </div>
-
         <!-- Hamburger Button Implementation -->
-            <div id="menu">
-        <div class="@hamburgerToggle" @onclick="ToggleHamburger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
+        <div id="menu">
+            <div class="@hamburgerToggle" @onclick="ToggleHamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <nav class="@navToggle" id="nav">
+                <ul>
+                    <li><a>
+                    <label class="check--container" for="auto--checkbox">
+                            Automatic theme change
+                        <input type="checkbox" name="auto--checkbox" @bind="automaticChange" @oninput="ToggleAutomaticChange"/>
+                        <span class="checkmark"></span>
+                    </label>
+                    </a></li>
+                    <li><a href="#">About us</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav class="@navToggle" id="nav">
-            <ul>
-                <li><a>
-                    <label class="brightnessButton" for="checkbox">
-                        <input type="checkbox" id="checkbox" @bind="themeSwitch" @oninput="ChangeTheme"/>
-                        <span class="slider"></span>
-                        </label>
-                </a></li>
-                <li><a href="#">
-                    <!-- Not decided whether to implement the language button or not -->
-                </a></li>
-                <li><a href="#">Option 3</a></li>
-                <li><a href="#">Option 4</a></li>
-            </ul>
-        </nav>
-    </div>
     <div class="@menuBg" id="menu-bg"></div>
     </div>
     <main>
@@ -73,7 +68,16 @@
 </div>
 
 @code {
+    //themeSwitch is bound to the checkbox
+    //true == dark mode; false == light mode
     bool themeSwitch;
+    bool automaticChange = true;
+    string isChecked = "checked";
+
+    //hamburger menu state
+    //true == expanded; false == hidden
+    bool hamburgerMenu = false;
+
     string hamburgerToggle { get; set; } = "setting";
     string navToggle { get; set; } = "nav";
     string menuBg { get; set; } = "menu-bg";
@@ -94,23 +98,52 @@
         //Reading albums and songs from .json file into a Library
         songLibrary = await HttpClient.GetFromJsonAsync<Library>("/res/albums.json");
 
-        // Not functioning right now. Tried to do the automatic theme change. If anyone can fix it pls do so!! //
-
-        /*int currentHour = DateTime.Now.Hour;
-
-        if (currentHour >= 6 && currentHour < 20)
+        //Read values from the local storage (if they exist)
+        if (localStorage.ContainKey("auto"))
         {
-            await JSRuntime.InvokeVoidAsync("setTheme", "light");
+            automaticChange = localStorage.GetItem<bool>("auto");
         }
+
+        if (localStorage.ContainKey("theme"))
+        {
+            themeSwitch= localStorage.GetItem<bool>("theme");
+        }
+
+        // Change the theme based on preferences
+        if (automaticChange)
+        {
+            int currentHour = DateTime.Now.Hour;
+
+            if (currentHour >= 6 && currentHour < 20)
+            {
+                await ChangeTheme("light");
+                themeSwitch = true;
+            }
+            else
+            {
+                await ChangeTheme("dark");
+                themeSwitch = false;
+            }
+        } 
         else
         {
-            await JSRuntime.InvokeVoidAsync("setTheme", "dark");
+            if (themeSwitch)
+            {
+                await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','dark')");
+                themeSwitch = false;
+            }
+            else
+            {
+                await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','light')");
+                themeSwitch = true;
+            }
         }
-        */
     }
 
+    //Function for the checkbox
     protected async Task ChangeTheme()
     {
+        Console.WriteLine(themeSwitch);
         if (themeSwitch)
         {
             await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','dark')");
@@ -118,23 +151,48 @@
         {
             await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','light')");
         }
+        localStorage.SetItem("theme", themeSwitch);
+        Console.WriteLine(themeSwitch);
     }
+    
+    //Function for calling a specific theme
+    protected async Task ChangeTheme(string theme)
+    {
+        await JSRuntime.InvokeAsync<object>("eval", "document.documentElement.setAttribute('data-theme','"+ theme + "')");
+        localStorage.SetItem("theme", themeSwitch);
+    }
+
     // Method to open the Hamburger Button
     protected void ToggleHamburger()
     {
-        if (hamburgerToggle == "setting")
+        if (hamburgerMenu == false)
         {
             hamburgerToggle = "setting change";
             menuBg = "menu-bg change-bg change";
             navToggle = "nav change";
-
+            hamburgerMenu = true;
 
         }
-        else if (hamburgerToggle == "setting change")
+        else if (hamburgerMenu == true)
         {
             hamburgerToggle = "setting";
             menuBg = "menu-bg";
             navToggle = "nav";
+            hamburgerMenu = false;
         }
+    }
+
+    // We need this function to properly save item to the local storage
+    protected void ToggleAutomaticChange()
+    {
+        if(automaticChange == false)
+        {
+            automaticChange = true;
+        }
+        else
+        {
+            automaticChange = false;
+        }
+        localStorage.SetItem("auto", automaticChange);
     }
 }
