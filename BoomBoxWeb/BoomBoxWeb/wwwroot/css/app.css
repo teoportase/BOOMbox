@@ -6,24 +6,24 @@
     --background-color: #2a2a35;
     --header-color: #818cab;
     --musicbox-color: #818cab;
-    --title-color: white;
+    --title-color: #FFF;
     --subtitle-color: #b3b3b3;
-    --hover-color: black;
+    --hover-color: #000;
     --scrollbar-color: #909090;
-    --scrollbar-bg: rgb(18, 18, 18);
+    --scrollbar-bg: #121212;
 }
 
 [data-theme="light"] {
     --text-color: #1a1b1c;
     --darkest-color: #ceb899;
-    --button-color: #fff;
+    --button-color: #FFF;
     --background-color: #e5ccaf;
     --header-color: #f4e8e0;
     --musicbox-color: #f4e8e0;
-    --title-color: #1c1c1c;
+    --title-color: #121212;
     --subtitle-color: #4a4a4a;
-    --hover-color: white;
-    --scrollbar-color: rgb(18, 18, 18);
+    --hover-color: #FFF;
+    --scrollbar-color: #121212;
     --scrollbar-bg: #ceb899;
 }
 

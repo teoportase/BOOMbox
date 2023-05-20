@@ -156,7 +156,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #333333;
+    background-color: rgb(18, 18, 18);
     border-radius: 34px;
     transition: .4s;
 }
@@ -174,7 +174,7 @@ body {
 }
 
 input:checked + .slider {
-    background-color: #333333;
+    background-color: #121212;
 }
 
 input:checked + .slider:before {
