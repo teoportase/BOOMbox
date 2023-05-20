@@ -14,7 +14,7 @@
             <img src="res/Boombox.svg" class="boombox-logo" alt="boombox icon">
         </div>       
         <div class="separator"></div>
-        <p class="sidebar--header">YOUR FAVOURITES</p>
+        <p class="sidebar--header" @onclick="ShowPopup">YOUR FAVOURITES</p>
         <LikedSongsComponent />
     </nav>
     <div class="header">
@@ -52,14 +52,26 @@
     <main>
         <LibraryComponent />
     </main>
+    @if (isVisible)
+    {
+        <div class="connection--popup">
+            <p>Connected to the <br />Wio Board!</p>
+        </div>
+    }
+    
 </div>
 
 @code {
     //themeSwitch is bound to the checkbox
     //true == dark mode; false == light mode
     bool themeSwitch;
+
+    //Variable for automatic theme change
     bool automaticChange = true;
-    string isChecked = "checked";
+
+    //Boolean for the popup
+    bool isVisible = false;
+
 
     //hamburger menu state
     //true == expanded; false == hidden
@@ -125,6 +137,22 @@
                 themeSwitch = true;
             }
         }
+        var mqttConnection = MqttConnection.GetInstance();
+        await mqttConnection.Subscribe("boombox/connect", ShowPopup);
+
+
+    }
+
+    protected async Task ShowPopup()
+    {
+        isVisible = true;
+        // Delay is crucial for this function to work, don't remove it
+        await Task.Delay(1);
+        StateHasChanged();
+
+        await Task.Delay(3000);
+        isVisible = false;
+        StateHasChanged();
     }
 
     //Function for the checkbox

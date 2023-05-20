@@ -3,6 +3,7 @@
 */
 
 #include "Amogus.h"
+#include "Avatar.h"
 #include "AxelF.h"
 #include "BadRomance.h"
 #include "Chameleon.h"

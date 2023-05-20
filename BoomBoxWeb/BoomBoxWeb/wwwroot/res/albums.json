@@ -66,6 +66,12 @@
           "title": "Running in the 90's",
           "artist": "Maurizio De Jorio, Max Coveri",
           "image": "running.jpg"
+        },
+        {
+          "id": "avatar",
+          "title": "The Avatar's Love",
+          "artist": "Jeremy Zuckerman",
+          "image": "avatar.jpg"
         }
       ]
     },

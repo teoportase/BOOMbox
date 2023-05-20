@@ -306,3 +306,35 @@ body main main::-webkit-scrollbar {
 body main main::-webkit-scrollbar-track {
     background-color: var(--scrollbar-bg);
 }
+
+
+.connection--popup {
+    position: fixed;
+    height: 100px;
+    width: 300px;
+    background-color: white;
+    bottom: 30px;
+    right: 46px;
+    text-align: center;
+    border-radius: 10px;
+    border: 3px solid var(--title-color);
+    background-color: var(--musicbox-color);
+    box-shadow: 0 10px 30px 0 rgba(0,0,0,.3), 0 1px 2px 0 rgba(0,0,0,.2);
+    animation: fading 1s ease 2s forwards;
+}
+
+.connection--popup p{
+    top:50%;
+    font-size: 26px;
+    color: var(--text-color);
+}
+
+@keyframes fading {
+    from {
+        opacity: 100%;
+    }
+
+    to {
+        opacity: 0%;
+    }
+}

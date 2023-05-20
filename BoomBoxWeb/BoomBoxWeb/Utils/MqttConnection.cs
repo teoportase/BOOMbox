@@ -89,5 +89,41 @@ namespace BoomBoxWeb.Utils
                 Console.WriteLine("MQTT message " + topic + "/" + payload + " published at " + host);
             }
         }
+
+        public async Task Subscribe(string topic, Func<Task> messageReceivedCallback)
+        {
+            //Declaring connection options
+            var options = new ManagedMqttClientOptionsBuilder()
+                .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
+                .WithClientOptions(new MqttClientOptionsBuilder()
+                    .WithClientId("TestClient")
+                    .WithWebSocketServer(BrokerIP + ":9001/mqtt")
+                    .Build())
+                .Build();
+
+            //Creating a managed MQTT client using connection options
+            var mqttClient = new MqttFactory().CreateManagedMqttClient();
+
+            //Proccessing the received message
+            mqttClient.ApplicationMessageReceivedAsync += e =>
+            {
+                Reply = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+                Console.WriteLine("Received application message: " + Reply);
+
+                //Calling back the function given as an argument
+                //In this case - showing the pop up notification
+                Task.Run(async () => await messageReceivedCallback());
+
+                return Task.CompletedTask;
+            };
+
+            //Subsribing to a topic
+            await mqttClient.SubscribeAsync(topic);
+
+            //Conecting to the broker using ClientOptions
+            await mqttClient.StartAsync(options);
+
+        }
+
     }
 }
