@@ -33,12 +33,6 @@
           "image": "badromance.png"
         },
         {
-          "id":  "chameleon",
-          "title": "Chameleon",
-          "artist": "Herbie Hancock",
-          "image": "chameleon.jpg"
-        },
-        {
           "id":  "axel",
           "title": "Axel F",
           "artist": "Crazy Frog",
@@ -78,6 +72,17 @@
           "title": "The Avatar's Love",
           "artist": "Jeremy Zuckerman",
           "image": "avatar.jpg"
+        }
+      ]
+    },
+    {
+      "name": "Jazz-funk",
+      "songs": [
+        {
+          "id": "chameleon",
+          "title": "Chameleon",
+          "artist": "Herbie Hancock",
+          "image": "chameleon.jpg"
         }
       ]
     }

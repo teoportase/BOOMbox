@@ -12,22 +12,7 @@
     <nav class="sidebar">
         <div class="brand">
             <img src="res/Boombox.svg" class="boombox-logo" alt="boombox icon">
-        </div>
-        @*<p class="sidebar--header">OUR PICKS</p>
-        <div class="menu recommendations">
-            <div class="menu--item">
-                <a href="#">
-                    <img src="http://via.placeholder.com/32x32" alt="">
-                    <span class="menu--item--text">Rain On Me</span>
-                </a>
-            </div>
-            <div class="menu--item">
-                <a href="#">
-                    <img src="http://via.placeholder.com/32x32" alt="">
-                    <span class="menu--item--text">Supalonely (feat. Gus Dapperton)</span>
-                </a>
-            </div>
-        </div>*@
+        </div>       
         <div class="separator"></div>
         <p class="sidebar--header" @onclick="ShowPopup">YOUR FAVOURITES</p>
         <LikedSongsComponent />
@@ -48,15 +33,17 @@
                 <div class="line3"></div>
             </div>
             <nav class="@navToggle" id="nav">
-                <ul>
+                <ul>          
                     <li><a>
                     <label class="check--container" for="auto--checkbox">
-                            Automatic theme change
+                        <span class="hamburger--text">AUTOMATIC THEME</span>
                         <input type="checkbox" name="auto--checkbox" @bind="automaticChange" @oninput="ToggleAutomaticChange"/>
                         <span class="checkmark"></span>
                     </label>
                     </a></li>
-                    <li><a href="/AboutUs">About us</a></li>
+                    <li><a href="/AboutUs" id="about--us">
+                        <span class="hamburger--text">ABOUT US</span>
+                    </a></li>
                 </ul>
             </nav>
         </div>

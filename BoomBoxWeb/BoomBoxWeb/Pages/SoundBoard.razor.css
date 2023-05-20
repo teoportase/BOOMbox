@@ -23,8 +23,6 @@ body {
     overflow-y: auto;
 }
 
-/* Sidebar scrollbar to be added*/
-
 /* Centering boombox logo*/
 .sidebar .brand {
     padding-bottom: 18px;
@@ -156,7 +154,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #333333;
+    background-color: var(--scrollbar-color);
     border-radius: 34px;
     transition: .4s;
 }
@@ -174,7 +172,7 @@ body {
 }
 
 input:checked + .slider {
-    background-color: #333333;
+    background-color: #121212;
 }
 
 input:checked + .slider:before {
@@ -267,8 +265,24 @@ input:checked + .slider:before {
 
 .change-bg {
     width: 400px;
-    height: 150px;
+    height: 130px;
     transform: translate(50%,-30%);
+}
+
+.hamburger--text {
+    margin-top: 1rem;
+    margin-bottom: 1.3rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+    color: var(--title-color)
+}
+
+#about--us {
+    text-decoration: none;
 }
 
 /* Styling main content area*/
@@ -285,12 +299,12 @@ body main main::-webkit-scrollbar {
     width: 16px;
 }
 
-body main main::-webkit-scrollbar-thumb {
-    background-color: #909090;
-}
+    body main main::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-color);
+    }
 
 body main main::-webkit-scrollbar-track {
-    background-color: rgb(18, 18, 18);
+    background-color: var(--scrollbar-bg);
 }
 
 
