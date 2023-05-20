@@ -28,7 +28,7 @@ Our system can be briefly described using this diagram:
 - Grove Speaker
 - Grove LED bar
 
-For more detailed information of technology
+For more detailed information of the technology used such as documentation for them, check out [the respective section](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/wikis/home#tech-stack) of the wiki.
 
 TODO: *add missing frameworks/information*
 
