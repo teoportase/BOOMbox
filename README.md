@@ -15,67 +15,6 @@ Our system can be briefly described using this diagram:
 
 ![Diagram of the BOOMbox system illustrating the user application, broker, Wio Terminal, and accessories](/ReadmeImages/system-design.jpg)
 
-### Folder Organization
-
-Under the `BoomBoxWeb` folder, you can find everything regarding the web application.
-
-It consists of two directories, `BoombBoxWeb.Tests`, containing unit tests for the website, and `BoomBoxWeb`, containing the code for the website. Inside `BoomBoxWeb`, you can find a multitude of folders. The most important ones are `Pages`, where structures of the individual pages are located, and `Songs`, which includes the logic and the visual components responsible for generating song content on the website. In the `Utils` folder, you can find a `MqttConnection.cs` file, which enables us to send messages through MQTT. All of the necessary assets, shared between pages, are located in the `wwwroot` directory.
-
-The `ReadmeImages` folder is for storing the images found inside this markdown file.
-
-The `SongUtils` folder contains a Python script that converts midi files into a text file filled with notes that the program can read.
-
-TODO: *add python description here*
-
-Under the `WioTerminalConnection > MqttWio` folder, you'll find the Arduino program (`MqttWio.ino`) and its associated files to upload to the Wio Terminal. It currently has some test songs in the folder `Songs` such as: `Amogus.h`, `BadRomance.h`, `Megalovania.h`, and more. All of the songs in the folder are included in the file `Songs.h`, which is then included in the Arduino program. In order to play these songs through the speaker, we created a class called `SpeakerNotes.h` that creates a template for every note.
-
-Adding songs is a bit tedious as that is as much as both our time and knowledge of the topic allowed. For now, this is done by following these steps: 
-
-1. In the aforementioned `Songs` folder, create a new C header file titled `<file name>.h`. You can name the file anything you would like, just make sure it is something you can associate with the song;
-
-2. Inside, add the following text (you can change <SongName> for what you want):
-
-```txt
-    #include "SpeakerNotes.h"
-
-    Note <SongName>[] = {
-        // add the text from the midi to txt Python program below.
-    };
-```
-
-3. Open `Songs.h` and add this: `#include "<file name>.h"`
-
-4. In `MqttWio.ino` inside the function `playSong()`, add another if statement following this template where you can <key word>
-and <SongName> based on what you added in step 2:
-
-```txt
-    if(songName.equalsIgnoreCase("<key word>")) {
-        int SONG_LENGTH = sizeof(<SongName>) / sizeof(Note);
-
-        for(int note_index = 0; note_index < SONG_LENGTH; note_index++) {
-            int level = map(note_index, SONG_LENGTH - 1, 0, 0, 10);
-            bar.setLevel(level);
-
-            kirby.startSinging();
-            playNote(note_index, <SongName>);
-            delay(<SongName>[note_index].delay);
-            kirby.stopSinging();
-        }
-    }
-```
-
-5. Reupload the code to the Wio Terminal.
-
-
-
-Adding more songs, or editing existing ones, in the web application, is done via modifying the `albums.json` file under the `BoomBoxWeb > wwwroot > res` directory. It contains an array of `Albums`, which have a `name`, displayed as the section headline on the website, and an array of `Songs`. You can add a new one, by adding the following fields:
-- `id` - the payload that will get sent through MQTT. It should be unique, and the same as `songName` in `MqttWio.ino`.
-- `title` - the song's title
-- `artist` - full name of the song's author
-- `image` - name of the file containing the song's cover image, including the file extension. The image should be placed in the `BoomBoxWeb > wwwroot > res > album_thumbnail` folder.
-
-&nbsp;
-
 
 **For more information about how to use the application, check out the [user manual](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/wikis/User-Manual) on the Wiki.**
 
@@ -122,6 +61,9 @@ In order to run this project, you will need the following:
 - a WiFi connection.
 
 \* *There are two types of wires: [jumper type](https://www.seeedstudio.com/Grove-4-pin-Male-Jumper-to-Grove-4-pin-Conversion-Cable-5-PCs-per-Pack.html?queryID=8b2492180bba9d5ebee0d287da73b02f&objectID=1321&indexName=bazaar_retailer_products) and [buckled type](https://www.seeedstudio.com/Grove-Universal-4-Pin-Buckled-5cm-Cable-5-PCs-Pack.html). The buckled cables require an [extra battery](https://www.seeedstudio.com/Wio-Terminal-Chassis-Battery-650mAh-p-4756.html?queryID=efb6faccaebf56fd6b9b2c02df2d36f6&objectID=4756&indexName=bazaar_retailer_products) to connect, while the jumper type are enough for just the Wio Terminal. However, we assume that if you are using the jumper cables, you know how to connect them properly.*
+
+First, clone the repository if you have not already. The command for that is:
+`git clone https://git.chalmers.se/courses/dit113/2023/group-12/boombox.git`
 
 Open the file `WioTerminalConnection > MqttWio > MqttWio.ino` in Arduino IDE.
 
