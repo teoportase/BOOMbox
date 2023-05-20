@@ -4,6 +4,42 @@
     </div>
     <p class="section--body--item--title">@Name</p>
     <p class="section--body--item--subtitle">@Description</p>
+    <div class="socials">
+        @if(Github != null)
+        {
+            <a href="https://github.com/@Github">
+                <img class="social--icon" src="res/icons/github.png" />
+            </a>
+        }
+
+        @if (Linkedin != null)
+        {
+            <a href="https://linkedin.com/in/@Linkedin">
+                <img class="social--icon" src="res/icons/linkedin.png" />
+            </a>
+        }
+
+        @if (Twitter != null)
+        {
+            <a href='https://twitter.com/@Twitter'>
+                <img class="social--icon" src="res/icons/twitter.png" />
+            </a>
+        }
+
+        @if (Youtube != null)
+        {
+            <a href="https://youtube.com/@@@Youtube">
+                <img class="social--icon" src="res/icons/youtube.png" />
+            </a>
+        }
+
+        @if (Instagram != null)
+        {
+            <a href="https://instagram.com/@Youtube">
+                <img class="social--icon" src="res/icons/instagram.png" />
+            </a>
+        }
+    </div>
 </div>
 
 @code {
@@ -15,6 +51,21 @@
 
     [Parameter]
     public string Description { get; set; }
+
+    [Parameter]
+    public string Github { get; set; } = null;
+
+    [Parameter]
+    public string Linkedin { get; set; } = null;
+
+    [Parameter]
+    public string Twitter { get; set; } = null;
+
+    [Parameter]
+    public string Youtube { get; set; } = null;
+
+    [Parameter]
+    public string Instagram { get; set; } = null;
 
 
     protected override void OnInitialized()
