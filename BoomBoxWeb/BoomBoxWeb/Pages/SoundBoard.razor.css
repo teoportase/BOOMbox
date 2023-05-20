@@ -23,8 +23,6 @@ body {
     overflow-y: auto;
 }
 
-/* Sidebar scrollbar to be added*/
-
 /* Centering boombox logo*/
 .sidebar .brand {
     padding-bottom: 18px;
@@ -267,8 +265,24 @@ input:checked + .slider:before {
 
 .change-bg {
     width: 400px;
-    height: 150px;
+    height: 130px;
     transform: translate(50%,-30%);
+}
+
+.hamburger--text {
+    margin-top: 1rem;
+    margin-bottom: 1.3rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+    color: var(--title-color)
+}
+
+#about--us {
+    text-decoration: none;
 }
 
 /* Styling main content area*/

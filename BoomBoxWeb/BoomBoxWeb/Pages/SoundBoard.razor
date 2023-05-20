@@ -48,15 +48,17 @@
                 <div class="line3"></div>
             </div>
             <nav class="@navToggle" id="nav">
-                <ul>
+                <ul>          
                     <li><a>
                     <label class="check--container" for="auto--checkbox">
-                            Automatic theme change
+                        <span class="hamburger--text">AUTOMATIC THEME</span>
                         <input type="checkbox" name="auto--checkbox" @bind="automaticChange" @oninput="ToggleAutomaticChange"/>
                         <span class="checkmark"></span>
                     </label>
                     </a></li>
-                    <li><a href="#">About us</a></li>
+                    <li><a href="/AboutUs" id="about--us">
+                        <span class="hamburger--text">ABOUT US</span>
+                    </a></li>
                 </ul>
             </nav>
         </div>
