@@ -34,23 +34,19 @@ Our system can be briefly described using this diagram:
 - The speaker mentioned is not powerful enough to play lyrics to songs, so the device will only play a basic melody for the selected song;
 - The device has a bug where sometimes it disconnects from the broker, and it erases the queue of songs. The device will automatically reconnect, but the user will need to reselect which songs they want to play;
 - For very fast-paced songs, the animation of Kirby singing may cause a very slight delay. We have tried to reduce it as much as possible, but there is a small chance it may still be noticeable for some songs;
+- Currently, the way we implemented the `playSong()` method in the `MqttWio.ino` file is by using a sequence of if-statements. We tried to solve this issue by assigning each song a unique ID number and store the songs in a dynamically generated array but sadly, due to memory issues, this kept causing different bugs. Therefore, we discarded the idea.
 
 &nbsp;
-
 
 ## Purpose and Benefits
 
-The goal of this project is to add a spark of joy to our daily lives while doing what we love to do most! **listening to music**
-Spotify, Youtube Music, Apple Music...
-There has been so many platforms developed for one single purpose which is listening to music, making it a red ocean.
-Most likely, it would be difficult for our system to survive in a market like this.
-Therefore, we have decided to dive a little deeper to find the blue ocean.
-Swimming deaper to avoid the numerous planktons, we found a possibility which was the game industry.
-Creating a music platform for one specific reason, our team beleive that it definately would be possible to nail down our narrow customers' need
-leading to a profitable business model.
+The main purpose of the system is to entertain individuals who enjoy listening to `8-bit retro style` sounds,
+and love playing around with soundboards.
+
+As a user, you will be able to rejoice in playing a song wirelessly from any device, liking your favorite tracks,
+and seeing a cute Kirby react every time a song snippet is being played.
 
 &nbsp;
-
 
 ## Setup guide
 
