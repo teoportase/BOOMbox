@@ -1,11 +1,11 @@
 ﻿/* Variables for reuse */
 :root {
     --text-color: #B3B3B3;
-    --darkest-color: #1c1c1c;
+    --darkest-color: #000000;
     --button-color: #3d4040;
-    --background-color: #2a2a35;
-    --header-color: #818cab;
-    --musicbox-color: #818cab;
+    --background-color: #121212;
+    --header-color: #1a1a1a;
+    --musicbox-color: #222222;
     --title-color: #FFF;
     --subtitle-color: #b3b3b3;
     --hover-color: #000;

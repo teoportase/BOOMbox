@@ -156,7 +156,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgb(18, 18, 18);
+    background-color: var(--scrollbar-color);
     border-radius: 34px;
     transition: .4s;
 }
