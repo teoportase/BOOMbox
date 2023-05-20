@@ -13,7 +13,7 @@ As mentioned previously, this project comes in the form of a classic boombox (a 
 
 Our system can be briefly described using this diagram:
 
-![Diagram of the BOOMbox system illustrating the user application, broker, Wio Terminal, and accessories](/ReadmeImages/system-design.jpg)
+![Diagram of the BOOMbox system illustrating the user application, broker, Wio Terminal, and accessories](/ReadmeImages/system-diagram.jpg)
 
 
 **For more information about how to use the application, check out the [user manual](https://git.chalmers.se/courses/dit113/2023/group-12/boombox/-/wikis/User-Manual) on the Wiki.**
