@@ -34,7 +34,7 @@ namespace BoomBoxWeb.Tests
         }
 
         [Test, Category("AboutUsPage")]
-        public async Task IndexLocalStorageTest()
+        public async Task AboutUsLocalStorageTest()
         {
             string valueSet = "Test value";
             var localStorage = this.AddBlazoredLocalStorage();
