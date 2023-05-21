@@ -130,6 +130,7 @@ body {
     justify-content: flex-end;
     align-items: center;
     background-color: var(--header-color);
+    z-index:3;
 }
 
 /* Styling for theme slider (6 down)*/
