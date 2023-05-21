@@ -1,6 +1,6 @@
 using Blazored.LocalStorage;
-using AboutUs = BoomBoxWeb.Pages.AboutUs;
 using BoomBoxWeb.Team;
+using AboutUs = BoomBoxWeb.Pages.AboutUs;
 
 namespace BoomBoxWeb.Tests
 {
