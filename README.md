@@ -99,7 +99,7 @@ Enjoy!
 
 ## Video Demo
 
-TODO: *add link here*
+Find the final demo [here](https://youtu.be/8WeQ-5S3Ck8).
 
 &nbsp;
 
