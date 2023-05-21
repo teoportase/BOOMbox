@@ -4,9 +4,9 @@ using BoomBoxWeb.Team;
 
 namespace BoomBoxWeb.Tests
 {
-    public class IndexPageTest : TestContext
+    public class AboutUsPageTest : TestContext
     {
-        [Test, Category("IndexPage")]
+        [Test, Category("AboutUsPage")]
         public void AboutUsRenderTest()
         {
             var cut = RenderComponent<AboutUs>();
@@ -19,7 +19,7 @@ namespace BoomBoxWeb.Tests
             Assert.That(membersAmount, Is.EqualTo(members.Count));
         }
 
-        [Test, Category("IndexPage")]
+        [Test, Category("AboutUsPage")]
         public void AboutUsRedirectTest()
         {
             var ctx = new TestContext();
@@ -33,7 +33,7 @@ namespace BoomBoxWeb.Tests
             Assert.That(nav.Uri.ToString(), Is.EqualTo("http://localhost/"));
         }
 
-        [Test, Category("IndexPage")]
+        [Test, Category("AboutUsPage")]
         public async Task IndexLocalStorageTest()
         {
             string valueSet = "Test value";
