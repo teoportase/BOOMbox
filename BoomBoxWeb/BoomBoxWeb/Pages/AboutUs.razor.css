@@ -1,10 +1,5 @@
-﻿html {
-    font-size: 16px;
-}
-
-body {
+﻿body {
     margin: 0;
-    color: #fff;
 }
 
 * {
@@ -14,7 +9,7 @@ body {
 }
 
 .title {
-    color: #8f8f8f;
+    color: var(--subtitle-color);
     font-size: 3rem;   
 }
 
@@ -43,7 +38,6 @@ body {
     width: 34px;
     cursor: pointer;
     outline: 0;
-
 }
 
 .header--button.previous {
