@@ -4,7 +4,8 @@
     {
         public List<Album> Albums { get; set; }
 
-        public Library() { 
+        public Library()
+        {
             Albums = new List<Album>();
         }
 
