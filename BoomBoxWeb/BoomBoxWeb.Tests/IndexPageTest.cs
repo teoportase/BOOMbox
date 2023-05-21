@@ -1,42 +1,36 @@
-using SoundBoard = BoomBoxWeb.Pages.SoundBoard;
 using Blazored.LocalStorage;
+using AboutUs = BoomBoxWeb.Pages.AboutUs;
+using BoomBoxWeb.Team;
 
 namespace BoomBoxWeb.Tests
 {
     public class IndexPageTest : TestContext
     {
         [Test, Category("IndexPage")]
-        public void IndexRenderTest()
+        public void AboutUsRenderTest()
         {
-            Services.AddBlazoredLocalStorage();
-            var mock = Services.AddMockHttpClient();
-            JSInterop.Setup<bool>("localStorage.hasOwnProperty", _ => true);
-
-            var cut = RenderComponent<SoundBoard>();
+            var cut = RenderComponent<AboutUs>();
             Assert.That(cut, Is.Not.Null);
 
-            var boombox = cut.Find("#test");
+            var members = cut.FindComponents<MemberComponent>();
 
-            boombox.MarkupMatches("<input type=\"checkbox\" id=\"checkbox\" @bind=\"themeSwitch\" @oninput=\"ChangeTheme\" />");
+            var membersAmount = 6;
+
+            Assert.That(membersAmount, Is.EqualTo(members.Count));
         }
 
         [Test, Category("IndexPage")]
-        public void IndexRedirectTest()
+        public void AboutUsRedirectTest()
         {
-            Services.AddBlazoredLocalStorage();
-            var mock = Services.AddMockHttpClient();
-            JSInterop.Setup<bool>("localStorage.hasOwnProperty", _ => true);
-
             var ctx = new TestContext();
             var nav = ctx.Services.GetRequiredService<NavigationManager>();
-            var localStorage = this.AddBlazoredLocalStorage();
 
-            var cut = ctx.RenderComponent<SoundBoard>();
+            var cut = RenderComponent<AboutUs>();
+            Assert.That(cut, Is.Not.Null);
 
-            cut.Find("#nav").Click();
-            cut.Find("#about--us").Click();
+            cut.Find("button").Click();
 
-            Assert.That(nav.Uri.ToString(), Is.EqualTo("http://localhost/AboutUs"));
+            Assert.That(nav.Uri.ToString(), Is.EqualTo("http://localhost/"));
         }
 
         [Test, Category("IndexPage")]
