@@ -1,4 +1,5 @@
-using Index = BoomBoxWeb.Pages.Index;
+using SoundBoard = BoomBoxWeb.Pages.SoundBoard;
+using Blazored.LocalStorage;
 
 namespace BoomBoxWeb.Tests
 {
@@ -7,25 +8,35 @@ namespace BoomBoxWeb.Tests
         [Test, Category("IndexPage")]
         public void IndexRenderTest()
         {
-            var cut = RenderComponent<Index>();
+            Services.AddBlazoredLocalStorage();
+            var mock = Services.AddMockHttpClient();
+            JSInterop.Setup<bool>("localStorage.hasOwnProperty", _ => true);
+
+            var cut = RenderComponent<SoundBoard>();
             Assert.That(cut, Is.Not.Null);
 
-            var boombox = cut.Find("#boombox-icon");
+            var boombox = cut.Find("#test");
 
-            boombox.MarkupMatches("<input type=\"image\" id=\"boombox-icon\" src=\"res/Boombox.svg\" alt=\"boombox icon\" />");
+            boombox.MarkupMatches("<input type=\"checkbox\" id=\"checkbox\" @bind=\"themeSwitch\" @oninput=\"ChangeTheme\" />");
         }
 
         [Test, Category("IndexPage")]
         public void IndexRedirectTest()
         {
+            Services.AddBlazoredLocalStorage();
+            var mock = Services.AddMockHttpClient();
+            JSInterop.Setup<bool>("localStorage.hasOwnProperty", _ => true);
+
             var ctx = new TestContext();
             var nav = ctx.Services.GetRequiredService<NavigationManager>();
+            var localStorage = this.AddBlazoredLocalStorage();
 
-            var cut = ctx.RenderComponent<Index>();
+            var cut = ctx.RenderComponent<SoundBoard>();
 
-            cut.Find("#boombox-icon").Click();
+            cut.Find("#nav").Click();
+            cut.Find("#about--us").Click();
 
-            Assert.That(nav.Uri.ToString(), Is.EqualTo("http://localhost/SoundBoard"));
+            Assert.That(nav.Uri.ToString(), Is.EqualTo("http://localhost/AboutUs"));
         }
 
         [Test, Category("IndexPage")]
