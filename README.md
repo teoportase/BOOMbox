@@ -109,11 +109,9 @@ TODO: *add link here*
 Group 12 consists of 6 beautiful young minds:
 - **Arvin Rahimi** (<gusrahimar@student.gu.se>) - focused on the implementation of the various sensors connected to the boombox, including some that did not make the final version and the connection between the Wio Terminal and the web application, and worked on the README skeleton;
 - **Adrian Hassa** (<gushasade@student.gu.se>) - worked on the development of the backend of the web application, aided with the frontend and the midi file reading program;
-- **David Boram Hong** (<guscholcda@student.gu.se>) - focused on the frontend of the application, including adding the dark theme - light theme feature, the sidebar, and a pause-play feature which did not make the final version;
+- **David Boram Hong** (<guscholcda@student.gu.se>) - focused on adding features to the frontend of the web application, including a dark/light theme feature, a hamburger menu, and a pause-play feature which did not make the final version;
 - **Ionel Pop** (<guspopio@student.gu.se>) - aided in the development of the backend of the web application, as well as creating on CI/CD for the project and the script for converting `.midi` files to readable text by the device;
-- **Marko Mojsov** (<gusmojsma@student.gu.se>) - focused on the frontend of the web application and its design;
-- **Teodora Portase** (<gusportte@student.gu.se>) - worked on a way for the speaker to play the necessary notes by creating a class that has notes and their octave to the respective frequency, as well as implementing the Kirby singing and sleeping.
+- **Marko Mojsov** (<gusmojsma@student.gu.se>) - worked on creating the frontend of the web application, polishing added features, ensuring the design remained cohesive and the repository Wiki;
+- **Teodora Portase** (<gusportte@student.gu.se>) - worked on a way for the speaker to play the necessary notes by creating a class that has notes and their octave to the respective frequency, as well as implementing the Kirby singing/sleeping and the README;
 
 If you have any questions relating this project, feel free to contact us at our respective emails.
-
-TODO: *add everyone's major contributions to the project here*
