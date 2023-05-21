@@ -59,7 +59,7 @@ First, clone the repository if you have not already. The command for that is:
 
 Open the file `WioTerminalConnection > MqttWio > MqttWio.ino` in Arduino IDE.
 
-In the meantime, add the accessories to the Wio board as so: the battery to the back of the Wio Terminal, the speaker to the port under the 5-way switch and the LED bar to the top right port of the battery. If you are using the jumper cables, connect them as instructed. If the pin specification in the lines 26-28 of `MqttWio.ino` do not match how you connected the extra sensor, you can change them there. Connect the board to your device, and turn it on.
+In the meantime, add the accessories to the Wio board as so: the battery to the back of the Wio Terminal, the speaker to the port under the 5-way switch and the LED bar to the top right port of the battery. If you are using the jumper cables, connect them as instructed. If the pin specification in "Pin definitions" section in `MqttWio.ino` do not match how you connected the extra sensor, you can change them there. Connect the board to your device, and turn it on.
 
 Once the file opens and the Wio is turned on, you will need to setup your board and install some libraries. To setup the board, go to `File > Preferences > Additional board URLs`, and paste *https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json*. After, go to the `Select Board` dropdown menu at the top, and search `Seeeduino Wio Terminal`. Select that option and the port that the IDE suggests. When prompted, select the option `Install manually`.
 
