@@ -1,4 +1,4 @@
-﻿@page "/SoundBoard"
+﻿@page "/"
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 @inject HttpClient HttpClient
 @inject IJSRuntime JSRuntime
@@ -14,7 +14,7 @@
             <img src="res/Boombox.svg" class="boombox-logo" alt="boombox icon">
         </div>       
         <div class="separator"></div>
-        <p class="sidebar--header" @onclick="ShowPopup">YOUR FAVOURITES</p>
+        <p class="sidebar--header">YOUR FAVOURITES</p>
         <LikedSongsComponent />
     </nav>
     <div class="header">
@@ -111,18 +111,7 @@
         // Change the theme based on preferences
         if (automaticChange)
         {
-            int currentHour = DateTime.Now.Hour;
-
-            if (currentHour >= 6 && currentHour < 20)
-            {
-                await ChangeTheme("light");
-                themeSwitch = true;
-            }
-            else
-            {
-                await ChangeTheme("dark");
-                themeSwitch = false;
-            }
+            await UpdateAutoTheme();
         } 
         else
         {
@@ -169,7 +158,7 @@
         localStorage.SetItem("theme", themeSwitch);
         Console.WriteLine(themeSwitch);
     }
-    
+
     //Function for calling a specific theme
     protected async Task ChangeTheme(string theme)
     {
@@ -198,16 +187,34 @@
     }
 
     // We need this function to properly save item to the local storage
-    protected void ToggleAutomaticChange()
+    protected async Task ToggleAutomaticChange()
     {
         if(automaticChange == false)
         {
             automaticChange = true;
+            await UpdateAutoTheme();
         }
         else
         {
             automaticChange = false;
         }
         localStorage.SetItem("auto", automaticChange);
+    }
+
+
+    protected async Task UpdateAutoTheme()
+    {
+        int currentHour = DateTime.Now.Hour;
+
+        if (currentHour >= 6 && currentHour < 20)
+        {
+            await ChangeTheme("light");
+            themeSwitch = true;
+        }
+        else
+        {
+            await ChangeTheme("dark");
+            themeSwitch = false;
+        }
     }
 }

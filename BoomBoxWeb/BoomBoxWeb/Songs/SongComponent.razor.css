@@ -58,10 +58,6 @@
     color: var(--title-color)
 }
 
-.section--body--item--title:hover {
-    color: var(--hover-color);
-}
-
 /* Formats song card subtitle */
 .section--body--item--subtitle {
     margin: 0;

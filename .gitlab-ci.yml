@@ -40,12 +40,12 @@ build:
   script:
     - 'dotnet build --no-restore'
 
-index_page_test:
+aboutus_page_test:
   stage: test
   tags:
     - docker-build
   script:
-    - 'dotnet test --filter TestCategory=IndexPage --no-restore'
+    - 'dotnet test --filter TestCategory=AboutUsPage --no-restore'
 
 mqtt_test:
   stage: test

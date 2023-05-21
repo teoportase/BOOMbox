@@ -13,16 +13,17 @@ namespace BoomBoxWeb.Utils
          * Add a settings page/reading broker config from file
          */
 
-        private static MqttConnection ? instance;
+        private static MqttConnection? instance;
 
         //Set this to the IP of a MQTT broker, or localhost if running everything locally
         private readonly string BrokerIP = "18.116.40.41"; // We set this to match the new broker running in AWS
-        
+
         //Message that will be proccessed by the Subscribe() method
         //Value assigned here is the 'default' one, before receiving anything
         public string Reply { get; set; } = "Awaiting response...";
 
-        private MqttConnection() {
+        private MqttConnection()
+        {
             // Empty private constructor to prevent instantiation
             // Initialization code should go here
         }
@@ -33,7 +34,7 @@ namespace BoomBoxWeb.Utils
 
             return instance;
         }
-        
+
 
         public async Task PublishMessage(string topic, string payload)
         {

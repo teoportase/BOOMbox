@@ -1,20 +1,14 @@
 ﻿@page "/AboutUs"
-@using Team
 @inject HttpClient HttpClient
-@inject IJSRuntime JSRuntime
-
-<head>
-    <!-- Imports icons -->
-    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
-</head>
+@inject NavigationManager nav
 
 <div id="body-wrapper">
     <div class="header">
         <div class="header--bg"></div>
         <div class="header--buttons">
-            <a href="/">
-                <button class="header--button previous">
-                    <i class="lni lni-chevron-left"></i>
+            <a href="/" id="chevron">
+                <button class="header--button previous" id="home" @onclick="NavigateToMainPage">
+                    <b>&lt</b>
                 </button>
             </a>
         </div>
@@ -29,7 +23,7 @@
                 <MemberComponent 
                     Name="Adrian Hassa" 
                     Photo="adrian.jpg"
-                    Description="Lorem ipsum"
+                    Description="Be crime, do gay"
                     Twitter="Adikowskyyy"
                     Github="Adrian2901"
                     Linkedin="adrian-hassa"/>
@@ -37,38 +31,45 @@
                 <MemberComponent 
                     Name="Arvin Rahimi" 
                     Photo="arvin.jpg"
-                    Description="Lorem ipsum"
+                    Description="if (pleaseWork(true)) { grade = 5; } else{ justQuit() }"
                     Instagram="_aspanix_"
                     Github="Aspanix"/>
 
                 <MemberComponent 
                     Name="David Boram Hong" 
                     Photo="david.jpg"
-                    Description="Lorem ipsum" />
+                    Description="Thanks for the inspiration Spotify, but now we'll take your spot!!"
+                    Instagram="davidhong521"/>
 
                 <MemberComponent 
                     Name="Ionel Pop" 
                     Photo="ionel.png"
-                    Description="Lorem ipsum" 
-                    Youtube="Mults"
+                    Description="''Don't quote me on this''" 
+                    Youtube="MultsElMesco"
                     Github="IonelPopJara"
                     Linkedin="ionel-pop-jara"/>
 
                 <MemberComponent 
                     Name="Marko Mojsov" 
                     Photo="marko.png"
-                    Description="Lorem ipsum" 
+                    Description="Revert 'Revert 'Merge branch 'subscribe-protocol-wio' into 'main'''" 
                     Linkedin="marko-mojsov"
                     Instagram="markomojsov"/>
 
                 <MemberComponent 
                     Name="Teo Portase" 
                     Photo="teo.jpeg"
-                    Description="Lorem ipsum" 
+                    Description="''Something witty and impressive, I guess''" 
                     Linkedin="teoportase"/>
 
         </div>
     </section>
     </main>
-      
 </div>
+
+@code{
+    private void NavigateToMainPage()
+    {
+        nav.NavigateTo("/");
+    }
+}
